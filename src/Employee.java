@@ -1,3 +1,11 @@
+/*
+* @Karim Boumghar
+* @Philippe Gabriel
+* @Version 1.0 2020-11-12
+*
+* The class Employee
+**/
+
 public class Employee extends Person {
 
 }

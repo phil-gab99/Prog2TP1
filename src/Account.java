@@ -40,6 +40,8 @@ public abstract class Account implements FavoriteProducts {
         this.position = position;
 
         this.email = generateEmail();
+
+        Base.addAccount(this);
     }
 
     /*
@@ -85,12 +87,20 @@ public abstract class Account implements FavoriteProducts {
         return email;
     }
 
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
     /*
     * The setter method setBalance allows modifying of a user's balance
     **/
 
     public void setBalance(int balance) {
 
-        this.balance = balance;        
+        this.balance = balance;
     }
 }

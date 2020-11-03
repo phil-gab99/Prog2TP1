@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /*
 * @Karim Boumghar
@@ -10,14 +11,27 @@ import java.util.ArrayList;
 
 public class Base {
 
-    private ArrayList<Account> population;
+    private ArrayList<Account> accounts;
+    private HashMap<String, Integer> emailMapping;
+
+    /*
+    * The method addAccount adds any new user to the array list
+    **/
 
     public static void addAccount(Account a) {
-        System.out.println("Work in progress");
+
+        accounts.add(a);
     }
 
-    public static boolean emailExist(Account a) {
-        System.out.println("Work in progress");
-        return true;
+    /*
+    * The method emailExist checks for whether an email for a given user exists
+    * and updates the hashmap responsible for mapping the emails
+    **/
+
+    public static int emailExist(String firstName, String lastName) {
+
+        if () {
+
+        }
     }
 }

@@ -9,7 +9,7 @@
 //todo : Give program specification
 //todo : Begin
 
-public abstract class Account {
+public abstract class Account implements FavoriteProducts {
 
     private int balance;  //Balance associated with the account
     private String email; //Email to be generated for the different accounts

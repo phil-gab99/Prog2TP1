@@ -6,7 +6,8 @@
 * The class Manager
 **/
 
-public class Manager extends Account implements AddBalance, DeductBalance {
+public class Manager extends Account implements AddBalance, DeductBalance,
+    ManageProducts {
 
     public Manager(String lastName, String firstName, String birth) {
         super(lastName, firstName, birth, 2);

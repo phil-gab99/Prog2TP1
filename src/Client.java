@@ -6,6 +6,9 @@
 * The class Client
 **/
 
-public class Client extends Person {
+public class Client extends Account implements AddBalance {
 
+    public Client(String lastName, String firstName, String birth) {
+        super(lastName, firstName, birth, 0);
+    }
 }

@@ -16,6 +16,8 @@ public class Base {
 
     /*
     * The method addAccount adds any new user to the array list
+    *
+    * @param a Account attached to some user
     **/
 
     public static void addAccount(Account a) {
@@ -28,10 +30,16 @@ public class Base {
     * and updates the hashmap responsible for mapping the emails
     **/
 
-    public static int emailExist(String firstName, String lastName) {
+    public static int emailExist(String lastName, String firstName) {
 
-        if () {
+        if (emailMapping.containsKey(lastName + firstName)) {
 
+            emailMapping.replace(lastName + firstName, emailMapping.get(lastName + firstName) + 1);
+            return emailMapping.get(lastName + firstName)
+        } else {
+
+            emailMapping.put(lastName + firstName, 1);
+            return 1;
         }
     }
 }

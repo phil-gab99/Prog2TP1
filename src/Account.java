@@ -54,21 +54,11 @@ public abstract class Account implements FavoriteProducts {
 
     public String generateEmail() {
 
-        int count = 0;
+        int count = Base.emailExist(lastName, firstName);
 
-        String validEmail = lastName + firstName + count;
+        String validEmail = lastName + firstName + count + "@magasin.ca";
 
-        //This is a long method for generating an email in worst case scenario
-        //Would recommend to instead make a search of all emails with the same
-        //lastName and firstName, extract the numbers using UTF-8 encoding
-        //conditions and create the email afterwards
-        // while(emailExist(validEmail + "@magasin.ca")) {
-        //
-        //     count ++;
-        //     validEmail = validEmail.substring(0,validEmail.length() - 1) + count;
-        // }
-
-        return validEmail + "@magasin.ca";
+        return validEmail;
     }
 
     /*

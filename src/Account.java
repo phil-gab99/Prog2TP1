@@ -69,13 +69,25 @@ public abstract class Account {
         return validEmail + "@magasin.ca";
     }
 
+    /*
+    * The getter method getBalance gives access to a user's balance
+    **/
+
     public int getBalance() {
         return balance;
     }
 
+    /*
+    * The getter method getEmail gives access to a user's email
+    **/
+
     public String getEmail() {
         return email;
     }
+
+    /*
+    * The setter method setBalance allows modifying of a user's balance
+    **/
 
     public void setBalance(int balance) {
 

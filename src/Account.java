@@ -60,7 +60,7 @@ public abstract class Account {
         //Would recommend to instead make a search of all emails with the same
             //lastName and firstName, extract the numbers using UTF-8 encoding
             //conditions and create the email afterwards
-        // while(emailExist(email)) {
+        // while(emailExist(validEmail + "@magasin.ca")) {
         //
         //     count ++;
         //     validEmail = validEmail.substring(0,validEmail.length() - 1) + count;

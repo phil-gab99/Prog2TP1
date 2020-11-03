@@ -69,20 +69,20 @@ public abstract class Account {
         return validEmail + "@magasin.ca";
     }
 
-    //Need to see how these will be implemented for the different account types
-    // public void addBalance(int amount) {
-    //     this.balance += amount;
-    // }
-    //
-    // public void removeBalance(int amount) {
-    //
-    // }
-
     public int getBalance() {
         return balance;
     }
 
     public String getEmail() {
         return email;
+    }
+
+    public void setBalance(int balance) {
+
+        if (balance < 0) {
+            this.balance = 0;
+        } else {
+            this.balance = balance;
+        }
     }
 }

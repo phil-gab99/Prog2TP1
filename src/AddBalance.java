@@ -8,7 +8,5 @@
 
 public interface AddBalance {
 
-    default void addBalance(int amount) {
-        this.balance += amount;
-    }
+    void addBalance(int amount);
 }

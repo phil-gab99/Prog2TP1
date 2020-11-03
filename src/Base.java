@@ -11,8 +11,8 @@ import java.util.HashMap;
 
 public class Base {
 
-    private ArrayList<Account> accounts;
-    private HashMap<String, Integer> emailMapping;
+    private static ArrayList<Account> accounts = new ArrayList<Account>();
+    private static HashMap<String, Integer> emailMapping = new HashMap <String, Integer>();
 
     /*
     * The method addAccount adds any new user to the array list
@@ -28,6 +28,11 @@ public class Base {
     /*
     * The method emailExist checks for whether an email for a given user exists
     * and updates the hashmap responsible for mapping the emails
+    *
+    * @param lastName String representing the user's last name
+    * @param firstName String representing the user's last name
+    * @return digits Integer indicating the instance number on how many times
+    * a user with the given last and first name exists
     **/
 
     public static int emailExist(String lastName, String firstName) {
@@ -35,7 +40,7 @@ public class Base {
         if (emailMapping.containsKey(lastName + firstName)) {
 
             emailMapping.replace(lastName + firstName, emailMapping.get(lastName + firstName) + 1);
-            return emailMapping.get(lastName + firstName)
+            return emailMapping.get(lastName + firstName);
         } else {
 
             emailMapping.put(lastName + firstName, 1);

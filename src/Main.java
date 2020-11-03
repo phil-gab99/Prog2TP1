@@ -10,10 +10,8 @@ public class Main {
 
     public static void main(String[] args) {
         Client c1 = new Client("Last", "First", "123");
-
-        System.out.println(c1.getBalance());
-        c1.addBalance(3000);
-
-        System.out.println(c1.getBalance());
+        Client c2 = new Client("Last", "First", "12345");
+        System.out.println(c1.getEmail());
+        System.out.println(c2.getEmail());
     }
 }

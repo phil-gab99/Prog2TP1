@@ -8,5 +8,5 @@
 
 public interface DeductBalance {
 
-    void DeductBalance(int amount);
+    void deductBalance(int amount);
 }

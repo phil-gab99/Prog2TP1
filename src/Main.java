@@ -9,8 +9,8 @@
 public class Main {
 
     public static void main(String[] args) {
-        Client c1 = new Client("Last", "First", "123");
-        Client c2 = new Client("Last", "First", "12345");
+        Client c1 = new Client("Zelric", "Jayajay", "123");
+        Client c2 = new Client("Zelric", "Jayajay", "12345");
         System.out.println(c1.getEmail());
         System.out.println(c2.getEmail());
     }

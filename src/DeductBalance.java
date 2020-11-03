@@ -8,5 +8,11 @@
 
 public interface DeductBalance {
 
+    /*
+    * 
+    *
+    *
+    **/
+
     void deductBalance(int amount);
 }

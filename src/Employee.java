@@ -12,9 +12,17 @@ public class Employee extends Account implements AddBalance, DeductBalance {
         super(lastName, firstName, birth, 1);
     }
 
+    /*
+    * The addBalance method was implemented from the AddBalance interface
+    **/
+
     public void addBalance(int amount) {
         this.setBalance(this.getBalance() + amount);
     }
+
+    /*
+    * The deductBalance method was implemented from the DeductBalance interface
+    **/
 
     public void deductBalance(int amount) {
         this.setBalance(this.getBalance() - amount);

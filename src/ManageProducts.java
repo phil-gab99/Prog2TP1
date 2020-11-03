@@ -8,7 +8,7 @@
 
 public interface ManageProducts {
 
-    // //Consider changing them to default if has simple enough behaviour
-    // void addProduct(Product p);
-    // void removeProduct(Product p);
+    //Consider changing them to default if has simple enough behaviour
+    void addProduct(Product p);
+    void removeProduct(Product p);
 }

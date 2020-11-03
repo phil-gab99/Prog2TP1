@@ -1,7 +1,7 @@
 /*
 * @Karim Boumghar
 * @Philippe Gabriel
-* @Version 1.6.5 2020-11-12
+* @Version 1.6.9 2020-11-12
 *
 * The class Account contains the basic fields and methods common to the various
 * account types as well as useful accessor methods
@@ -60,6 +60,14 @@ public abstract class Account implements FavoriteProducts {
         String validEmail = lastName + firstName + count + "@magasin.ca";
 
         return validEmail;
+    }
+
+    public void addFavorite(Product p) {
+        System.out.println("Work in progress");
+    }
+
+    public void removeFavorite(Product p) {
+        System.out.println("Work in progress");
     }
 
     /*

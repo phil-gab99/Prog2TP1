@@ -20,4 +20,12 @@ public class Manager extends Account implements AddBalance, DeductBalance,
     public void deductBalance(int amount) {
         this.setBalance(this.getBalance() - amount);
     }
+
+    public void addProduct(Product p) {
+        System.out.println("Work in progress");
+    }
+
+    public void removeProduct(Product p) {
+        System.out.println("Work in progress");
+    }
 }

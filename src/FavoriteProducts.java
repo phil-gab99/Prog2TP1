@@ -8,7 +8,7 @@
 
 public interface FavoriteProducts {
 
-    // //Consider changing them to default if has simple enough behaviour
-    // void addFavorite(Product p);
-    // void removeFavorite(Product p);
+    //Consider changing them to default if has simple enough behaviour
+    void addFavorite(Product p);
+    void removeFavorite(Product p);
 }

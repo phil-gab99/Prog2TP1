@@ -4,15 +4,20 @@ import java.util.HashMap;
 /*
 * @Karim Boumghar
 * @Philippe Gabriel
-* @Version 1.1 2020-11-12
+* @Version 1.3.2 2020-11-12
 *
 * The class Base
 **/
 
 public class Base {
 
+    //The accounts array list holds all the different users' information
     private static ArrayList<Account> accounts = new ArrayList<Account>();
-    private static HashMap<String, Integer> emailMapping = new HashMap <String, Integer>();
+
+    //The emailMapping hashmap keeps track of the number of instances for which
+        //users with the same first and last name have been recorded
+    private static HashMap<String, Integer> emailMapping = new HashMap <String,
+        Integer>();
 
     /*
     * The method addAccount adds any new user to the array list
@@ -39,7 +44,8 @@ public class Base {
 
         if (emailMapping.containsKey(lastName + firstName)) {
 
-            emailMapping.replace(lastName + firstName, emailMapping.get(lastName + firstName) + 1);
+            emailMapping.replace(lastName + firstName, emailMapping.get(
+                lastName + firstName) + 1);
             return emailMapping.get(lastName + firstName);
         } else {
 

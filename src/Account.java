@@ -1,9 +1,10 @@
 /*
 * @Karim Boumghar
 * @Philippe Gabriel
-* @Version 1.5.0 2020-11-12
+* @Version 1.6.5 2020-11-12
 *
-* The class Account
+* The class Account contains the basic fields and methods common to the various
+* account types as well as useful accessor methods
 **/
 
 //todo : Give program specification
@@ -63,6 +64,8 @@ public abstract class Account implements FavoriteProducts {
 
     /*
     * The getter method getBalance gives access to a user's balance
+    *
+    * @return balance The user's balance
     **/
 
     public int getBalance() {
@@ -71,15 +74,29 @@ public abstract class Account implements FavoriteProducts {
 
     /*
     * The getter method getEmail gives access to a user's email
+    *
+    * @return email The user's email
     **/
 
     public String getEmail() {
         return email;
     }
 
+    /*
+    * The getter method getLastName gives access to a user's last name
+    *
+    * @return lastName The user's last name
+    **/
+
     public String getLastName() {
         return lastName;
     }
+
+    /*
+    * The getter method getLastName gives access to a user's first name
+    *
+    * @return firstName The user's first name
+    **/
 
     public String getFirstName() {
         return firstName;

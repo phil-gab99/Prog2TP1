@@ -32,7 +32,7 @@ public abstract class Account implements FavoriteProducts {
     **/
 
     public Account(String lastName, String firstName, String birth,
-        int position) {
+    int position) {
 
         this.lastName = lastName;
         this.firstName = firstName;
@@ -58,8 +58,8 @@ public abstract class Account implements FavoriteProducts {
 
         //This is a long method for generating an email in worst case scenario
         //Would recommend to instead make a search of all emails with the same
-            //lastName and firstName, extract the numbers using UTF-8 encoding
-            //conditions and create the email afterwards
+        //lastName and firstName, extract the numbers using UTF-8 encoding
+        //conditions and create the email afterwards
         // while(emailExist(validEmail + "@magasin.ca")) {
         //
         //     count ++;
@@ -91,10 +91,6 @@ public abstract class Account implements FavoriteProducts {
 
     public void setBalance(int balance) {
 
-        if (balance < 0) {
-            this.balance = 0;
-        } else {
-            this.balance = balance;
-        }
+        this.balance = balance;        
     }
 }

@@ -5,7 +5,7 @@ import inventory.*;
 /*
 * @Karim Boumghar
 * @Philippe Gabriel
-* @Version 1.0 2020-11-12
+* @Version 1.1.0 2020-11-12
 *
 * The interface ManageProducts offers the necessary methods for managing the
 * store's available inventory

@@ -7,7 +7,7 @@ import inventory.*;
 /*
 * @Karim Boumghar
 * @Philippe Gabriel
-* @Version 1.11.9 2020-11-12
+* @Version 1.11.11 2020-11-12
 *
 * The class Account contains the basic fields and methods common to the various
 * account types as well as useful accessor methods
@@ -113,7 +113,7 @@ public abstract class Account implements ManageBalance, FavoriteProducts,
 
     /*
     * The addBalance method was implemented from the ManageBalance interface
-    * and is available for all account types
+    * and is an available action for all account types
     **/
 
     public void addBalance(int amount) {
@@ -137,6 +137,11 @@ public abstract class Account implements ManageBalance, FavoriteProducts,
         }
     }
 
+    /*
+    * The addFavorite method was implemented from the FavoriteProducts
+    * interface and is an available action for all account types
+    **/
+
     public void addFavorite(Product p) {
 
         if (productAvailable(p)) {
@@ -144,25 +149,40 @@ public abstract class Account implements ManageBalance, FavoriteProducts,
         }
     }
 
+    /*
+    * The removeFavorite method was implemented from the FavoriteProducts
+    * interface and is an available action for all account types
+    **/
+
     public void removeFavorite(Product p) {
 
         favorites.remove(p);
     }
 
+    /*
+    * The addProduct method was implemented from the ManageProducts interface
+    * and is an available action for manager-type accounts
+    **/
+
     public void addProduct(Product p) {
 
         if (position == 3) {
-
+            System.out.println("Work in progress");
         } else {
 
             System.out.println("Action allowed only for manager-type accounts");
         }
     }
 
+    /*
+    * The removeProduct method was implemented from the ManageProducts
+    * interface and is an available action for manager-type accounts
+    **/
+
     public void removeProduct(Product p) {
 
         if (position == 3) {
-
+            System.out.println("Work in progress");
         } else {
 
             System.out.println("Action allowed only for manager-type accounts");

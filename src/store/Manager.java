@@ -19,6 +19,6 @@ public class Manager extends Account {
     **/
 
     public Manager(String lastName, String firstName, String birth) {
-        super(lastName, firstName, birth, 2);
+        super(lastName, firstName, birth);
     }
 }

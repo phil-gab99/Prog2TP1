@@ -25,7 +25,6 @@ public abstract class Account implements ManageBalance, FavoriteProducts,
     private String lastName;
     private String firstName;
     private String birth;
-    private int position;
     private ArrayList<Product> favorites;
 
     /*
@@ -36,17 +35,13 @@ public abstract class Account implements ManageBalance, FavoriteProducts,
     * @param firstName String indicating individual's first name
     * @param birth String indicating individual's date of birth following the
     * format: dd/mm/yyyy
-    * @param position Integer indicating individual's position within the store
-    * 0 indicates client type, 1 employee type, 2 manager type
     **/
 
-    public Account(String lastName, String firstName, String birth,
-    int position) {
+    public Account(String lastName, String firstName, String birth) {
 
         this.lastName = lastName;
         this.firstName = firstName;
         this.birth = birth;
-        this.position = position;
         this.favorites = new ArrayList<Product>();
 
         this.email = generateEmail();
@@ -128,7 +123,7 @@ public abstract class Account implements ManageBalance, FavoriteProducts,
 
     public void deductBalance(int amount) {
 
-        if (position == 0) {
+        if (this instanceof Client) {
 
             System.out.println("Action not allowed for client-type accounts");
         } else {
@@ -166,7 +161,7 @@ public abstract class Account implements ManageBalance, FavoriteProducts,
 
     public void addProduct(Product p) {
 
-        if (position == 2) {
+        if (this instanceof Manager) {
             System.out.println("Work in progress");
         } else {
 
@@ -181,7 +176,7 @@ public abstract class Account implements ManageBalance, FavoriteProducts,
 
     public void removeProduct(Product p) {
 
-        if (position == 2) {
+        if (this instanceof Manager) {
             System.out.println("Work in progress");
         } else {
 

@@ -15,5 +15,8 @@ public class Main {
         Client c2 = new Client("Zelric", "Jayajay", "12345");
         System.out.println(c1.getEmail());
         System.out.println(c2.getEmail());
+        System.out.println(Base.accounts.get(0).getBalance());
+        c1.addBalance(3000);
+        System.out.println(Base.accounts.get(0).getBalance());
     }
 }

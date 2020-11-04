@@ -12,7 +12,13 @@ import inventory.*;
 
 public interface FavoriteProducts {
 
-    //Consider changing them to default if has simple enough behaviour
+    /*
+    * The methods addFavorite and removeFavorite adds or removes a product
+    * to the user's favorite product list
+    *
+    * @param p Product to be added to the user's favorite products list
+    **/
+
     void addFavorite(Product p);
     void removeFavorite(Product p);
 }

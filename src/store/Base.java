@@ -14,11 +14,11 @@ import java.util.HashMap;
 public class Base {
 
     //The accounts array list holds all the different users' information
-    private static ArrayList<Account> accounts = new ArrayList<Account>();
+    public static ArrayList<Account> accounts = new ArrayList<Account>();
 
     //The emailMapping hashmap keeps track of the number of instances for which
         //users with the same first and last name have been recorded
-    private static HashMap<String, Integer> emailMapping = new HashMap <String,
+    public static HashMap<String, Integer> emailMapping = new HashMap <String,
         Integer>();
 
     /*

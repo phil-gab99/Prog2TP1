@@ -1,5 +1,6 @@
 package store;
 
+import java.util.ArrayList;
 import actions.*;
 import inventory.*;
 
@@ -15,7 +16,8 @@ import inventory.*;
 //todo : Give program specification
 //todo : Begin
 
-public abstract class Account implements FavoriteProducts {
+public abstract class Account implements ManageBalance, FavoriteProducts,
+    ManageProducts {
 
     private int balance;  //Balance associated with the account
     private String email; //Email to be generated for the different accounts
@@ -24,6 +26,7 @@ public abstract class Account implements FavoriteProducts {
     private String firstName;
     private String birth;
     private int position;
+    private ArrayList<Product> favorites;
 
     /*
     * The Account constructor serves to assign the common existing traits
@@ -44,6 +47,7 @@ public abstract class Account implements FavoriteProducts {
         this.firstName = firstName;
         this.birth = birth;
         this.position = position;
+        this.favorites = new ArrayList<Product>();
 
         this.email = generateEmail();
 
@@ -65,14 +69,6 @@ public abstract class Account implements FavoriteProducts {
         String validEmail = lastName + firstName + count + "@magasin.ca";
 
         return validEmail;
-    }
-
-    public void addFavorite(Product p) {
-        System.out.println("Work in progress");
-    }
-
-    public void removeFavorite(Product p) {
-        System.out.println("Work in progress");
     }
 
     /*
@@ -116,11 +112,42 @@ public abstract class Account implements FavoriteProducts {
     }
 
     /*
-    * The setter method setBalance allows modifying of a user's balance
+    * The addBalance method was implemented from the ManageBalance interface
     **/
 
-    public void setBalance(int balance) {
+    public void addBalance(int amount) {
 
-        this.balance = balance;
+        balance += amount;
+    }
+
+    /*
+    * The deductBalance method was implemented from the ManageBalance interface
+    **/
+
+    public void deductBalance(int amount) {
+
+        if (position == 0) {
+
+            System.out.println("Action not allowed for Client-type accounts");
+        } else {
+
+            balance -= amount;
+        }
+    }
+
+    public void addFavorite(Product p) {
+        System.out.println("Work in progress");
+    }
+
+    public void removeFavorite(Product p) {
+        System.out.println("Work in progress");
+    }
+
+    public void addProduct(Product p) {
+        System.out.println("Work in progress");
+    }
+
+    public void removeProduct(Product p) {
+        System.out.println("Work in progress");
     }
 }

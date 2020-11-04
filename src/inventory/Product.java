@@ -26,4 +26,12 @@ public class Product {
 
         this.manager = manager;
     }
+
+    public String getManager() {
+        return manager;
+    }
+
+    public String toString() {
+        return "Le directeur est : " + manager;
+    }
 }

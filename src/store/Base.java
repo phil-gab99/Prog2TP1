@@ -35,7 +35,6 @@ public class Base {
     **/
 
     public static void addAccount(Account a) {
-
         accounts.add(a);
     }
 
@@ -46,17 +45,17 @@ public class Base {
     **/
 
     public static void addProduct(Product p) {
-        System.out.println("Work in progress");
+        products.add(p);
     }
 
     /*
-    * The method removeProduct removes a product fromt the products list
+    * The method removeProduct removes a product from the the products list
     *
     * @param p Product to remove
     **/
 
     public static void removeProduct(Product p) {
-        System.out.println("Work in progress");
+        products.remove(p);
     }
 
     /*

@@ -13,7 +13,7 @@ import java.awt.Color;
 public class Food extends Product {
 
     private String name;
-    private Color color;
+    private String color;
     private double weight;
 
     /*
@@ -25,12 +25,27 @@ public class Food extends Product {
     * @param weight Double indicating the fruit's weight
     **/
 
-    public Food(String manager, String name, Color color, double weight) {
+    public Food(String manager, String name, String color, double weight) {
 
         super(manager);
 
         this.name = name;
         this.color = color;
         this.weight = weight;
+    }
+
+    /*
+     * toString method implemented which returns the name of the food, it's color,
+     * it's weight in cm and it's weight.
+     *
+     */
+
+    public String toString() {
+
+        String temp = "Nom : " + name + "\ncouleur : " + color
+                + "\nde poids : " + weight + "lbs\nqui a été rentré par : " + getManager();
+
+
+        return temp;
     }
 }

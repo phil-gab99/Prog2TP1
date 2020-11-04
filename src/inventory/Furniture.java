@@ -32,4 +32,18 @@ public class Furniture extends Product {
         this.price = price;
         this.height = height;
     }
+
+    /*
+    * toString method implemented which returns the type of furniture, it's price,
+    * it's height (in cm) and the manager which added it to the list.
+    *
+     */
+    public String toString() {
+
+        String temp = "C'est un meuble de type : " + type + "\n qui coute : " + price
+                + "$\n de taille : " + height + "cm\n qui a été rentré par : " + getManager();
+
+
+        return temp;
+    }
 }

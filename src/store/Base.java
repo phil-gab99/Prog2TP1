@@ -6,9 +6,11 @@ import java.util.HashMap;
 /*
 * @Karim Boumghar
 * @Philippe Gabriel
-* @Version 1.3.5 2020-11-12
+* @Version 1.3.6 2020-11-12
 *
-* The class Base
+* The class Base is responsible for holding information with regards to the
+* different accounts created or products enlisted as well as providing some
+* useful generic methods to manage the data
 **/
 
 public class Base {

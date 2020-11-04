@@ -1,4 +1,8 @@
-public class Food {
+package inventory;
+
+import java.awt.Color;
+
+public class Food extends Product {
 
     private String name;
     private Color color;

@@ -1,3 +1,7 @@
+package actions;
+
+import inventory.*;
+
 /*
 * @Karim Boumghar
 * @Philippe Gabriel

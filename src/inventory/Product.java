@@ -1,3 +1,5 @@
+package inventory;
+
 public class Product {
 
     private String manager;

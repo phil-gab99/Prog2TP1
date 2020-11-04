@@ -1,3 +1,8 @@
+package store;
+
+import actions.*;
+import inventory.*;
+
 /*
 * @Karim Boumghar
 * @Philippe Gabriel

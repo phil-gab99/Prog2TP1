@@ -1,3 +1,7 @@
+package store;
+
+import actions.*;
+
 /*
 * @Karim Boumghar
 * @Philippe Gabriel

@@ -1,3 +1,5 @@
+import store.*;
+
 /*
 * @Karim Boumghar
 * @Philippe Gabriel

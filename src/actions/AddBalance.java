@@ -1,3 +1,5 @@
+package actions;
+
 /*
 * @Karim Boumghar
 * @Philippe Gabriel

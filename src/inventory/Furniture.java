@@ -1,4 +1,6 @@
-public class Furniture {
+package inventory;
+
+public class Furniture extends Product {
 
     private String type;
     private double price;

@@ -3,9 +3,10 @@ package actions;
 /*
 * @Karim Boumghar
 * @Philippe Gabriel
-* @Version 1.0 2020-11-12
+* @Version 1.1.0 2020-11-12
 *
-* The interface ManageBalance
+* The interface ManageBalance offers the necessary methods for managing a
+* user's balance
 **/
 
 public interface ManageBalance {

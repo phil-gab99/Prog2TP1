@@ -5,9 +5,10 @@ import inventory.*;
 /*
 * @Karim Boumghar
 * @Philippe Gabriel
-* @Version 1.0 2020-11-12
+* @Version 1.0.1 2020-11-12
 *
-* The interface FavoriteProducts
+* The interface FavoriteProducts offers the necessary methods for managing a
+* user's favorite products' list
 **/
 
 public interface FavoriteProducts {

@@ -5,9 +5,9 @@ import actions.*;
 /*
 * @Karim Boumghar
 * @Philippe Gabriel
-* @Version 1.2.2 2020-11-12
+* @Version 1.2.4 2020-11-12
 *
-* The class Client
+* The class Client gives a definition of client-type accounts
 **/
 
 public class Client extends Account {

@@ -113,6 +113,7 @@ public abstract class Account implements ManageBalance, FavoriteProducts,
 
     /*
     * The addBalance method was implemented from the ManageBalance interface
+    * and is available for all account types
     **/
 
     public void addBalance(int amount) {
@@ -122,13 +123,14 @@ public abstract class Account implements ManageBalance, FavoriteProducts,
 
     /*
     * The deductBalance method was implemented from the ManageBalance interface
+    * and is not an available action for Client-type accounts
     **/
 
     public void deductBalance(int amount) {
 
         if (position == 0) {
 
-            System.out.println("Action not allowed for Client-type accounts");
+            System.out.println("Action not allowed for client-type accounts");
         } else {
 
             balance -= amount;
@@ -136,18 +138,34 @@ public abstract class Account implements ManageBalance, FavoriteProducts,
     }
 
     public void addFavorite(Product p) {
-        System.out.println("Work in progress");
+
+        if (productAvailable(p)) {
+            favorites.add(p);
+        }
     }
 
     public void removeFavorite(Product p) {
-        System.out.println("Work in progress");
+
+        favorites.remove(p);
     }
 
     public void addProduct(Product p) {
-        System.out.println("Work in progress");
+
+        if (position == 3) {
+
+        } else {
+
+            System.out.println("Action allowed only for manager-type accounts");
+        }
     }
 
     public void removeProduct(Product p) {
-        System.out.println("Work in progress");
+
+        if (position == 3) {
+
+        } else {
+
+            System.out.println("Action allowed only for manager-type accounts");
+        }
     }
 }

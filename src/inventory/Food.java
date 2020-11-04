@@ -34,6 +34,7 @@ public class Food extends Product {
         this.weight = weight;
     }
 
+
     /*
      * toString method implemented which returns the name of the food, it's color,
      * it's weight in cm and it's weight.

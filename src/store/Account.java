@@ -64,45 +64,23 @@ public abstract class Account implements ManageBalance, FavoriteProducts,
         return lastName + firstName + count + "@magasin.ca";
     }
 
-    /*
-    * The getter method getBalance gives access to a user's balance
-    *
-    * @return balance The user's balance
-    **/
 
     public int getBalance() {
         return balance;
     }
 
-    /*
-    * The getter method getEmail gives access to a user's email
-    *
-    * @return email The user's email
-    **/
-
     public String getEmail() {
         return email;
     }
-
-    /*
-    * The getter method getLastName gives access to a user's last name
-    *
-    * @return lastName The user's last name
-    **/
 
     public String getLastName() {
         return lastName;
     }
 
-    /*
-    * The getter method getLastName gives access to a user's first name
-    *
-    * @return firstName The user's first name
-    **/
-
     public String getFirstName() {
         return firstName;
     }
+
 
     /*
     * The addBalance method was implemented from the ManageBalance interface
@@ -162,7 +140,7 @@ public abstract class Account implements ManageBalance, FavoriteProducts,
     public void addProduct(Product p) {
 
         if (this instanceof Manager) {
-            System.out.println("Work in progress");
+            Base.addProduct(p);
         } else {
 
             System.out.println("Action allowed only for manager-type accounts");
@@ -171,13 +149,14 @@ public abstract class Account implements ManageBalance, FavoriteProducts,
 
     /*
     * The removeProduct method was implemented from the ManageProducts
-    * interface and is an available action for manager-type accounts
+    * interface and is an available action for manager-type accounts.
+    * If the product is not present in the list, nothing is done.
     **/
 
     public void removeProduct(Product p) {
 
         if (this instanceof Manager) {
-            System.out.println("Work in progress");
+            Base.removeProduct(p);
         } else {
 
             System.out.println("Action allowed only for manager-type accounts");

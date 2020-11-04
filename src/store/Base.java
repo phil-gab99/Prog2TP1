@@ -1,5 +1,7 @@
 package store;
 
+import inventory.Product;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 

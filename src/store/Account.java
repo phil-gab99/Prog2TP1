@@ -61,9 +61,7 @@ public abstract class Account implements ManageBalance, FavoriteProducts,
 
         int count = Base.emailExist(lastName, firstName);
 
-        String validEmail = lastName + firstName + count + "@magasin.ca";
-
-        return validEmail;
+        return lastName + firstName + count + "@magasin.ca";
     }
 
     /*
@@ -138,10 +136,12 @@ public abstract class Account implements ManageBalance, FavoriteProducts,
     **/
 
     public void addFavorite(Product p) {
-
+        /*
         if (productAvailable(p)) {
             favorites.add(p);
         }
+        */
+
     }
 
     /*

@@ -18,6 +18,7 @@ public class Client extends Account {
     **/
 
     public Client(String lastName, String firstName, String birth) {
+
         super(lastName, firstName, birth);
     }
 }

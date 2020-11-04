@@ -17,8 +17,9 @@ public class Product {
     * The Product constructor serves to assign the common existing traits
     * with regards to the different product types
     *
-    * @param manager String representing the manager's last name indicating the
-    * manager responsible for including a given product in the store inventory
+    * @param manager String representing the manager's first name
+    * and last name indicating the manager responsible for including a
+    * given product in the store inventory.
     **/
 
     public Product(String manager) {

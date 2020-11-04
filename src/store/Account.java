@@ -7,7 +7,7 @@ import inventory.*;
 /*
 * @Karim Boumghar
 * @Philippe Gabriel
-* @Version 1.6.9 2020-11-12
+* @Version 1.11.9 2020-11-12
 *
 * The class Account contains the basic fields and methods common to the various
 * account types as well as useful accessor methods

@@ -166,7 +166,7 @@ public abstract class Account implements ManageBalance, FavoriteProducts,
 
     public void addProduct(Product p) {
 
-        if (position == 3) {
+        if (position == 2) {
             System.out.println("Work in progress");
         } else {
 
@@ -181,7 +181,7 @@ public abstract class Account implements ManageBalance, FavoriteProducts,
 
     public void removeProduct(Product p) {
 
-        if (position == 3) {
+        if (position == 2) {
             System.out.println("Work in progress");
         } else {
 

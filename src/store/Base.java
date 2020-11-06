@@ -98,7 +98,7 @@ public class Base {
 
     public static int emailExist(String lastName, String firstName) {
 
-        String user = lastName + firstName
+        String user = lastName + firstName;
 
         if (emailMapping.containsKey(user)) {
 

@@ -108,6 +108,34 @@ public abstract class Account implements ManageBalance, FavoriteProducts,
     }
 
     /*
+    * The getter method getBirth gives access to a user's date of birth
+    *
+    * @return birth The user's date of birth
+    **/
+
+    public String getBirth() {
+        return birth;
+    }
+
+    /*
+    * The method toString converts each account's data into a string
+    *
+    * @return info String holding the user's relevant information
+    **/
+
+    public String toString() {
+
+        String info = "" +
+            "Last Name: " + lastName +
+            " First Name: " + firstName +
+            " Birth: " + birth +
+            " Email: " + email +
+            " Balance: " + balance;
+
+        return info;
+    }
+
+    /*
     * The addBalance method was implemented from the ManageBalance interface
     * and is an available action for all account types
     **/

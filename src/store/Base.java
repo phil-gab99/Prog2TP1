@@ -98,14 +98,15 @@ public class Base {
 
     public static int emailExist(String lastName, String firstName) {
 
-        if (emailMapping.containsKey(lastName + firstName)) {
+        String user = lastName + firstName
 
-            emailMapping.replace(lastName + firstName, emailMapping.get(
-                lastName + firstName) + 1);
-            return emailMapping.get(lastName + firstName);
+        if (emailMapping.containsKey(user)) {
+
+            emailMapping.replace(user, emailMapping.get(user) + 1);
+            return emailMapping.get(user);
         } else {
 
-            emailMapping.put(lastName + firstName, 1);
+            emailMapping.put(user, 1);
             return 1;
         }
     }

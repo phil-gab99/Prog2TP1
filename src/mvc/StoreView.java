@@ -5,13 +5,23 @@ import javax.swing.border.*;
 import java.awt.*;
 import store.*;
 
+/*
+* @Karim Boumghar
+* @Philippe Gabriel
+* @Version 1.15.2 2020-11-12
+*
+* The class StoreView indicates how the first main window of the application is
+* configured
+**/
+
 public class StoreView extends JFrame {
 
-    private static final int FRAME_WIDTH = 1440;
-    private static final int FRAME_HEIGHT = 900;
+    private static final int FRAME_WIDTH = 1440; //Default frame width
+    private static final int FRAME_HEIGHT = 900; //Default frame height
 
-    private JList<String> list;
+    private JList<String> list; //List that will hold each account
 
+    //The different buttons for specific tasks
     private JButton addAccount;
     private JButton removeAccount;
     private JButton advancedSearch;
@@ -25,14 +35,18 @@ public class StoreView extends JFrame {
         setLayout(new FlowLayout());
         setSize(FRAME_WIDTH, FRAME_HEIGHT);
 
+        //Note: Might need some changes later for size
         String[] data = new String[Base.accounts.size()];
 
+        //Loading each account into the String array
         for (int i = 0; i < data.length; i++) {
 
             data[i] = Base.accounts.get(i).toString();
         }
 
         list = new JList<String>(data);
+
+        //Creating and configuring the scrollpane and list header
         JScrollPane scrollpane = new JScrollPane(list);
         JLabel header = new JLabel("Last Name  |  First Name  |  Date of Birth"
         + "  |  Email  |  Balance  |  Position", JLabel.LEFT);
@@ -58,11 +72,15 @@ public class StoreView extends JFrame {
         add(productsList);
     }
 
+    /*
+    * The main method instantiates the main application window
+    **/
+
     public static void main(String[] args) {
 
         StoreView gui = new StoreView();
         gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         gui.setVisible(true);
-        gui.setTitle("My first Java list");
+        gui.setTitle("My first Java list :)");
     }
 }

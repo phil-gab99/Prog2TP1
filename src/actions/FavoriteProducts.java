@@ -17,7 +17,7 @@ public interface FavoriteProducts {
     * The methods addFavorite and removeFavorite adds or removes a product
     * to the user's favorite product list
     *
-    * @param p Product to be added to the user's favorite products list
+    * @param p Product to be added/removed
     **/
 
     void addFavorite(Product p);

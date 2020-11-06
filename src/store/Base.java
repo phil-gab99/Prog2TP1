@@ -2,6 +2,7 @@ package store;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import inventory.*;
 
 /*
 * @Karim Boumghar
@@ -38,13 +39,21 @@ public class Base {
     }
 
     /*
-    * The method addProduct adds a new product to the products list
+    * The method addProduct adds a new product to the products list and avoids
+    * adding duplicate items in the products list
     *
     * @param p Product to add
     **/
 
     public static void addProduct(Product p) {
-        System.out.println("Work in progress");
+
+        if (productAvailable(p)) {
+
+            System.out.println("Product already available!");
+        } else {
+
+            products.add(p);
+        }
     }
 
     /*
@@ -54,7 +63,27 @@ public class Base {
     **/
 
     public static void removeProduct(Product p) {
-        System.out.println("Work in progress");
+
+        if (productAvailable(p)) {
+
+            products.remove(p);
+        } else {
+
+            System.out.println("No such product enlisted!");
+        }
+    }
+
+    /*
+    * The method productAvailable checks if a given product is present within
+    * the list or not
+    *
+    * @param p Product of interest
+    * @return Boolean indicating if product is available or not
+    **/
+
+    public static boolean productAvailable(Product p) {
+
+        return products.contains(p);
     }
 
     /*

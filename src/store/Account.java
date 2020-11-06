@@ -35,6 +35,7 @@ public abstract class Account implements ManageBalance, FavoriteProducts,
     * @param firstName String indicating individual's first name
     * @param birth String indicating individual's date of birth following the
     * format: dd/mm/yyyy
+    * @param favorites ArrayList holding a user's favorite products
     **/
 
     public Account(String lastName, String firstName, String birth) {
@@ -139,7 +140,7 @@ public abstract class Account implements ManageBalance, FavoriteProducts,
 
     public void addFavorite(Product p) {
 
-        if (productAvailable(p)) {
+        if (Base.productAvailable(p)) {
             favorites.add(p);
         }
     }
@@ -162,7 +163,8 @@ public abstract class Account implements ManageBalance, FavoriteProducts,
     public void addProduct(Product p) {
 
         if (this instanceof Manager) {
-            System.out.println("Work in progress");
+
+            Base.addProduct(p);
         } else {
 
             System.out.println("Action allowed only for manager-type accounts");
@@ -177,7 +179,8 @@ public abstract class Account implements ManageBalance, FavoriteProducts,
     public void removeProduct(Product p) {
 
         if (this instanceof Manager) {
-            System.out.println("Work in progress");
+
+            Base.removeProduct(p);
         } else {
 
             System.out.println("Action allowed only for manager-type accounts");

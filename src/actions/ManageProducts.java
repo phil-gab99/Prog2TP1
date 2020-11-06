@@ -13,7 +13,13 @@ import inventory.*;
 
 public interface ManageProducts {
 
-    //Consider changing them to default if has simple enough behaviour
+    /*
+    * The methods addProduct and removeProduct adds or removes a product
+    * to the product list
+    *
+    * @param p Product to be added/removed
+    **/
+
     void addProduct(Product p);
     void removeProduct(Product p);
 }

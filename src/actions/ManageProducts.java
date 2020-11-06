@@ -14,8 +14,8 @@ import inventory.*;
 public interface ManageProducts {
 
     /*
-    * The methods addProduct and removeProduct adds or removes a product
-    * to the product list
+    * The methods addProduct and removeProduct adds or removes a product to the
+    * product list
     *
     * @param p Product to be added/removed
     **/

@@ -17,14 +17,14 @@ import inventory.*;
 public class Base {
 
     //The accounts array list holds all the different users' information
-    public static ArrayList<Account> accounts = new ArrayList<Account>();
+    private static ArrayList<Account> accounts = new ArrayList<Account>();
 
     //The products array list holds the available products decided by managers
-    public static ArrayList<Product> products = new ArrayList<Product>();
+    private static ArrayList<Product> products = new ArrayList<Product>();
 
     //The emailMapping hashmap keeps track of the number of instances for which
         //users with the same first and last name have been recorded
-    public static HashMap<String, Integer> emailMapping = new HashMap <String,
+    private static HashMap<String, Integer> emailMapping = new HashMap <String,
         Integer>();
 
     /*

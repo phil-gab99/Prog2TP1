@@ -25,6 +25,11 @@ class StoreModel {
         this.view = view;
     }
 
+    /*
+    * The method addAccount handles the event of adding an account with the
+    * included details specified
+    **/
+
     public void addAccount() {
 
         //Need to add full implementation of account adding (dialogbox)
@@ -46,7 +51,9 @@ class StoreModel {
             view.list.getSelectedValuesList().toArray(users);
 
             if (users.length == 0) {
-                System.err.println("Please select a user to delete");
+                System.out.println("I am here");
+                view.msgBox("Please select a user to delete.",
+                    "No User Selected", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
@@ -65,7 +72,5 @@ class StoreModel {
         } catch(ConcurrentModificationException e) {
 
         }
-
-        // System.out.println(Arrays.toString(Base.accounts.toArray()));
     }
 }

@@ -37,16 +37,7 @@ public class StoreView extends JFrame {
         Dimension d = screen.getScreenSize();
         setLocation((d.width - getWidth()) / 2, (d.height - getHeight()) / 2);
 
-        //Note: Might need some changes later for size
-        String[] data = new String[Base.accounts.size()];
-
-        //Loading each account into the String array
-        for (int i = 0; i < data.length; i++) {
-
-            data[i] = Base.accounts.get(i).toString();
-        }
-
-        list = new JList<String>(data);
+        list = new JList<String>();
         list.setModel(new DefaultListModel<String>());
 
         //Creating and configuring the scrollpane and list header
@@ -122,6 +113,20 @@ public class StoreView extends JFrame {
 
 
         add(button);
+    }
+
+    /*
+    * The method msgBox creates a dialog informative pane to the user with
+    * the given message as information
+    *
+    * @param message String holding information to display
+    * @param title String indicating dialog box title
+    * @param messageType Integer indicating the type of message to display
+    **/
+
+    public void msgBox(String message, String title, int messageType) {
+
+        JOptionPane.showMessageDialog(null, message, title, messageType);
     }
 
     /*

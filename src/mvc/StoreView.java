@@ -18,6 +18,8 @@ public class StoreView extends JFrame {
 
     private static final int FRAME_WIDTH = 800; //Default frame width
     private static final int FRAME_HEIGHT = 450; //Default frame height
+    private static final Toolkit screen = Toolkit.getDefaultToolkit();
+    private static final Dimension d = screen.getScreenSize();
 
     private StoreModel model;
     private StoreControl control;
@@ -33,9 +35,7 @@ public class StoreView extends JFrame {
         GridBagConstraints c = new GridBagConstraints();
         setLayout(gridbag);
         setSize(FRAME_WIDTH, FRAME_HEIGHT);
-        Toolkit screen = Toolkit.getDefaultToolkit();
-        Dimension d = screen.getScreenSize();
-        setLocation((d.width - getWidth()) / 2, (d.height - getHeight()) / 2);
+        centerComponent(this);
 
         list = new JList<String>();
         list.setModel(new DefaultListModel<String>());
@@ -52,49 +52,50 @@ public class StoreView extends JFrame {
 
         c.insets = new Insets(5, 20, 5, 20);
         c.gridwidth = GridBagConstraints.REMAINDER;
-        c.gridheight = 3;
 
         gridbag.setConstraints(scrollpane, c);
         add(scrollpane);
 
         //Configuring button placements
-        c.insets = new Insets(5, 100, 5, 100);
+        c.insets = new Insets(5, 20, 5, 5);
         c.gridwidth = GridBagConstraints.RELATIVE;
-        c.gridheight = 1;
-        makeButton("Add Account", gridbag, c, 1);
+        makeButton(this, "Add Account", gridbag, c, 1);
+        c.insets = new Insets(5, 5, 5, 20);
         c.gridwidth = GridBagConstraints.REMAINDER;
-        makeButton("Delete Account", gridbag, c, 2);
+        makeButton(this, "Delete Account", gridbag, c, 2);
 
-        c.weightx = 0.0;
-        c.gridheight = 3;
-        makeButton("Advanced Search", gridbag, c, 3);
-
-        c.weightx = 1.0;
-        c.gridheight = 1;
-        c.gridwidth = GridBagConstraints.RELATIVE;
-        makeButton("Add Balance", gridbag, c, 4);
-        c.gridwidth = GridBagConstraints.REMAINDER;
-        makeButton("Deduct Balance", gridbag, c, 5);
+        c.insets = new Insets(5, 20, 5, 20);
+        makeButton(this, "Advanced Search", gridbag, c, 3);
 
         c.gridwidth = GridBagConstraints.RELATIVE;
-        makeButton("View Favorite Products", gridbag, c, 6);
+        c.insets = new Insets(5, 20, 5, 5);
+        makeButton(this, "Add Balance", gridbag, c, 4);
         c.gridwidth = GridBagConstraints.REMAINDER;
-        makeButton("View Available Products", gridbag, c, 7);
+        c.insets = new Insets(5, 5, 5, 20);
+        makeButton(this, "Deduct Balance", gridbag, c, 5);
+
+        c.gridwidth = GridBagConstraints.RELATIVE;
+        c.insets = new Insets(5, 20, 5, 5);
+        makeButton(this, "View Favorite Products", gridbag, c, 6);
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        c.insets = new Insets(5, 5, 5, 20);
+        makeButton(this, "View Available Products", gridbag, c, 7);
     }
 
     /*
     * The makeButton method creates a button to implement onto the interface
     * and assigns it a specific listener
     *
+    * @param parent Container that will hold the button
     * @param name String indicating button label
-    * @param gridbag GridBagLayout with frame layout details
+    * @param gridbag GridBagLayout with parent layout details
     * @param c GridBagConstraints indicating the specific constraints and
     * details on where the button is to be added
     * @param listenType Integer indicating which type of listener to assign to
     * the given button
     **/
 
-    public void makeButton(String name, GridBagLayout gridbag,
+    public void makeButton(Container parent, String name, GridBagLayout gridbag,
         GridBagConstraints c, int listenType) {
 
         JButton button = new JButton(name);
@@ -112,7 +113,68 @@ public class StoreView extends JFrame {
         }
 
 
-        add(button);
+        parent.add(button);
+    }
+
+    /*
+    * The makeLabel method creates a label to implement onto the interface
+    *
+    * @param parent Container that will hold the label
+    * @param name String indicating label content
+    * @param gridbag GridBagLayout with parent layout details
+    * @param c GridBagConstraints indicating the specific constraints and
+    * details on where the label is to be added
+    **/
+
+    public void makeLabel(Container parent, String name, GridBagLayout gridbag,
+        GridBagConstraints c) {
+
+        JLabel label = new JLabel(name);
+        gridbag.setConstraints(label, c);
+
+        parent.add(label);
+    }
+
+    /*
+    * The makeTextField method creates a textfield to implement onto the
+    * interface and assigns it a specific listener
+    *
+    * @param parent Container that will hold the textfield
+    * @param gridbag GridBagLayout with parent layout details
+    * @param c GridBagConstraints indicating the specific constraints and
+    * details on where the textfield is to be added
+    * @param columns Integer dictating textfield width
+    **/
+
+    public void makeTextField(Container parent, GridBagLayout gridbag,
+        GridBagConstraints c, int columns) {
+
+        JTextField textfield = new JTextField(columns);
+        gridbag.setConstraints(textfield, c);
+
+        parent.add(textfield);
+    }
+
+    /*
+    * The makeRadioButton method creates a radio button to implement onto the
+    * interface and assigns it a specific listener
+    *
+    * @param parent Container that will hold the radio button
+    * @param group ButtonGroup assembling radio buttons together
+    * @param label String labelling the radio button
+    * @param gridbag GridBagLayout with parent layout details
+    * @param c GridBagConstraints indicating the specific constraints and
+    * details on where the radio button is to be added
+    **/
+
+    public void makeRadioButton(Container parent, ButtonGroup group,
+        String label, GridBagLayout gridbag, GridBagConstraints c) {
+
+        JRadioButton radio = new JRadioButton(label);
+        gridbag.setConstraints(radio, c);
+
+        group.add(radio);
+        parent.add(radio);
     }
 
     /*
@@ -127,6 +189,91 @@ public class StoreView extends JFrame {
     public void msgBox(String message, String title, int messageType) {
 
         JOptionPane.showMessageDialog(null, message, title, messageType);
+    }
+
+    /*
+    * The method accountDialog generates a dialog box with options for the user
+    * to select for creating an account
+    *
+    * @param title String indicating dialog box title
+    **/
+
+    public void accountDialog(String title) {
+
+        JDialog dialog = new JDialog(this, title, true);
+        ButtonGroup group = new ButtonGroup();
+        GridBagLayout gridbag = new GridBagLayout();
+        GridBagConstraints c = new GridBagConstraints();
+
+        dialog.setSize(FRAME_WIDTH/2, FRAME_HEIGHT/2);
+        centerComponent(dialog);
+        dialog.setLayout(gridbag);
+
+        c.fill = GridBagConstraints.BOTH;
+        c.weightx = 1.0;
+
+        c.gridwidth = 1;
+        c.insets = new Insets(5, 20, 5, 5);
+        makeLabel(dialog, "Last Name: ", gridbag, c);
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        c.insets = new Insets(5, 5, 5, 20);
+        makeTextField(dialog, gridbag, c, 0);
+
+        c.gridwidth = 1;
+        c.insets = new Insets(5, 20, 5, 5);
+        makeLabel(dialog, "First Name: ", gridbag, c);
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        c.insets = new Insets(5, 5, 5, 20);
+        makeTextField(dialog, gridbag, c, 0);
+
+        c.gridwidth = 1;
+        c.insets = new Insets(5, 20, 5, 0);
+        makeLabel(dialog, "Date of birth: ", gridbag, c);
+        c.gridwidth = 6;
+        c.insets = new Insets(5, 5, 5, 0);
+        makeTextField(dialog, gridbag, c, 2);
+        c.insets = new Insets(5, 0, 5, 0);
+        c.gridwidth = 1;
+        makeLabel(dialog, "/", gridbag, c);
+        c.gridwidth = 6;
+        makeTextField(dialog, gridbag, c, 2);
+        c.gridwidth = 1;
+        makeLabel(dialog, "/", gridbag, c);
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        c.insets = new Insets(5, 0, 5, 20);
+        makeTextField(dialog, gridbag, c, 4);
+
+        c.gridwidth = 1;
+        c.insets = new Insets(5, 20, 5, 0);
+        makeLabel(dialog, "Position: ", gridbag, c);
+        c.gridwidth = 7;
+        c.insets = new Insets(5, 5, 5, 0);
+        makeRadioButton(dialog, group, "Client", gridbag, c);
+        c.insets = new Insets(5, 0, 5, 0);
+        makeRadioButton(dialog, group, "Employee", gridbag, c);
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        c.insets = new Insets(5, 0, 5, 20);
+        makeRadioButton(dialog, group, "Manager", gridbag, c);
+
+        c.gridwidth = 11;
+        c.insets = new Insets(5, 20, 5, 5);
+        makeButton(dialog, "OK", gridbag, c, 5);
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        c.insets = new Insets(5, 5, 5, 20);
+        makeButton(dialog, "Cancel", gridbag, c, 5);
+
+        dialog.setVisible(true);
+    }
+
+    /*
+    * The method centerComponent centers a given component with respect to
+    * their screen dimensions
+    *
+    * @param c Component to be centered
+    **/
+
+    public void centerComponent(Component c) {
+        c.setLocation((d.width - c.getWidth()) / 2, (d.height - c.getHeight()) / 2);
     }
 
     /*

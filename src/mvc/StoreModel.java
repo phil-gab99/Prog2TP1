@@ -32,15 +32,11 @@ class StoreModel {
 
     public void addAccount() {
 
-        //Need to add full implementation of account adding (dialogbox)
-        Client c1 = new Client("Ayoub", "Souleiman", "01/02/1999");
-        Client c2 = new Client("Ayoub", "Souleiman", "01/02/1999");
-        Client c3 = new Client("Ayoub", "Souleiman", "01/02/1999");
         DefaultListModel<String> model = (DefaultListModel<String>) view.list.getModel();
+        // Client c1 = new Client("Ayoub", "Souleiman", "00/00/0000");
 
-        model.add(0,c1.toString());
-        model.add(1,c2.toString());
-        model.add(2,c3.toString());
+        view.accountDialog("Add Account");
+        // model.add(0,c1.toString());
     }
 
     public void deleteAccount() {

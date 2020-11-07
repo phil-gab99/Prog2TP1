@@ -39,6 +39,23 @@ public class Base {
     }
 
     /*
+    * The method deleteAccount deletes any new user based on their given unique
+    * email
+    *
+    * @param email Account's email used to identify desired user
+    **/
+
+    public static void deleteAccount(String email) {
+
+        for (Account a : accounts) {
+
+            if (a.getEmail().equals(email)) {
+                accounts.remove(a);
+            }
+        }
+    }
+
+    /*
     * The method addProduct adds a new product to the products list and avoids
     * adding duplicate items in the products list
     *

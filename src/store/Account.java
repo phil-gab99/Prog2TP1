@@ -125,7 +125,7 @@ public abstract class Account implements ManageBalance, FavoriteProducts,
 
     public String toString() {
 
-        return lastName + "  |  " + firstName + "  |  " + birth + "  |  " + email + "  |  " + balance + "  |  " + this.getClass().getSimpleName();
+        return lastName + " - " + firstName + " - " + birth + " - " + email + " - " + balance + " - " + this.getClass().getSimpleName();
     }
 
     /*

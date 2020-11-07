@@ -19,18 +19,15 @@ public class StoreView extends JFrame {
     private static final int FRAME_WIDTH = 800; //Default frame width
     private static final int FRAME_HEIGHT = 450; //Default frame height
 
-    private JList<String> list; //List that will hold each account
+    private StoreModel model;
+    private StoreControl control;
 
-    //The different buttons for specific tasks
-    // private JButton addAccount;
-    // private JButton removeAccount;
-    // private JButton advancedSearch;
-    // private JButton favoriteProducts;
-    // private JButton addBalance;
-    // private JButton deductBalance;
-    // private JButton productsList;
+    public JList<String> list; //List that will hold each account
 
     public StoreView() {
+
+        model = new StoreModel(this);
+        control = new StoreControl(model);
 
         GridBagLayout gridbag = new GridBagLayout();
         GridBagConstraints c = new GridBagConstraints();
@@ -53,8 +50,8 @@ public class StoreView extends JFrame {
 
         //Creating and configuring the scrollpane and list header
         JScrollPane scrollpane = new JScrollPane(list);
-        JLabel header = new JLabel("Last Name  |  First Name  |  Date of Birth"
-        + "  |  Email  |  Balance  |  Position", JLabel.LEFT);
+        JLabel header = new JLabel("Last Name - First Name - Date of Birth"
+        + " - Email - Balance - Position", JLabel.LEFT);
         header.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
         scrollpane.setColumnHeaderView(header);
 
@@ -68,88 +65,49 @@ public class StoreView extends JFrame {
         gridbag.setConstraints(scrollpane, c);
         add(scrollpane);
 
+        //Configuring button placements
         c.insets = new Insets(5, 100, 5, 100);
         c.gridwidth = GridBagConstraints.RELATIVE;
         c.gridheight = 1;
-        makeButton("Add Account", gridbag, c);
+        makeButton("Add Account", gridbag, c, 1);
         c.gridwidth = GridBagConstraints.REMAINDER;
-        makeButton("Remove Account", gridbag, c);
+        makeButton("Delete Account", gridbag, c, 2);
 
         c.weightx = 0.0;
         c.gridheight = 3;
-        makeButton("Advanced Search", gridbag, c);
+        makeButton("Advanced Search", gridbag, c, 3);
 
         c.weightx = 1.0;
         c.gridheight = 1;
         c.gridwidth = GridBagConstraints.RELATIVE;
-        makeButton("Add Balance", gridbag, c);
+        makeButton("Add Balance", gridbag, c, 4);
         c.gridwidth = GridBagConstraints.REMAINDER;
-        makeButton("Deduct Balance", gridbag, c);
+        makeButton("Deduct Balance", gridbag, c, 5);
 
         c.gridwidth = GridBagConstraints.RELATIVE;
-        makeButton("View User Favorite Products", gridbag, c);
+        makeButton("View Favorite Products", gridbag, c, 6);
         c.gridwidth = GridBagConstraints.REMAINDER;
-        makeButton("View Available Products", gridbag, c);
-
-        // makeButton("Button1", gridbag, c);
-        // makeButton("Button2", gridbag, c);
-        // makeButton("Button3", gridbag, c);
-        //
-        // c.gridwidth = GridBagConstraints.REMAINDER; //end row
-        // makeButton("Button4", gridbag, c);
-        //
-        // c.weightx = 0.0;                //reset to the default
-        // makeButton("Button5", gridbag, c); //another row
-        //
-        // c.gridwidth = GridBagConstraints.RELATIVE; //next-to-last in row
-        // makeButton("Button6", gridbag, c);
-        //
-        // c.gridwidth = GridBagConstraints.REMAINDER; //end row
-        // makeButton("Button7", gridbag, c);
-        //
-        // c.gridwidth = 1;                //reset to the default
-        // c.gridheight = 2;
-        // c.weighty = 1.0;
-        // makeButton("Button8", gridbag, c);
-        //
-        // c.weighty = 0.0;                //reset to the default
-        // c.gridwidth = GridBagConstraints.REMAINDER; //end row
-        // c.gridheight = 1;               //reset to the default
-        // makeButton("Button9", gridbag, c);
-        // makeButton("Button10", gridbag, c);
-
-        // c.insets = new Insets(50, 10, 0, 10);
-
-
-
-
-        // c.gridwidth = 1;
-        // c.gridheight = 5;
-        // c.weightx = 1.0;
-        // makeButton("Add an account", gridbag, c);
-
-        // addAccount = new JButton("Add an account");
-        // removeAccount = new JButton("Remove account");
-        // advancedSearch = new JButton("Advanced Search");
-        // favoriteProducts = new JButton("Favorite Products");
-        // addBalance = new JButton("Add to Balance");
-        // deductBalance = new JButton("Deduct from Balance");
-        // productsList = new JButton("List of available products");
-
-        // add(addAccount);
-        // add(removeAccount);
-        // add(advancedSearch);
-        // add(favoriteProducts);
-        // add(addBalance);
-        // add(deductBalance);
-        // add(productsList);
+        makeButton("View Available Products", gridbag, c, 7);
     }
 
     public void makeButton(String name, GridBagLayout gridbag,
-    GridBagConstraints c) {
+        GridBagConstraints c, int listenType) {
 
         JButton button = new JButton(name);
         gridbag.setConstraints(button, c);
+
+        switch (listenType) {
+            case 1: button.addActionListener(control.new AddAccount()); break;
+            case 2: button.addActionListener(control.new DeleteAccount()); break;
+            // case 3: button.addActionListener(StoreControl.new AddAccount()); break
+            // case 4: button.addActionListener(StoreControl.new AddAccount()); break
+            // case 5: button.addActionListener(StoreControl.new AddAccount()); break
+            // case 6: button.addActionListener(StoreControl.new AddAccount()); break
+            // case 7: button.addActionListener(StoreControl.new AddAccount()); break
+            default: System.out.println("Lolilou");
+        }
+
+
         add(button);
     }
 
@@ -158,6 +116,10 @@ public class StoreView extends JFrame {
     **/
 
     public static void main(String[] args) {
+
+        Client c1 = new Client("Ayoub", "Souleiman", "01/02/1999");
+        Client c2 = new Client("Ayoub", "Souleiman", "01/02/1999");
+        Client c3 = new Client("Ayoub", "Souleiman", "01/02/1999");
 
         StoreView gui = new StoreView();
         gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

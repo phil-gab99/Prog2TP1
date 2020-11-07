@@ -17,7 +17,6 @@ class StoreModel {
     }
 
     public void addAccount() {
-        System.out.println("Work in progress");
 
         Client c1 = new Client("Ayoub", "Souleiman", "01/02/1999");
         Client c2 = new Client("Ayoub", "Souleiman", "01/02/1999");
@@ -44,8 +43,8 @@ class StoreModel {
             DefaultListModel<String> model = (DefaultListModel<String>) view.list.getModel();
             int[] selectedIndices = view.list.getSelectedIndices();
 
-            for (int index : selectedIndices) {
-                model.remove(index);
+            for (int i = selectedIndices.length - 1; i >= 0; i--) {
+                model.remove(i);
             }
 
             for (String user : users) {

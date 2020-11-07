@@ -22,7 +22,7 @@ public class StoreView extends JFrame {
     private StoreModel model;
     private StoreControl control;
 
-    public JList<String> list; //List that will hold each account
+    protected JList<String> list; //List that will hold each account
 
     public StoreView() {
 
@@ -47,6 +47,7 @@ public class StoreView extends JFrame {
         }
 
         list = new JList<String>(data);
+        list.setModel(new DefaultListModel<String>());
 
         //Creating and configuring the scrollpane and list header
         JScrollPane scrollpane = new JScrollPane(list);
@@ -116,10 +117,6 @@ public class StoreView extends JFrame {
     **/
 
     public static void main(String[] args) {
-
-        Client c1 = new Client("Ayoub", "Souleiman", "01/02/1999");
-        Client c2 = new Client("Ayoub", "Souleiman", "01/02/1999");
-        Client c3 = new Client("Ayoub", "Souleiman", "01/02/1999");
 
         StoreView gui = new StoreView();
         gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

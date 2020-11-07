@@ -25,18 +25,20 @@ class StoreModel {
             String[] users = new String[view.list.getSelectedValuesList().size()];
             view.list.getSelectedValuesList().toArray(users);
 
-            for (String user : users) {
-                String userEmail = user.split(" - ")[3];
-                System.out.println(Arrays.toString(Base.accounts.toArray()));
-                Base.deleteAccount(userEmail);
-                System.out.println(Arrays.toString(Base.accounts.toArray()));
+            if (users.length == 0) {
+                System.err.println("Please select a user to delete");
+                return;
             }
-        } catch(NullPointerException e) {
-            System.err.println("Please select a user to delete");
-        } catch(ConcurrentModificationException e) {
 
+            for (String user : users) {
+
+                String userEmail = user.split(" - ")[3];
+                Base.deleteAccount(userEmail);
+            }
+        } catch(ConcurrentModificationException e) {
+            System.out.println("Exception caught");
         }
 
-        // System.out.println(Arrays.toString(Base.accounts.toArray()));
+        System.out.println(Arrays.toString(Base.accounts.toArray()));
     }
 }

@@ -51,6 +51,7 @@ public class Base {
 
             if (a.getEmail().equals(email)) {
                 accounts.remove(a);
+                break;
             }
         }
     }

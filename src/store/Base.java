@@ -7,7 +7,7 @@ import inventory.*;
 /*
 * @Karim Boumghar
 * @Philippe Gabriel
-* @Version 1.3.6 2020-11-12
+* @Version 1.20.14 2020-11-12
 *
 * The class Base is responsible for holding information with regards to the
 * different accounts created or products enlisted as well as providing some

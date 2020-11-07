@@ -8,7 +8,7 @@ import store.*;
 /*
 * @Karim Boumghar
 * @Philippe Gabriel
-* @Version 1.15.2 2020-11-12
+* @Version 1.30.16 2020-11-12
 *
 * The class StoreView indicates how the first main window of the application is
 * configured
@@ -90,6 +90,18 @@ public class StoreView extends JFrame {
         c.gridwidth = GridBagConstraints.REMAINDER;
         makeButton("View Available Products", gridbag, c, 7);
     }
+
+    /*
+    * The makeButton method creates a button to implement onto the interface
+    * and assigns it a specific listener
+    *
+    * @param name String indicating button label
+    * @param gridbag GridBagLayout with frame layout details
+    * @param c GridBagConstraints indicating the specific constraints and
+    * details on where the button is to be added
+    * @param listenType Integer indicating which type of listener to assign to
+    * the given button
+    **/
 
     public void makeButton(String name, GridBagLayout gridbag,
         GridBagConstraints c, int listenType) {

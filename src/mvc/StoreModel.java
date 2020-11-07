@@ -7,6 +7,15 @@ import java.util.ConcurrentModificationException;
 import javax.swing.*;
 import store.*;
 
+/*
+* @Karim Boumghar
+* @Philippe Gabriel
+* @Version 1.25.11 2020-11-12
+*
+* The class StoreModel gives the details of the actions to be ensued upon
+* triggering action events
+**/
+
 class StoreModel {
 
     private StoreView view;
@@ -18,6 +27,7 @@ class StoreModel {
 
     public void addAccount() {
 
+        //Need to add full implementation of account adding (dialogbox)
         Client c1 = new Client("Ayoub", "Souleiman", "01/02/1999");
         Client c2 = new Client("Ayoub", "Souleiman", "01/02/1999");
         Client c3 = new Client("Ayoub", "Souleiman", "01/02/1999");

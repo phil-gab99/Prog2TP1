@@ -27,6 +27,8 @@ public class StoreView extends JFrame {
 
     //Array list of components holding user input details upon element creation
     protected ArrayList<JTextField> details;
+    //Account on which some action needs to be done
+    protected Account accountOperation;
     protected ButtonGroup group;  //Radio button group
     protected JList<String> list; //List that will hold each account
     protected JDialog dialog;     //Dialog used for various user input contexts
@@ -111,15 +113,15 @@ public class StoreView extends JFrame {
             case 1: button.addActionListener(control.new AddAccount()); break;
             case 2: button.addActionListener(control.new DeleteAccount()); break;
             // case 3: button.addActionListener(StoreControl.new AddAccount()); break
-            // case 4: button.addActionListener(StoreControl.new AddAccount()); break
-            // case 5: button.addActionListener(StoreControl.new AddAccount()); break
+            case 4: button.addActionListener(control.new AddBalance()); break;
+            case 5: button.addActionListener(control.new DeductBalance()); break;
             // case 6: button.addActionListener(StoreControl.new AddAccount()); break
             // case 7: button.addActionListener(StoreControl.new AddAccount()); break
             case 8: button.addActionListener(control.new OkAccount()); break;
-            case 9: button.addActionListener(control.new Cancel()); break;
+            case 9: button.addActionListener(control.new OkAddBalance()); break;
+            case 20: button.addActionListener(control.new Cancel()); break;
             default: System.out.println("Lolilou");
         }
-
 
         parent.add(button);
     }
@@ -275,7 +277,47 @@ public class StoreView extends JFrame {
         makeButton(dialog, "OK", gridbag, c, 8);
         c.gridwidth = GridBagConstraints.REMAINDER;
         c.insets = new Insets(5, 5, 5, 20);
-        makeButton(dialog, "Cancel", gridbag, c, 9);
+        makeButton(dialog, "Cancel", gridbag, c, 20);
+
+        dialog.setVisible(true);
+    }
+
+    /*
+    * The method addBalanceDialog generates a dialog box with options for the
+    * user to indicate the amount to add unto the selected account's balance
+    *
+    * @param title String indicating dialog box title
+    * @param a Account for which balance needs to be modified
+    **/
+
+    public void addBalanceDialog(String title, Account a) {
+
+        accountOperation = a;
+        dialog = new JDialog(this, title, true);
+        details = new ArrayList<JTextField>();
+        GridBagLayout gridbag = new GridBagLayout();
+        GridBagConstraints c = new GridBagConstraints();
+
+        dialog.setSize(FRAME_WIDTH/2, FRAME_HEIGHT/2);
+        centerComponent(dialog);
+        dialog.setLayout(gridbag);
+
+        c.fill = GridBagConstraints.BOTH;
+        c.weightx = 1.0;
+
+        c.gridwidth = 1;
+        c.insets = new Insets(5, 20, 5, 5);
+        makeLabel(dialog, "Amount: ", gridbag, c);
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        c.insets = new Insets(5, 5, 5, 20);
+        makeTextField(dialog, gridbag, c, 0, 2);
+
+        c.gridwidth = 1;
+        c.insets = new Insets(5, 20, 5, 5);
+        makeButton(dialog, "OK", gridbag, c, 9);
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        c.insets = new Insets(5, 5, 5, 20);
+        makeButton(dialog, "Cancel", gridbag, c, 20);
 
         dialog.setVisible(true);
     }

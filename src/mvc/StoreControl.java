@@ -49,10 +49,31 @@ class StoreControl {
         }
     }
 
+    public class AddBalance implements ActionListener {
+
+        public void actionPerformed(ActionEvent e) {
+            model.addBalance();
+        }
+    }
+
+    public class DeductBalance implements ActionListener {
+
+        public void actionPerformed(ActionEvent e) {
+            // model.deductBalance();
+        }
+    }
+
     public class OkAccount implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {
             model.okAccount();
+        }
+    }
+
+    public class OkAddBalance implements ActionListener {
+
+        public void actionPerformed(ActionEvent e) {
+            model.okAddBalance();
         }
     }
 

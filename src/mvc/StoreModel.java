@@ -83,12 +83,31 @@ class StoreModel {
             for (String user : users) {
 
                 String userEmail = user.split(" - ")[3];
-                Base.deleteAccount(userEmail);
+                Base.deleteAccount(Base.userFromEmail(userEmail));
             }
         } catch(ConcurrentModificationException e) {
             //do nothing
         }
-        System.out.println("We made it here");
+    }
+
+    public void addBalance() {
+
+        String[] users = new String[view.list.getSelectedValuesList().size()];
+        view.list.getSelectedValuesList().toArray(users);
+
+        if (users.length == 0) {
+            view.msgBox("Please select a user.",
+            "No User Selected", JOptionPane.ERROR_MESSAGE);
+            return;
+        } else if (users.length > 1) {
+            view.msgBox("Please select a single user.",
+            "No User Selected", JOptionPane.ERROR_MESSAGE);
+            return;
+        } else {
+
+            String userEmail = users[0].split(" - ")[3];
+            view.addBalanceDialog("Add Balance", Base.userFromEmail(userEmail));
+        }
     }
 
     public void okAccount() {
@@ -97,10 +116,12 @@ class StoreModel {
         String firstName;
 
         try {
-            lastName = view.details.get(0).getText().substring(0,1).toUpperCase() + view.details.get(0).getText().substring(1);
-            firstName = view.details.get(1).getText().substring(0,1).toUpperCase() + view.details.get(1).getText().substring(1);
+            lastName = view.details.get(0).getText().substring(0,1).toUpperCase()
+            + view.details.get(0).getText().substring(1);
+            firstName = view.details.get(1).getText().substring(0,1).toUpperCase()
+            + view.details.get(1).getText().substring(1);
         } catch(StringIndexOutOfBoundsException e) {
-            view.msgBox("Please enter a last name and a first name for the user",
+            view.msgBox("Please enter a last name and a first name for the user.",
             "No Names Entered", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -113,32 +134,25 @@ class StoreModel {
 
             day = Integer.parseInt(view.details.get(2).getText());
 
-            if (day < 0 || day > 31) {
+            if (day > 31) {
 
-                view.msgBox("Please enter a valid birth day",
+                view.msgBox("Please enter a valid birth day.",
                 "Day Out Of Range", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
             month = Integer.parseInt(view.details.get(3).getText());
 
-            if (month < 0 || month > 12) {
+            if (month > 12) {
 
-                view.msgBox("Please enter a valid birth month",
+                view.msgBox("Please enter a valid birth month.",
                 "Month Out Of Range", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
             year = Integer.parseInt(view.details.get(4).getText());
-
-            if (year < 0) {
-
-                view.msgBox("Please enter a valid birth year",
-                "Year Out Of Range", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
         } catch(NumberFormatException e) {
-            view.msgBox("Please enter an input for the user's birth date",
+            view.msgBox("Please enter an input for the user's birth date.",
             "No Input", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -157,13 +171,32 @@ class StoreModel {
         } else if (position == "Manager") {
             a = new Manager(lastName, firstName, birth);
         } else {
-            view.msgBox("Please select a position for this user",
+            view.msgBox("Please select a position for this user.",
             "No Position Selected", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         model = (DefaultListModel<String>) view.list.getModel();
         model.addElement(a.toString());
+        cancel();
+    }
+
+    public void okAddBalance() {
+
+        int amount;
+
+        try {
+            amount = Integer.parseInt(view.details.get(0).getText());
+        } catch(NumberFormatException e) {
+            view.msgBox("Please enter an amount.",
+            "No Input", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        view.accountOperation.addBalance(amount);
+
+        model = (DefaultListModel<String>) view.list.getModel();
+        model.set(view.list.getSelectedIndex(),view.accountOperation.toString());
         cancel();
     }
 

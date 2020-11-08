@@ -39,21 +39,14 @@ public class Base {
     }
 
     /*
-    * The method deleteAccount deletes any new user based on their given unique
-    * email
+    * The method deleteAccount deletes a user from the accounts list
     *
-    * @param email Account's email used to identify desired user
+    * @param a Account attached to some user
     **/
 
-    public static void deleteAccount(String email) {
+    public static void deleteAccount(Account a) {
 
-        for (Account a : accounts) {
-
-            if (a.getEmail().equals(email)) {
-                accounts.remove(a);
-                break;
-            }
-        }
+        accounts.remove(a);
     }
 
     /*
@@ -127,5 +120,23 @@ public class Base {
             emailMapping.put(user, 1);
             return 1;
         }
+    }
+
+    /*
+    * The method userFromEmail determines the identity of a user based on their
+    * known email
+    *
+    * @param email String representing the user's email
+    **/
+
+    public static Account userFromEmail(String email) {
+
+        for (Account a : accounts) {
+
+            if (a.getEmail().equals(email)) {
+                return a;
+            }
+        }
+        return null;
     }
 }

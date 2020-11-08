@@ -1,5 +1,7 @@
 package mvc;
+
 import java.awt.event.*;
+import javax.swing.*;
 
 /*
 * @Karim Boumghar
@@ -19,6 +21,20 @@ class StoreControl {
         this.model = model;
     }
 
+    public class KeyLetters extends KeyAdapter {
+
+        public void keyTyped(KeyEvent e) {
+            model.format(e, 'A', 'z');
+        }
+    }
+
+    public class KeyNumbers extends KeyAdapter {
+
+        public void keyTyped(KeyEvent e) {
+            model.format(e, '0', '9');
+        }
+    }
+
     public class AddAccount implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {
@@ -30,6 +46,13 @@ class StoreControl {
 
         public void actionPerformed(ActionEvent e) {
             model.deleteAccount();
+        }
+    }
+
+    public class Cancel implements ActionListener {
+
+        public void actionPerformed(ActionEvent e) {
+            model.cancel();
         }
     }
 }

@@ -1,8 +1,8 @@
 package mvc;
 
+import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.*;
-import java.awt.*;
 import store.*;
 
 /*
@@ -25,6 +25,7 @@ public class StoreView extends JFrame {
     private StoreControl control;
 
     protected JList<String> list; //List that will hold each account
+    protected JDialog dialog;     //Dialog used for various user input contexts
 
     public StoreView() {
 
@@ -109,6 +110,7 @@ public class StoreView extends JFrame {
             // case 5: button.addActionListener(StoreControl.new AddAccount()); break
             // case 6: button.addActionListener(StoreControl.new AddAccount()); break
             // case 7: button.addActionListener(StoreControl.new AddAccount()); break
+            case 8: button.addActionListener(control.new Cancel()); break;
             default: System.out.println("Lolilou");
         }
 
@@ -147,17 +149,22 @@ public class StoreView extends JFrame {
     **/
 
     public void makeTextField(Container parent, GridBagLayout gridbag,
-        GridBagConstraints c, int columns) {
+        GridBagConstraints c, int columns, int listenType) {
 
         JTextField textfield = new JTextField(columns);
         gridbag.setConstraints(textfield, c);
+
+        switch (listenType) {
+            case 1: textfield.addKeyListener(control.new KeyLetters()); break;
+            case 2: textfield.addKeyListener(control.new KeyNumbers()); break;
+        }
 
         parent.add(textfield);
     }
 
     /*
     * The makeRadioButton method creates a radio button to implement onto the
-    * interface and assigns it a specific listener
+    * interface
     *
     * @param parent Container that will hold the radio button
     * @param group ButtonGroup assembling radio buttons together
@@ -200,7 +207,7 @@ public class StoreView extends JFrame {
 
     public void accountDialog(String title) {
 
-        JDialog dialog = new JDialog(this, title, true);
+        dialog = new JDialog(this, title, true);
         ButtonGroup group = new ButtonGroup();
         GridBagLayout gridbag = new GridBagLayout();
         GridBagConstraints c = new GridBagConstraints();
@@ -217,31 +224,31 @@ public class StoreView extends JFrame {
         makeLabel(dialog, "Last Name: ", gridbag, c);
         c.gridwidth = GridBagConstraints.REMAINDER;
         c.insets = new Insets(5, 5, 5, 20);
-        makeTextField(dialog, gridbag, c, 0);
+        makeTextField(dialog, gridbag, c, 0, 1);
 
         c.gridwidth = 1;
         c.insets = new Insets(5, 20, 5, 5);
         makeLabel(dialog, "First Name: ", gridbag, c);
         c.gridwidth = GridBagConstraints.REMAINDER;
         c.insets = new Insets(5, 5, 5, 20);
-        makeTextField(dialog, gridbag, c, 0);
+        makeTextField(dialog, gridbag, c, 0, 1);
 
         c.gridwidth = 1;
         c.insets = new Insets(5, 20, 5, 0);
         makeLabel(dialog, "Date of birth: ", gridbag, c);
         c.gridwidth = 6;
         c.insets = new Insets(5, 5, 5, 0);
-        makeTextField(dialog, gridbag, c, 2);
+        makeTextField(dialog, gridbag, c, 2, 2);
         c.insets = new Insets(5, 0, 5, 0);
         c.gridwidth = 1;
         makeLabel(dialog, "/", gridbag, c);
         c.gridwidth = 6;
-        makeTextField(dialog, gridbag, c, 2);
+        makeTextField(dialog, gridbag, c, 2, 2);
         c.gridwidth = 1;
         makeLabel(dialog, "/", gridbag, c);
         c.gridwidth = GridBagConstraints.REMAINDER;
         c.insets = new Insets(5, 0, 5, 20);
-        makeTextField(dialog, gridbag, c, 4);
+        makeTextField(dialog, gridbag, c, 4, 2);
 
         c.gridwidth = 1;
         c.insets = new Insets(5, 20, 5, 0);
@@ -260,7 +267,7 @@ public class StoreView extends JFrame {
         makeButton(dialog, "OK", gridbag, c, 5);
         c.gridwidth = GridBagConstraints.REMAINDER;
         c.insets = new Insets(5, 5, 5, 20);
-        makeButton(dialog, "Cancel", gridbag, c, 5);
+        makeButton(dialog, "Cancel", gridbag, c, 8);
 
         dialog.setVisible(true);
     }

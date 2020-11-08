@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.*;
 import java.util.ConcurrentModificationException;
+import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
 import store.*;
 
@@ -23,6 +25,15 @@ class StoreModel {
     public StoreModel(StoreView view) {
 
         this.view = view;
+    }
+
+    public void format(KeyEvent e, char lb, char ub) {
+
+        char c = e.getKeyChar();
+
+        if (((c < lb) || (c > ub))) {
+            e.consume();
+        }
     }
 
     /*
@@ -66,7 +77,11 @@ class StoreModel {
                 Base.deleteAccount(userEmail);
             }
         } catch(ConcurrentModificationException e) {
-
+            //do nothing
         }
+    }
+
+    public void cancel() {
+        view.dialog.dispose();
     }
 }

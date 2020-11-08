@@ -37,6 +37,19 @@ class StoreModel {
         }
     }
 
+    public String getRadioButtonText(ButtonGroup group) {
+
+        for (Enumeration buttons = group.getElements(); buttons.hasMoreElements();) {
+            AbstractButton button = (AbstractButton) buttons.nextElement();
+
+            if (button.isSelected()) {
+                return button.getText();
+            }
+        }
+
+        return null;
+    }
+
     /*
     * The method addAccount handles the event of adding an account with the
     * included details specified
@@ -44,11 +57,7 @@ class StoreModel {
 
     public void addAccount() {
 
-        model = (DefaultListModel<String>) view.list.getModel();
-        // Client c1 = new Client("Ayoub", "Souleiman", "00/00/0000");
-
         view.accountDialog("Add Account");
-        // model.add(0,c1.toString());
     }
 
     public void deleteAccount() {
@@ -60,7 +69,7 @@ class StoreModel {
 
             if (users.length == 0) {
                 view.msgBox("Please select a user to delete.",
-                    "No User Selected", JOptionPane.ERROR_MESSAGE);
+                "No User Selected", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
@@ -68,7 +77,7 @@ class StoreModel {
             int[] selectedIndices = view.list.getSelectedIndices();
 
             for (int i = selectedIndices.length - 1; i >= 0; i--) {
-                model.remove(i);
+                model.remove(selectedIndices[i]);
             }
 
             for (String user : users) {
@@ -79,10 +88,83 @@ class StoreModel {
         } catch(ConcurrentModificationException e) {
             //do nothing
         }
+        System.out.println("We made it here");
     }
 
-    public void ok() {
-        System.out.println("OK!!!!");
+    public void okAccount() {
+
+        String lastName;
+        String firstName;
+
+        try {
+            lastName = view.details.get(0).getText().substring(0,1).toUpperCase() + view.details.get(0).getText().substring(1);
+            firstName = view.details.get(1).getText().substring(0,1).toUpperCase() + view.details.get(1).getText().substring(1);
+        } catch(StringIndexOutOfBoundsException e) {
+            view.msgBox("Please enter a last name and a first name for the user",
+            "No Names Entered", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        int day;
+        int month;
+        int year;
+
+        try {
+
+            day = Integer.parseInt(view.details.get(2).getText());
+
+            if (day < 0 || day > 31) {
+
+                view.msgBox("Please enter a valid birth day",
+                "Day Out Of Range", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            month = Integer.parseInt(view.details.get(3).getText());
+
+            if (month < 0 || month > 12) {
+
+                view.msgBox("Please enter a valid birth month",
+                "Month Out Of Range", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            year = Integer.parseInt(view.details.get(4).getText());
+
+            if (year < 0) {
+
+                view.msgBox("Please enter a valid birth year",
+                "Year Out Of Range", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        } catch(NumberFormatException e) {
+            view.msgBox("Please enter an input for the user's birth date",
+            "No Input", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+
+        String birth = day + "/" + month + "/" + year;
+
+        String position = getRadioButtonText(view.group);
+
+        Account a;
+
+        if (position == "Client") {
+            a = new Client(lastName, firstName, birth);
+        } else if (position == "Employee") {
+            a = new Employee(lastName, firstName, birth);
+        } else if (position == "Manager") {
+            a = new Manager(lastName, firstName, birth);
+        } else {
+            view.msgBox("Please select a position for this user",
+            "No Position Selected", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        model = (DefaultListModel<String>) view.list.getModel();
+        model.addElement(a.toString());
+        cancel();
     }
 
     public void cancel() {

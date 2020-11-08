@@ -49,10 +49,10 @@ class StoreControl {
         }
     }
 
-    public class OK implements ActionListener {
+    public class OkAccount implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {
-            model.ok();
+            model.okAccount();
         }
     }
 

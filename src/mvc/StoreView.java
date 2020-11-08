@@ -1,6 +1,7 @@
 package mvc;
 
 import java.awt.*;
+import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.border.*;
 import store.*;
@@ -24,8 +25,12 @@ public class StoreView extends JFrame {
     private StoreModel model;
     private StoreControl control;
 
+    //Array list of components holding user input details upon element creation
+    protected ArrayList<JTextField> details;
+    protected ButtonGroup group;  //Radio button group
     protected JList<String> list; //List that will hold each account
     protected JDialog dialog;     //Dialog used for various user input contexts
+
 
     public StoreView() {
 
@@ -110,7 +115,7 @@ public class StoreView extends JFrame {
             // case 5: button.addActionListener(StoreControl.new AddAccount()); break
             // case 6: button.addActionListener(StoreControl.new AddAccount()); break
             // case 7: button.addActionListener(StoreControl.new AddAccount()); break
-            case 8: button.addActionListener(control.new OK()); break;
+            case 8: button.addActionListener(control.new OkAccount()); break;
             case 9: button.addActionListener(control.new Cancel()); break;
             default: System.out.println("Lolilou");
         }
@@ -160,6 +165,7 @@ public class StoreView extends JFrame {
             case 2: textfield.addKeyListener(control.new KeyNumbers()); break;
         }
 
+        details.add(textfield);
         parent.add(textfield);
     }
 
@@ -209,7 +215,8 @@ public class StoreView extends JFrame {
     public void accountDialog(String title) {
 
         dialog = new JDialog(this, title, true);
-        ButtonGroup group = new ButtonGroup();
+        group = new ButtonGroup();
+        details = new ArrayList<JTextField>();
         GridBagLayout gridbag = new GridBagLayout();
         GridBagConstraints c = new GridBagConstraints();
 

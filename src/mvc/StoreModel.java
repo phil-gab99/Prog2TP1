@@ -90,6 +90,11 @@ class StoreModel {
         }
     }
 
+    public void advSearch() {
+        
+        view.advSearchDialog("Advanced Search");
+    }
+
     public void addBalance() {
 
         String[] users = new String[view.list.getSelectedValuesList().size()];

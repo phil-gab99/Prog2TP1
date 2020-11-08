@@ -49,6 +49,13 @@ class StoreControl {
         }
     }
 
+    public class AdvSearch implements ActionListener {
+
+        public void actionPerformed(ActionEvent e) {
+            model.advSearch();
+        }
+    }
+
     public class AddBalance implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {

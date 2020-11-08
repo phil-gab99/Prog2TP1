@@ -112,7 +112,7 @@ public class StoreView extends JFrame {
         switch (listenType) {
             case 1: button.addActionListener(control.new AddAccount()); break;
             case 2: button.addActionListener(control.new DeleteAccount()); break;
-            // case 3: button.addActionListener(StoreControl.new AddAccount()); break
+            case 3: button.addActionListener(control.new AdvSearch()); break;
             case 4: button.addActionListener(control.new AddBalance()); break;
             case 5: button.addActionListener(control.new DeductBalance()); break;
             // case 6: button.addActionListener(StoreControl.new AddAccount()); break
@@ -135,12 +135,13 @@ public class StoreView extends JFrame {
     * @param gridbag GridBagLayout with parent layout details
     * @param c GridBagConstraints indicating the specific constraints and
     * details on where the label is to be added
+    * @param aligment Float constant indicating the text alignment within label
     **/
 
     public void makeLabel(Container parent, String name, GridBagLayout gridbag,
-        GridBagConstraints c) {
+        GridBagConstraints c, int alignment) {
 
-        JLabel label = new JLabel(name);
+        JLabel label = new JLabel(name, alignment);
         gridbag.setConstraints(label, c);
 
         parent.add(label);
@@ -232,38 +233,38 @@ public class StoreView extends JFrame {
 
         c.gridwidth = 1;
         c.insets = new Insets(5, 20, 5, 5);
-        makeLabel(dialog, "Last Name: ", gridbag, c);
+        makeLabel(dialog, "Last Name: ", gridbag, c, SwingConstants.LEFT);
         c.gridwidth = GridBagConstraints.REMAINDER;
         c.insets = new Insets(5, 5, 5, 20);
         makeTextField(dialog, gridbag, c, 0, 1);
 
         c.gridwidth = 1;
         c.insets = new Insets(5, 20, 5, 5);
-        makeLabel(dialog, "First Name: ", gridbag, c);
+        makeLabel(dialog, "First Name: ", gridbag, c, SwingConstants.LEFT);
         c.gridwidth = GridBagConstraints.REMAINDER;
         c.insets = new Insets(5, 5, 5, 20);
         makeTextField(dialog, gridbag, c, 0, 1);
 
         c.gridwidth = 1;
         c.insets = new Insets(5, 20, 5, 0);
-        makeLabel(dialog, "Date of birth: ", gridbag, c);
+        makeLabel(dialog, "Date of birth: ", gridbag, c, SwingConstants.LEFT);
         c.gridwidth = 6;
         c.insets = new Insets(5, 5, 5, 0);
         makeTextField(dialog, gridbag, c, 2, 2);
         c.insets = new Insets(5, 0, 5, 0);
         c.gridwidth = 1;
-        makeLabel(dialog, "/", gridbag, c);
+        makeLabel(dialog, "/", gridbag, c, SwingConstants.CENTER);
         c.gridwidth = 6;
         makeTextField(dialog, gridbag, c, 2, 2);
         c.gridwidth = 1;
-        makeLabel(dialog, "/", gridbag, c);
+        makeLabel(dialog, "/", gridbag, c, SwingConstants.CENTER);
         c.gridwidth = GridBagConstraints.REMAINDER;
         c.insets = new Insets(5, 0, 5, 20);
         makeTextField(dialog, gridbag, c, 4, 2);
 
         c.gridwidth = 1;
         c.insets = new Insets(5, 20, 5, 0);
-        makeLabel(dialog, "Position: ", gridbag, c);
+        makeLabel(dialog, "Position: ", gridbag, c, SwingConstants.LEFT);
         c.gridwidth = 7;
         c.insets = new Insets(5, 5, 5, 0);
         makeRadioButton(dialog, group, "Client", gridbag, c);
@@ -279,6 +280,78 @@ public class StoreView extends JFrame {
         c.gridwidth = GridBagConstraints.REMAINDER;
         c.insets = new Insets(5, 5, 5, 20);
         makeButton(dialog, "Cancel", gridbag, c, 20);
+
+        dialog.setVisible(true);
+    }
+
+    /*
+    * The method advSearchDialog generates a dialog box with options for the
+    * user to search for specific users of the list
+    *
+    * @param title String indicating dialog box title
+    **/
+
+    public void advSearchDialog(String title) {
+
+        dialog = new JDialog(this, title, true);
+        group = new ButtonGroup();
+        details = new ArrayList<JTextField>();
+        GridBagLayout gridbag = new GridBagLayout();
+        GridBagConstraints c = new GridBagConstraints();
+
+        dialog.setSize(FRAME_WIDTH/2, FRAME_HEIGHT/2);
+        centerComponent(dialog);
+        dialog.setLayout(gridbag);
+
+        c.fill = GridBagConstraints.BOTH;
+        c.weightx = 1.0;
+
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        c.insets = new Insets(5, 20, 5, 20);
+        makeLabel(dialog, "Single User Search*", gridbag, c, SwingConstants.CENTER);
+
+        c.gridwidth = 1;
+        c.insets = new Insets(5, 20, 5, 5);
+        makeLabel(dialog, "Last Name: ", gridbag, c, SwingConstants.LEFT);
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        c.insets = new Insets(5, 5, 5, 20);
+        makeTextField(dialog, gridbag, c, 0, 1);
+
+        c.gridwidth = 1;
+        c.insets = new Insets(5, 20, 5, 5);
+        makeLabel(dialog, "First Name: ", gridbag, c, SwingConstants.LEFT);
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        c.insets = new Insets(5, 5, 5, 20);
+        makeTextField(dialog, gridbag, c, 0, 1);
+
+        c.gridwidth = 1;
+        c.insets = new Insets(5, 20, 5, 0);
+        makeLabel(dialog, "Date of birth: ", gridbag, c, SwingConstants.LEFT);
+        c.gridwidth = 6;
+        c.insets = new Insets(5, 5, 5, 0);
+        makeTextField(dialog, gridbag, c, 2, 2);
+        c.insets = new Insets(5, 0, 5, 0);
+        c.gridwidth = 1;
+        makeLabel(dialog, "/", gridbag, c, SwingConstants.CENTER);
+        c.gridwidth = 6;
+        makeTextField(dialog, gridbag, c, 2, 2);
+        c.gridwidth = 1;
+        makeLabel(dialog, "/", gridbag, c, SwingConstants.CENTER);
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        c.insets = new Insets(5, 0, 5, 20);
+        makeTextField(dialog, gridbag, c, 4, 2);
+
+        c.gridwidth = 1;
+        c.insets = new Insets(5, 20, 5, 0);
+        makeLabel(dialog, "Position: ", gridbag, c, SwingConstants.LEFT);
+        c.gridwidth = 7;
+        c.insets = new Insets(5, 5, 5, 0);
+        makeRadioButton(dialog, group, "Client", gridbag, c);
+        c.insets = new Insets(5, 0, 5, 0);
+        makeRadioButton(dialog, group, "Employee", gridbag, c);
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        c.insets = new Insets(5, 0, 5, 20);
+        makeRadioButton(dialog, group, "Manager", gridbag, c);
 
         dialog.setVisible(true);
     }
@@ -308,7 +381,7 @@ public class StoreView extends JFrame {
 
         c.gridwidth = 1;
         c.insets = new Insets(5, 20, 5, 5);
-        makeLabel(dialog, "Amount: ", gridbag, c);
+        makeLabel(dialog, "Amount: ", gridbag, c, SwingConstants.RIGHT);
         c.gridwidth = GridBagConstraints.REMAINDER;
         c.insets = new Insets(5, 5, 5, 20);
         makeTextField(dialog, gridbag, c, 0, 2);
@@ -324,8 +397,9 @@ public class StoreView extends JFrame {
     }
 
     /*
-    * The method addBalanceDialog generates a dialog box with options for the
-    * user to indicate the amount to add unto the selected account's balance
+    * The method deductBalanceDialog generates a dialog box with options for
+    * the user to indicate the amount to deduct from the selected account's
+    * balance
     *
     * @param title String indicating dialog box title
     * @param a Account for which balance needs to be modified
@@ -348,7 +422,7 @@ public class StoreView extends JFrame {
 
         c.gridwidth = 1;
         c.insets = new Insets(5, 20, 5, 5);
-        makeLabel(dialog, "Amount: ", gridbag, c);
+        makeLabel(dialog, "Amount: ", gridbag, c, SwingConstants.RIGHT);
         c.gridwidth = GridBagConstraints.REMAINDER;
         c.insets = new Insets(5, 5, 5, 20);
         makeTextField(dialog, gridbag, c, 0, 2);

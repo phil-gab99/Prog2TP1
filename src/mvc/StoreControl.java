@@ -59,7 +59,7 @@ class StoreControl {
     public class DeductBalance implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {
-            // model.deductBalance();
+            model.deductBalance();
         }
     }
 
@@ -74,6 +74,13 @@ class StoreControl {
 
         public void actionPerformed(ActionEvent e) {
             model.okAddBalance();
+        }
+    }
+
+    public class OkDeductBalance implements ActionListener {
+
+        public void actionPerformed(ActionEvent e) {
+            model.okDeductBalance();
         }
     }
 

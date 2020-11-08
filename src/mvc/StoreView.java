@@ -50,8 +50,8 @@ public class StoreView extends JFrame {
 
         //Creating and configuring the scrollpane and list header
         JScrollPane scrollpane = new JScrollPane(list);
-        JLabel header = new JLabel("Last Name - First Name - Date of Birth"
-        + " - Email - Balance - Position", JLabel.LEFT);
+        JLabel header = new JLabel("Last Name_First Name_Date of Birth_"
+        + "Email_ Balance_Position", JLabel.LEFT);
         header.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
         scrollpane.setColumnHeaderView(header);
 
@@ -119,6 +119,7 @@ public class StoreView extends JFrame {
             // case 7: button.addActionListener(StoreControl.new AddAccount()); break
             case 8: button.addActionListener(control.new OkAccount()); break;
             case 9: button.addActionListener(control.new OkAddBalance()); break;
+            case 10: button.addActionListener(control.new OkDeductBalance()); break;
             case 20: button.addActionListener(control.new Cancel()); break;
             default: System.out.println("Lolilou");
         }
@@ -315,6 +316,46 @@ public class StoreView extends JFrame {
         c.gridwidth = 1;
         c.insets = new Insets(5, 20, 5, 5);
         makeButton(dialog, "OK", gridbag, c, 9);
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        c.insets = new Insets(5, 5, 5, 20);
+        makeButton(dialog, "Cancel", gridbag, c, 20);
+
+        dialog.setVisible(true);
+    }
+
+    /*
+    * The method addBalanceDialog generates a dialog box with options for the
+    * user to indicate the amount to add unto the selected account's balance
+    *
+    * @param title String indicating dialog box title
+    * @param a Account for which balance needs to be modified
+    **/
+
+    public void deductBalanceDialog(String title, Account a) {
+
+        accountOperation = a;
+        dialog = new JDialog(this, title, true);
+        details = new ArrayList<JTextField>();
+        GridBagLayout gridbag = new GridBagLayout();
+        GridBagConstraints c = new GridBagConstraints();
+
+        dialog.setSize(FRAME_WIDTH/2, FRAME_HEIGHT/2);
+        centerComponent(dialog);
+        dialog.setLayout(gridbag);
+
+        c.fill = GridBagConstraints.BOTH;
+        c.weightx = 1.0;
+
+        c.gridwidth = 1;
+        c.insets = new Insets(5, 20, 5, 5);
+        makeLabel(dialog, "Amount: ", gridbag, c);
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        c.insets = new Insets(5, 5, 5, 20);
+        makeTextField(dialog, gridbag, c, 0, 2);
+
+        c.gridwidth = 1;
+        c.insets = new Insets(5, 20, 5, 5);
+        makeButton(dialog, "OK", gridbag, c, 10);
         c.gridwidth = GridBagConstraints.REMAINDER;
         c.insets = new Insets(5, 5, 5, 20);
         makeButton(dialog, "Cancel", gridbag, c, 20);

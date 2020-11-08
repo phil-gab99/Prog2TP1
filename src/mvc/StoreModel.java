@@ -82,7 +82,7 @@ class StoreModel {
 
             for (String user : users) {
 
-                String userEmail = user.split(" - ")[3];
+                String userEmail = user.split("_")[3];
                 Base.deleteAccount(Base.userFromEmail(userEmail));
             }
         } catch(ConcurrentModificationException e) {
@@ -105,8 +105,28 @@ class StoreModel {
             return;
         } else {
 
-            String userEmail = users[0].split(" - ")[3];
+            String userEmail = users[0].split("_")[3];
             view.addBalanceDialog("Add Balance", Base.userFromEmail(userEmail));
+        }
+    }
+
+    public void deductBalance() {
+
+        String[] users = new String[view.list.getSelectedValuesList().size()];
+        view.list.getSelectedValuesList().toArray(users);
+
+        if (users.length == 0) {
+            view.msgBox("Please select a user.",
+            "No User Selected", JOptionPane.ERROR_MESSAGE);
+            return;
+        } else if (users.length > 1) {
+            view.msgBox("Please select a single user.",
+            "No User Selected", JOptionPane.ERROR_MESSAGE);
+            return;
+        } else {
+
+            String userEmail = users[0].split("_")[3];
+            view.deductBalanceDialog("Deduct Balance", Base.userFromEmail(userEmail));
         }
     }
 
@@ -194,6 +214,25 @@ class StoreModel {
         }
 
         view.accountOperation.addBalance(amount);
+
+        model = (DefaultListModel<String>) view.list.getModel();
+        model.set(view.list.getSelectedIndex(),view.accountOperation.toString());
+        cancel();
+    }
+
+    public void okDeductBalance() {
+
+        int amount;
+
+        try {
+            amount = Integer.parseInt(view.details.get(0).getText());
+        } catch(NumberFormatException e) {
+            view.msgBox("Please enter an amount.",
+            "No Input", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        view.accountOperation.deductBalance(amount);
 
         model = (DefaultListModel<String>) view.list.getModel();
         model.set(view.list.getSelectedIndex(),view.accountOperation.toString());

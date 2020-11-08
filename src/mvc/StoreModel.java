@@ -28,11 +28,29 @@ class StoreModel {
         this.view = view;
     }
 
-    public void format(KeyEvent e, char lb, char ub) {
+    public void formatLetters(KeyEvent e) {
 
         char c = e.getKeyChar();
 
-        if (((c < lb) || (c > ub))) {
+        if ((c < 'A' || c > 'Z') && (c < 'a' || c > 'z')) {
+            e.consume();
+        }
+    }
+
+    public void formatNumber(KeyEvent e) {
+
+        char c = e.getKeyChar();
+
+        if (((c < '0') || (c > '9'))) {
+            e.consume();
+        }
+    }
+
+    public void maxColumns(KeyEvent e, int textLength) {
+
+        JTextField textfield = (JTextField) e.getComponent();
+
+        if (textfield.getText().length() >= textLength) {
             e.consume();
         }
     }
@@ -68,7 +86,7 @@ class StoreModel {
             view.list.getSelectedValuesList().toArray(users);
 
             if (users.length == 0) {
-                view.msgBox("Please select a user to delete.",
+                StoreView.msgBox("Please select a user to delete.",
                 "No User Selected", JOptionPane.ERROR_MESSAGE);
                 return;
             }
@@ -91,7 +109,7 @@ class StoreModel {
     }
 
     public void advSearch() {
-        
+
         view.advSearchDialog("Advanced Search");
     }
 
@@ -101,11 +119,11 @@ class StoreModel {
         view.list.getSelectedValuesList().toArray(users);
 
         if (users.length == 0) {
-            view.msgBox("Please select a user.",
+            StoreView.msgBox("Please select a user.",
             "No User Selected", JOptionPane.ERROR_MESSAGE);
             return;
         } else if (users.length > 1) {
-            view.msgBox("Please select a single user.",
+            StoreView.msgBox("Please select a single user.",
             "No User Selected", JOptionPane.ERROR_MESSAGE);
             return;
         } else {
@@ -121,11 +139,11 @@ class StoreModel {
         view.list.getSelectedValuesList().toArray(users);
 
         if (users.length == 0) {
-            view.msgBox("Please select a user.",
+            StoreView.msgBox("Please select a user.",
             "No User Selected", JOptionPane.ERROR_MESSAGE);
             return;
         } else if (users.length > 1) {
-            view.msgBox("Please select a single user.",
+            StoreView.msgBox("Please select a single user.",
             "No User Selected", JOptionPane.ERROR_MESSAGE);
             return;
         } else {
@@ -146,7 +164,7 @@ class StoreModel {
             firstName = view.details.get(1).getText().substring(0,1).toUpperCase()
             + view.details.get(1).getText().substring(1);
         } catch(StringIndexOutOfBoundsException e) {
-            view.msgBox("Please enter a last name and a first name for the user.",
+            StoreView.msgBox("Please enter a last name and a first name for the user.",
             "No Names Entered", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -161,7 +179,7 @@ class StoreModel {
 
             if (day > 31) {
 
-                view.msgBox("Please enter a valid birth day.",
+                StoreView.msgBox("Please enter a valid birth day.",
                 "Day Out Of Range", JOptionPane.ERROR_MESSAGE);
                 return;
             }
@@ -170,14 +188,14 @@ class StoreModel {
 
             if (month > 12) {
 
-                view.msgBox("Please enter a valid birth month.",
+                StoreView.msgBox("Please enter a valid birth month.",
                 "Month Out Of Range", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
             year = Integer.parseInt(view.details.get(4).getText());
         } catch(NumberFormatException e) {
-            view.msgBox("Please enter an input for the user's birth date.",
+            StoreView.msgBox("Please enter an input for the user's birth date.",
             "No Input", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -196,7 +214,7 @@ class StoreModel {
         } else if (position == "Manager") {
             a = new Manager(lastName, firstName, birth);
         } else {
-            view.msgBox("Please select a position for this user.",
+            StoreView.msgBox("Please select a position for this user.",
             "No Position Selected", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -213,7 +231,7 @@ class StoreModel {
         try {
             amount = Integer.parseInt(view.details.get(0).getText());
         } catch(NumberFormatException e) {
-            view.msgBox("Please enter an amount.",
+            StoreView.msgBox("Please enter an amount.",
             "No Input", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -232,7 +250,7 @@ class StoreModel {
         try {
             amount = Integer.parseInt(view.details.get(0).getText());
         } catch(NumberFormatException e) {
-            view.msgBox("Please enter an amount.",
+            StoreView.msgBox("Please enter an amount.",
             "No Input", JOptionPane.ERROR_MESSAGE);
             return;
         }

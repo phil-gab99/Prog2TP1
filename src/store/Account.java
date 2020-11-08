@@ -1,8 +1,10 @@
 package store;
 
 import java.util.ArrayList;
+import javax.swing.*;
 import actions.*;
 import inventory.*;
+import mvc.*;
 
 /*
 * @Karim Boumghar
@@ -147,8 +149,8 @@ public abstract class Account implements ManageBalance, FavoriteProducts,
     public void deductBalance(int amount) {
 
         if (this instanceof Client) {
-
-            System.out.println("Action not allowed for client-type accounts");
+            StoreView.msgBox("Action not allowed for client-type accounts.",
+            "Account Rights", JOptionPane.ERROR_MESSAGE);
         } else {
 
             balance -= amount;

@@ -165,8 +165,8 @@ public class StoreView extends JFrame {
         gridbag.setConstraints(textfield, c);
 
         switch (listenType) {
-            case 1: textfield.addKeyListener(control.new KeyLetters()); break;
-            case 2: textfield.addKeyListener(control.new KeyNumbers()); break;
+            case 1: textfield.addKeyListener(control.new KeyLetters(columns)); break;
+            case 2: textfield.addKeyListener(control.new KeyNumbers(columns)); break;
         }
 
         details.add(textfield);
@@ -193,20 +193,6 @@ public class StoreView extends JFrame {
 
         group.add(radio);
         parent.add(radio);
-    }
-
-    /*
-    * The method msgBox creates a dialog informative pane to the user with
-    * the given message as information
-    *
-    * @param message String holding information to display
-    * @param title String indicating dialog box title
-    * @param messageType Integer indicating the type of message to display
-    **/
-
-    public void msgBox(String message, String title, int messageType) {
-
-        JOptionPane.showMessageDialog(null, message, title, messageType);
     }
 
     /*
@@ -299,7 +285,7 @@ public class StoreView extends JFrame {
         GridBagLayout gridbag = new GridBagLayout();
         GridBagConstraints c = new GridBagConstraints();
 
-        dialog.setSize(FRAME_WIDTH/2, FRAME_HEIGHT/2);
+        dialog.setSize(FRAME_WIDTH/2, FRAME_HEIGHT);
         centerComponent(dialog);
         dialog.setLayout(gridbag);
 
@@ -352,6 +338,21 @@ public class StoreView extends JFrame {
         c.gridwidth = GridBagConstraints.REMAINDER;
         c.insets = new Insets(5, 0, 5, 20);
         makeRadioButton(dialog, group, "Manager", gridbag, c);
+
+        c.insets = new Insets(5, 20, 5, 20);
+        makeLabel(dialog, "*Note: Fill out at least one field to begin a search.",
+        gridbag, c, SwingConstants.LEFT);
+
+        makeLabel(dialog, "________________________________________________",
+        gridbag, c, SwingConstants.CENTER);
+
+        makeLabel(dialog, "Multiple User Search", gridbag, c, SwingConstants.CENTER);
+
+        c.gridwidth = 1;
+        c.insets = new Insets(5, 20, 5, 0);
+        makeLabel(dialog, "Last name first letter: ", gridbag, c, SwingConstants.LEFT);
+        c.insets = new Insets(5, 5, 5, 0);
+        makeTextField(dialog, gridbag, c, 1, 1);
 
         dialog.setVisible(true);
     }
@@ -446,6 +447,20 @@ public class StoreView extends JFrame {
 
     public void centerComponent(Component c) {
         c.setLocation((d.width - c.getWidth()) / 2, (d.height - c.getHeight()) / 2);
+    }
+
+    /*
+    * The method msgBox creates a dialog informative pane to the user with
+    * the given message as information
+    *
+    * @param message String holding information to display
+    * @param title String indicating dialog box title
+    * @param messageType Integer indicating the type of message to display
+    **/
+
+    public static void msgBox(String message, String title, int messageType) {
+
+        JOptionPane.showMessageDialog(null, message, title, messageType);
     }
 
     /*

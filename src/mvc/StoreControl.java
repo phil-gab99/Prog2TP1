@@ -23,15 +23,37 @@ class StoreControl {
 
     public class KeyLetters extends KeyAdapter {
 
+        private int textLength;
+
+        public KeyLetters(int textLength) {
+
+            this.textLength = textLength;
+        }
+
         public void keyTyped(KeyEvent e) {
-            model.format(e, 'A', 'z');
+            model.formatLetters(e);
+
+            if (textLength > 0) {
+                model.maxColumns(e, textLength);
+            }
         }
     }
 
     public class KeyNumbers extends KeyAdapter {
 
+        private int textLength;
+
+        public KeyNumbers(int textLength) {
+
+            this.textLength = textLength;
+        }
+
         public void keyTyped(KeyEvent e) {
-            model.format(e, '0', '9');
+            model.formatNumber(e);
+
+            if (textLength > 0) {
+                model.maxColumns(e, textLength);
+            }
         }
     }
 

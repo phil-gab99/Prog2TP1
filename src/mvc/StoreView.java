@@ -6,6 +6,8 @@ import javax.swing.*;
 import javax.swing.border.*;
 import store.*;
 
+//Need to resize add account and adv search dialogs
+
 /*
 * @Karim Boumghar
 * @Philippe Gabriel
@@ -260,7 +262,7 @@ public class StoreView extends JFrame {
         c.insets = new Insets(5, 0, 5, 20);
         makeRadioButton(dialog, group, "Manager", gridbag, c);
 
-        c.gridwidth = 11;
+        c.gridwidth = 20;
         c.insets = new Insets(5, 20, 5, 5);
         makeButton(dialog, "OK", gridbag, c, 8);
         c.gridwidth = GridBagConstraints.REMAINDER;
@@ -285,7 +287,7 @@ public class StoreView extends JFrame {
         GridBagLayout gridbag = new GridBagLayout();
         GridBagConstraints c = new GridBagConstraints();
 
-        dialog.setSize(FRAME_WIDTH/2, FRAME_HEIGHT);
+        dialog.setSize(FRAME_WIDTH - 200, FRAME_HEIGHT);
         centerComponent(dialog);
         dialog.setLayout(gridbag);
 
@@ -303,6 +305,7 @@ public class StoreView extends JFrame {
         c.insets = new Insets(5, 5, 5, 20);
         makeTextField(dialog, gridbag, c, 0, 1);
 
+        c.gridy = 3;
         c.gridwidth = 1;
         c.insets = new Insets(5, 20, 5, 5);
         makeLabel(dialog, "First Name: ", gridbag, c, SwingConstants.LEFT);
@@ -310,49 +313,60 @@ public class StoreView extends JFrame {
         c.insets = new Insets(5, 5, 5, 20);
         makeTextField(dialog, gridbag, c, 0, 1);
 
+        c.gridy = 4;
         c.gridwidth = 1;
         c.insets = new Insets(5, 20, 5, 0);
         makeLabel(dialog, "Date of birth: ", gridbag, c, SwingConstants.LEFT);
-        c.gridwidth = 6;
+        c.gridwidth = 1;
         c.insets = new Insets(5, 5, 5, 0);
         makeTextField(dialog, gridbag, c, 2, 2);
         c.insets = new Insets(5, 0, 5, 0);
-        c.gridwidth = 1;
         makeLabel(dialog, "/", gridbag, c, SwingConstants.CENTER);
-        c.gridwidth = 6;
         makeTextField(dialog, gridbag, c, 2, 2);
-        c.gridwidth = 1;
         makeLabel(dialog, "/", gridbag, c, SwingConstants.CENTER);
-        c.gridwidth = GridBagConstraints.REMAINDER;
         c.insets = new Insets(5, 0, 5, 20);
         makeTextField(dialog, gridbag, c, 4, 2);
 
+        c.gridy = 5;
         c.gridwidth = 1;
         c.insets = new Insets(5, 20, 5, 0);
         makeLabel(dialog, "Position: ", gridbag, c, SwingConstants.LEFT);
-        c.gridwidth = 7;
+        c.gridwidth = 3;
         c.insets = new Insets(5, 5, 5, 0);
         makeRadioButton(dialog, group, "Client", gridbag, c);
         c.insets = new Insets(5, 0, 5, 0);
         makeRadioButton(dialog, group, "Employee", gridbag, c);
-        c.gridwidth = GridBagConstraints.REMAINDER;
         c.insets = new Insets(5, 0, 5, 20);
         makeRadioButton(dialog, group, "Manager", gridbag, c);
 
+        c.gridy = 6;
+        c.gridwidth = GridBagConstraints.REMAINDER;
         c.insets = new Insets(5, 20, 5, 20);
         makeLabel(dialog, "*Note: Fill out at least one field to begin a search.",
         gridbag, c, SwingConstants.LEFT);
 
+        c.gridy = 7;
         makeLabel(dialog, "________________________________________________",
         gridbag, c, SwingConstants.CENTER);
 
+        c.gridy = 8;
         makeLabel(dialog, "Multiple User Search", gridbag, c, SwingConstants.CENTER);
 
+        c.gridy = 9;
         c.gridwidth = 1;
         c.insets = new Insets(5, 20, 5, 0);
         makeLabel(dialog, "Last name first letter: ", gridbag, c, SwingConstants.LEFT);
         c.insets = new Insets(5, 5, 5, 0);
         makeTextField(dialog, gridbag, c, 1, 1);
+
+        c.gridy = 10;
+        c.gridwidth = 5;
+        c.insets = new Insets(5, 20, 5, 5);
+        makeButton(dialog, "Single Search", gridbag, c, 8);
+        c.insets = new Insets(5, 5, 5, 5);
+        makeButton(dialog, "Multiple Search", gridbag, c, 8);
+        c.insets = new Insets(5, 5, 5, 20);
+        makeButton(dialog, "Cancel", gridbag, c, 20);
 
         dialog.setVisible(true);
     }

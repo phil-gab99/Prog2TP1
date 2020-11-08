@@ -49,6 +49,13 @@ class StoreControl {
         }
     }
 
+    public class OK implements ActionListener {
+
+        public void actionPerformed(ActionEvent e) {
+            model.ok();
+        }
+    }
+
     public class Cancel implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {

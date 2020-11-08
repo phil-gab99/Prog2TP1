@@ -21,6 +21,7 @@ import store.*;
 class StoreModel {
 
     private StoreView view;
+    private DefaultListModel<String> model;
 
     public StoreModel(StoreView view) {
 
@@ -43,7 +44,7 @@ class StoreModel {
 
     public void addAccount() {
 
-        DefaultListModel<String> model = (DefaultListModel<String>) view.list.getModel();
+        model = (DefaultListModel<String>) view.list.getModel();
         // Client c1 = new Client("Ayoub", "Souleiman", "00/00/0000");
 
         view.accountDialog("Add Account");
@@ -58,13 +59,12 @@ class StoreModel {
             view.list.getSelectedValuesList().toArray(users);
 
             if (users.length == 0) {
-                System.out.println("I am here");
                 view.msgBox("Please select a user to delete.",
                     "No User Selected", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
-            DefaultListModel<String> model = (DefaultListModel<String>) view.list.getModel();
+            model = (DefaultListModel<String>) view.list.getModel();
             int[] selectedIndices = view.list.getSelectedIndices();
 
             for (int i = selectedIndices.length - 1; i >= 0; i--) {
@@ -79,6 +79,10 @@ class StoreModel {
         } catch(ConcurrentModificationException e) {
             //do nothing
         }
+    }
+
+    public void ok() {
+        System.out.println("OK!!!!");
     }
 
     public void cancel() {

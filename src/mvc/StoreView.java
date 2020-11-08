@@ -110,7 +110,8 @@ public class StoreView extends JFrame {
             // case 5: button.addActionListener(StoreControl.new AddAccount()); break
             // case 6: button.addActionListener(StoreControl.new AddAccount()); break
             // case 7: button.addActionListener(StoreControl.new AddAccount()); break
-            case 8: button.addActionListener(control.new Cancel()); break;
+            case 8: button.addActionListener(control.new OK()); break;
+            case 9: button.addActionListener(control.new Cancel()); break;
             default: System.out.println("Lolilou");
         }
 
@@ -264,10 +265,10 @@ public class StoreView extends JFrame {
 
         c.gridwidth = 11;
         c.insets = new Insets(5, 20, 5, 5);
-        makeButton(dialog, "OK", gridbag, c, 5);
+        makeButton(dialog, "OK", gridbag, c, 8);
         c.gridwidth = GridBagConstraints.REMAINDER;
         c.insets = new Insets(5, 5, 5, 20);
-        makeButton(dialog, "Cancel", gridbag, c, 8);
+        makeButton(dialog, "Cancel", gridbag, c, 9);
 
         dialog.setVisible(true);
     }

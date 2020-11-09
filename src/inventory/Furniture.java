@@ -1,5 +1,7 @@
 package inventory;
 
+import store.*;
+
 /*
 * @Karim Boumghar
 * @Philippe Gabriel
@@ -31,5 +33,13 @@ public class Furniture extends Product {
         this.type = type;
         this.price = price;
         this.height = height;
+
+        Base.addProduct(this);
+    }
+
+    public String toString() {
+
+        return getManager() + "_" + type + "_" + price + "_" + height + "_" +
+        getClass().getSimpleName();
     }
 }

@@ -137,7 +137,7 @@ public abstract class Account implements ManageBalance, FavoriteProducts,
     public String toString() {
 
         return lastName + "_" + firstName + "_" + birth + "_" + email +
-        "_" + balance + "_" + this.getClass().getSimpleName();
+        "_" + balance + "_" + getClass().getSimpleName();
     }
 
     /*
@@ -200,7 +200,8 @@ public abstract class Account implements ManageBalance, FavoriteProducts,
             Base.addProduct(p);
         } else {
 
-            System.out.println("Action allowed only for manager-type accounts");
+            StoreView.msgBox("Action allowed only for manager-type accounts.",
+            "Account Rights", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -216,7 +217,8 @@ public abstract class Account implements ManageBalance, FavoriteProducts,
             Base.removeProduct(p);
         } else {
 
-            System.out.println("Action allowed only for manager-type accounts");
+            StoreView.msgBox("Action allowed only for manager-type accounts.",
+            "Account Rights", JOptionPane.ERROR_MESSAGE);
         }
     }
 }

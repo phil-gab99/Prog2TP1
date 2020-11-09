@@ -113,6 +113,13 @@ class StoreControl {
         }
     }
 
+    public class AvProducts implements ActionListener {
+
+        public void actionPerformed(ActionEvent e) {
+            model.avProducts();
+        }
+    }
+
     public class OkAccount implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {
@@ -145,6 +152,20 @@ class StoreControl {
 
         public void actionPerformed(ActionEvent e) {
             model.advSearchMultiple();
+        }
+    }
+
+    public class AddProduct implements ActionListener {
+
+        public void actionPerformed(ActionEvent e) {
+            model.addProduct();
+        }
+    }
+
+    public class RemoveProduct implements ActionListener {
+
+        public void actionPerformed(ActionEvent e) {
+            model.removeProduct();
         }
     }
 

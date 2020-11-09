@@ -7,6 +7,7 @@ import java.util.ConcurrentModificationException;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import inventory.*;
 import store.*;
 
 /*
@@ -30,6 +31,7 @@ class StoreModel {
 
     public void generateInterface(String[] data) {
 
+        cancel();
         view.makeResultsFrame();
         model = (DefaultListModel<String>) view.listResults.getModel();
 
@@ -41,8 +43,6 @@ class StoreModel {
                 break;
             }
         }
-
-        cancel();
     }
 
     public void formatLetters(KeyEvent e) {
@@ -136,6 +136,9 @@ class StoreModel {
 
     public void advSearch() {
 
+        Food f = new Food("Hey", "orange", "blue", 50.0);
+        Furniture f2 = new Furniture("Heyoo", "chair", 10.0, 50);
+
         view.advSearchDialog("Advanced Search");
     }
 
@@ -176,6 +179,26 @@ class StoreModel {
 
             String userEmail = users[0].split("_")[3];
             view.deductBalanceDialog("Deduct Balance", Base.userFromEmail(userEmail));
+        }
+    }
+
+    public void avProducts() {
+
+        String[] users = new String[view.list.getSelectedValuesList().size()];
+        view.list.getSelectedValuesList().toArray(users);
+
+        if (users.length == 0) {
+            StoreView.msgBox("Please select a user.",
+            "No User Selected", JOptionPane.ERROR_MESSAGE);
+            return;
+        } else if (users.length > 1) {
+            StoreView.msgBox("Please select a single user.",
+            "No User Selected", JOptionPane.ERROR_MESSAGE);
+            return;
+        } else {
+
+            Account user = Base.userFromEmail(users[0].split("_")[3]);
+            view.makeViewProductsFrame(user);
         }
     }
 
@@ -391,6 +414,42 @@ class StoreModel {
             StoreView.msgBox("There are no users whose last name match given letter.",
             "No Such Users", JOptionPane.ERROR_MESSAGE);
             return;
+        }
+    }
+
+    public void addProduct() {
+
+
+    }
+
+    public void removeProduct() {
+
+        try {
+
+            String[] productsList = new String[view.listProducts.getSelectedValuesList().size()];
+            view.listProducts.getSelectedValuesList().toArray(productsList);
+
+            if (productsList.length == 0) {
+                StoreView.msgBox("Please select a product to delete.",
+                "No Product Selected", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            model = (DefaultListModel<String>) view.listProducts.getModel();
+            int[] selectedIndices = view.listProducts.getSelectedIndices();
+
+            for (int i = selectedIndices.length - 1; i >= 0; i--) {
+                if (view.accountOperation instanceof Manager) {
+                    model.remove(selectedIndices[i]);
+                }
+            }
+
+            for (String product : productsList) {
+
+                view.accountOperation.removeProduct(Base.containsProduct(product));
+            }
+        } catch(ConcurrentModificationException e) {
+            //do nothing
         }
     }
 

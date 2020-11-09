@@ -76,6 +76,11 @@ public class Base {
         return sameAccount;
     }
 
+    public static ArrayList<Product> getProducts() {
+
+        return products;
+    }
+
     /*
     * The method addProduct adds a new product to the products list and avoids
     * adding duplicate items in the products list
@@ -109,6 +114,24 @@ public class Base {
 
             System.out.println("No such product enlisted!");
         }
+    }
+
+    /*
+    * The method containsProduct checks for a product's presence from the
+    * products list and returns the product
+    *
+    * @param p String implemention of product
+    **/
+
+    public static Product containsProduct(String p) {
+
+        for (Product e : products) {
+            if (e.toString().equals(p)) {
+                return e;
+            }
+        }
+
+        return null;
     }
 
     /*
@@ -183,7 +206,7 @@ public class Base {
         for (Account a : accounts) {
 
             if (a.getLastName().substring(0,1).equals(l)) {
-                
+
                 data[i++] = a.toString();
             }
         }

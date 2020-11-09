@@ -4,6 +4,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.border.*;
+import inventory.*;
 import store.*;
 
 /*
@@ -27,15 +28,17 @@ public class StoreView extends JFrame {
     private StoreModel model;
     private StoreControl control;
 
-    //Array list of components holding user input details upon element creation
+    //Array list of textfields holding user input details upon element creation
     protected ArrayList<JTextField> details;
     //Account on which some action needs to be done
     protected Account accountOperation;
     protected ButtonGroup group;  //Radio button group
     protected JList<String> list; //List that will hold each account
     protected JDialog dialog;     //Dialog used for various user input contexts
-    protected JFrame guiResults; //Interface holding user advanced search results
-    protected JList<String> listResults; //JList for search results
+    protected JFrame guiResults;  //Frame holding user advanced search results
+    protected JList<String> listResults; //List for search results
+    protected JFrame guiProducts; //Frame holding user advanced search results
+    protected JList<String> listProducts; //List for available products
 
     public StoreView() {
 
@@ -123,13 +126,15 @@ public class StoreView extends JFrame {
             case 3: button.addActionListener(control.new AdvSearch()); break;
             case 4: button.addActionListener(control.new AddBalance()); break;
             case 5: button.addActionListener(control.new DeductBalance()); break;
-            // case 6: button.addActionListener(StoreControl.new AddAccount()); break;
-            // case 7: button.addActionListener(StoreControl.new AddAccount()); break;
+            // case 6: button.addActionListener(control.new AddAccount()); break;
+            case 7: button.addActionListener(control.new AvProducts()); break;
             case 8: button.addActionListener(control.new OkAccount()); break;
             case 9: button.addActionListener(control.new OkAddBalance()); break;
             case 10: button.addActionListener(control.new OkDeductBalance()); break;
             case 11: button.addActionListener(control.new AdvSearchSingle()); break;
             case 12: button.addActionListener(control.new AdvSearchMultiple()); break;
+            case 13: button.addActionListener(control.new AddProduct()); break;
+            case 14: button.addActionListener(control.new RemoveProduct()); break;
             case 20: button.addActionListener(control.new Cancel()); break;
             default: System.out.println("Lolilou");
         }
@@ -236,6 +241,56 @@ public class StoreView extends JFrame {
         guiResults.add(scrollpane);
 
         guiResults.setVisible(true);
+    }
+
+    public void makeViewProductsFrame(Account user) {
+
+        accountOperation = user;
+
+        guiProducts = new JFrame("Search Results");
+
+        GridBagLayout gridbag = new GridBagLayout();
+        GridBagConstraints c = new GridBagConstraints();
+        guiProducts.setLayout(gridbag);
+        guiProducts.setSize(FRAME_WIDTH, FRAME_HEIGHT);
+        centerComponent(guiProducts, 50);
+
+        ArrayList<Product> avProducts = Base.getProducts();
+        DefaultListModel<String> listModel = new DefaultListModel<String>();
+
+        for (Product p : avProducts) {
+
+            listModel.addElement(p.toString());
+        }
+
+        listProducts = new JList<String>();
+        listProducts.setModel(listModel);
+
+        //Creating and configuring the scrollpane and list header
+        JScrollPane scrollpane = new JScrollPane(listProducts);
+        JLabel header = new JLabel("Manager Name_Property1_Property2_..._Product Type",
+        JLabel.LEFT);
+        header.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+        scrollpane.setColumnHeaderView(header);
+
+        c.fill = GridBagConstraints.BOTH;
+        c.weightx = 1.0;
+        c.weighty = 1.0;
+        c.insets = new Insets(5, 20, 5, 20);
+        c.gridwidth = GridBagConstraints.REMAINDER;
+
+        gridbag.setConstraints(scrollpane, c);
+        guiProducts.add(scrollpane);
+
+        c.weighty = 0.0;
+        c.gridwidth = GridBagConstraints.RELATIVE;
+        c.insets = new Insets(5, 20, 5, 5);
+        makeButton(guiProducts, "Add Product", gridbag, c, 13);
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        c.insets = new Insets(5, 5, 5, 20);
+        makeButton(guiProducts, "Remove Product", gridbag, c, 14);
+
+        guiProducts.setVisible(true);
     }
 
     /*

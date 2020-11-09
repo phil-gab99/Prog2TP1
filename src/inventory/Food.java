@@ -1,6 +1,6 @@
 package inventory;
 
-import java.awt.Color;
+import store.*;
 
 /*
 * @Karim Boumghar
@@ -13,24 +13,32 @@ import java.awt.Color;
 public class Food extends Product {
 
     private String name;
-    private Color color;
+    private String color;
     private double weight;
 
     /*
     * The Food constructor serves to assign the traits specific for food-type
     * products
     *
-    * @param name String indicating the fruit's name
-    * @param color Color indicating the fruit's color
-    * @param weight Double indicating the fruit's weight
+    * @param name String indicating the food's name
+    * @param color String indicating the food's color
+    * @param weight Double indicating the food's weight
     **/
 
-    public Food(String manager, String name, Color color, double weight) {
+    public Food(String manager, String name, String color, double weight) {
 
         super(manager);
 
         this.name = name;
         this.color = color;
         this.weight = weight;
+
+        Base.addProduct(this);
+    }
+
+    public String toString() {
+
+        return getManager() + "_" + name + "_" + color + "_" + weight + "_" +
+        getClass().getSimpleName();
     }
 }

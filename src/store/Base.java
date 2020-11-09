@@ -166,4 +166,28 @@ public class Base {
         }
         return null;
     }
+
+    /*
+    * The method getAccountsLetter retrieves the different accounts that start
+    * with a given letter in their string implementation
+    *
+    * @param l String consisting of a single character
+    * @return matchAccounts Array List of accounts that match the given String
+    **/
+
+    public static String[] getAccountsLetter(String l) {
+
+        String[] data = new String[accounts.size()];
+        int i = 0;
+
+        for (Account a : accounts) {
+
+            if (a.getLastName().substring(0,1).equals(l)) {
+                
+                data[i++] = a.toString();
+            }
+        }
+
+        return data;
+    }
 }

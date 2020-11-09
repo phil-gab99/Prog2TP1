@@ -144,7 +144,7 @@ class StoreControl {
     public class AdvSearchMultiple implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {
-            model.advSearchSingle();
+            model.advSearchMultiple();
         }
     }
 

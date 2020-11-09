@@ -30,12 +30,19 @@ class StoreModel {
 
     public void generateInterface(String[] data) {
 
-        view.newView();
-        model = (DefaultListModel<String>) view.resultsList.getModel();
+        view.makeResultsFrame();
+        model = (DefaultListModel<String>) view.listResults.getModel();
 
         for (String e : data) {
-            model.addElement(e);
+
+            if (e != null) {
+                model.addElement(e);
+            } else {
+                break;
+            }
         }
+
+        cancel();
     }
 
     public void formatLetters(KeyEvent e) {
@@ -361,6 +368,28 @@ class StoreModel {
         } else {
             StoreView.msgBox("The specified user does not exist.",
             "No Such User", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+    }
+
+    public void advSearchMultiple() {
+
+        String letter = view.details.get(7).getText().toUpperCase();
+
+        if (letter.equals("")) {
+            StoreView.msgBox("Please fill out the required field.",
+            "No Input", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        String[] data = Base.getAccountsLetter(letter);
+
+        if (data.length != 0) {
+
+            generateInterface(data);
+        } else {
+            StoreView.msgBox("There are no users whose last name match given letter.",
+            "No Such Users", JOptionPane.ERROR_MESSAGE);
             return;
         }
     }

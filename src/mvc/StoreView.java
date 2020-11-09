@@ -34,9 +34,8 @@ public class StoreView extends JFrame {
     protected ButtonGroup group;  //Radio button group
     protected JList<String> list; //List that will hold each account
     protected JDialog dialog;     //Dialog used for various user input contexts
-    protected JFrame guiResults;  //Interface holding user advanced search results
-    protected JList<String> resultsList; //JList for search results
-
+    protected JFrame guiResults; //Interface holding user advanced search results
+    protected JList<String> listResults; //JList for search results
 
     public StoreView() {
 
@@ -47,7 +46,7 @@ public class StoreView extends JFrame {
         GridBagConstraints c = new GridBagConstraints();
         setLayout(gridbag);
         setSize(FRAME_WIDTH, FRAME_HEIGHT);
-        centerComponent(this);
+        centerComponent(this, 0);
 
         list = new JList<String>();
         list.setModel(new DefaultListModel<String>());
@@ -93,54 +92,10 @@ public class StoreView extends JFrame {
         c.gridwidth = GridBagConstraints.REMAINDER;
         c.insets = new Insets(5, 5, 5, 20);
         makeButton(this, "View Available Products", gridbag, c, 7);
-    }
 
-    public void newView() {
-
-        guiResults = new JFrame();
-
-        model = new StoreModel((StoreView)guiResults);
-        control = new StoreControl(model);
-
-        GridBagLayout gridbag = new GridBagLayout();
-        GridBagConstraints c = new GridBagConstraints();
-        setLayout(gridbag);
-        setSize(FRAME_WIDTH, FRAME_HEIGHT);
-        centerComponent(guiResults);
-
-        resultsList = new JList<String>();
-        resultsList.setModel(new DefaultListModel<String>());
-
-        //Creating and configuring the scrollpane and list header
-        JScrollPane scrollpane = new JScrollPane(resultsList);
-        JLabel header = new JLabel("Last Name_First Name_Date of Birth_"
-        + "Email_ Balance_Position", JLabel.LEFT);
-        header.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
-        scrollpane.setColumnHeaderView(header);
-
-        c.fill = GridBagConstraints.BOTH;
-        c.weightx = 1.0;
-        c.weighty = 1.0;
-        c.insets = new Insets(5, 20, 5, 20);
-        c.gridwidth = GridBagConstraints.REMAINDER;
-
-        gridbag.setConstraints(scrollpane, c);
-        add(scrollpane);
-
-        //Configuring button placements
-        c.gridwidth = GridBagConstraints.RELATIVE;
-        c.insets = new Insets(5, 20, 5, 5);
-        makeButton(this, "Add Balance", gridbag, c, 4);
-        c.gridwidth = GridBagConstraints.REMAINDER;
-        c.insets = new Insets(5, 5, 5, 20);
-        makeButton(this, "Deduct Balance", gridbag, c, 5);
-
-        c.gridwidth = GridBagConstraints.RELATIVE;
-        c.insets = new Insets(5, 20, 5, 5);
-        makeButton(this, "View Favorite Products", gridbag, c, 6);
-        c.gridwidth = GridBagConstraints.REMAINDER;
-        c.insets = new Insets(5, 5, 5, 20);
-        makeButton(this, "View Available Products", gridbag, c, 7);
+        setTitle("Magasin");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
     }
 
     /*
@@ -251,6 +206,38 @@ public class StoreView extends JFrame {
         parent.add(radio);
     }
 
+    public void makeResultsFrame() {
+
+        guiResults = new JFrame("Search Results");
+
+        GridBagLayout gridbag = new GridBagLayout();
+        GridBagConstraints c = new GridBagConstraints();
+        guiResults.setLayout(gridbag);
+        guiResults.setSize(FRAME_WIDTH, FRAME_HEIGHT);
+        centerComponent(guiResults, 50);
+
+        listResults = new JList<String>();
+        listResults.setModel(new DefaultListModel<String>());
+
+        //Creating and configuring the scrollpane and list header
+        JScrollPane scrollpane = new JScrollPane(listResults);
+        JLabel header = new JLabel("Last Name_First Name_Date of Birth_"
+        + "Email_ Balance_Position", JLabel.LEFT);
+        header.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+        scrollpane.setColumnHeaderView(header);
+
+        c.fill = GridBagConstraints.BOTH;
+        c.weightx = 1.0;
+        c.weighty = 1.0;
+        c.insets = new Insets(5, 20, 5, 20);
+        c.gridwidth = GridBagConstraints.REMAINDER;
+
+        gridbag.setConstraints(scrollpane, c);
+        guiResults.add(scrollpane);
+
+        guiResults.setVisible(true);
+    }
+
     /*
     * The method accountDialog generates a dialog box with options for the user
     * to select for creating an account
@@ -267,7 +254,7 @@ public class StoreView extends JFrame {
         GridBagConstraints c = new GridBagConstraints();
 
         dialog.setSize(FRAME_WIDTH/2, FRAME_HEIGHT/2);
-        centerComponent(dialog);
+        centerComponent(dialog, 0);
         dialog.setLayout(gridbag);
 
         c.fill = GridBagConstraints.BOTH;
@@ -344,7 +331,7 @@ public class StoreView extends JFrame {
         GridBagConstraints c = new GridBagConstraints();
 
         dialog.setSize(FRAME_WIDTH - 200, FRAME_HEIGHT - 50);
-        centerComponent(dialog);
+        centerComponent(dialog, 0);
         dialog.setLayout(gridbag);
 
         c.fill = GridBagConstraints.BOTH;
@@ -461,7 +448,7 @@ public class StoreView extends JFrame {
         GridBagConstraints c = new GridBagConstraints();
 
         dialog.setSize(FRAME_WIDTH/3, FRAME_HEIGHT/3);
-        centerComponent(dialog);
+        centerComponent(dialog, 0);
         dialog.setLayout(gridbag);
 
         c.fill = GridBagConstraints.BOTH;
@@ -502,7 +489,7 @@ public class StoreView extends JFrame {
         GridBagConstraints c = new GridBagConstraints();
 
         dialog.setSize(FRAME_WIDTH/3, FRAME_HEIGHT/3);
-        centerComponent(dialog);
+        centerComponent(dialog, 0);
         dialog.setLayout(gridbag);
 
         c.fill = GridBagConstraints.BOTH;
@@ -530,10 +517,12 @@ public class StoreView extends JFrame {
     * their screen dimensions
     *
     * @param c Component to be centered
+    * @param offset Integer indicating offset from center
     **/
 
-    public void centerComponent(Component c) {
-        c.setLocation((d.width - c.getWidth()) / 2, (d.height - c.getHeight()) / 2);
+    public void centerComponent(Component c, int offset) {
+        c.setLocation((d.width - c.getWidth()) / 2 - offset,
+        (d.height - c.getHeight()) / 2 - offset);
     }
 
     /*
@@ -557,8 +546,5 @@ public class StoreView extends JFrame {
     public static void main(String[] args) {
 
         StoreView gui = new StoreView();
-        gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        gui.setVisible(true);
-        gui.setTitle("My first Java list :)");
     }
 }

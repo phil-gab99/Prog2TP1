@@ -45,11 +45,20 @@ public abstract class Account implements ManageBalance, FavoriteProducts,
         this.lastName = lastName;
         this.firstName = firstName;
         this.birth = birth;
-        this.favorites = new ArrayList<Product>();
-
         this.email = generateEmail();
 
         Base.addAccount(this);
+        UserFavProducts favorites = new UserFavProducts(this);
+    }
+
+    public Account(String lastName, String firstName, String birth,
+        String email, int balance) {
+
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.birth = birth;
+        this.email = email;
+        this.balance = balance;
     }
 
     /*

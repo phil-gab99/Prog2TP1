@@ -20,4 +20,10 @@ public class Employee extends Account {
     public Employee(String lastName, String firstName, String birth) {
         super(lastName, firstName, birth);
     }
+
+    public Employee(String lastName, String firstName, String birth,
+        String email, int balance) {
+
+        super(lastName, firstName, birth, email, balance);
+    }
 }

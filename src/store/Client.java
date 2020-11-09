@@ -20,4 +20,10 @@ public class Client extends Account {
     public Client(String lastName, String firstName, String birth) {
         super(lastName, firstName, birth);
     }
+
+    public Client(String lastName, String firstName, String birth,
+        String email, int balance) {
+
+        super(lastName, firstName, birth, email, balance);
+    }
 }

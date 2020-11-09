@@ -28,6 +28,16 @@ class StoreModel {
         this.view = view;
     }
 
+    public void generateInterface(String[] data) {
+
+        view.newView();
+        model = (DefaultListModel<String>) view.resultsList.getModel();
+
+        for (String e : data) {
+            model.addElement(e);
+        }
+    }
+
     public void formatLetters(KeyEvent e) {
 
         char c = e.getKeyChar();
@@ -41,7 +51,16 @@ class StoreModel {
 
         char c = e.getKeyChar();
 
-        if (((c < '0') || (c > '9'))) {
+        if ((c < '0') || (c > '9')) {
+            e.consume();
+        }
+    }
+
+    public void formatMixed(KeyEvent e) {
+
+        char c = e.getKeyChar();
+
+        if ((c < 'A' || c > 'Z') && (c < 'a' || c > 'z') && (c < '0' || c > '9')) {
             e.consume();
         }
     }
@@ -160,9 +179,9 @@ class StoreModel {
 
         try {
             lastName = view.details.get(0).getText().substring(0,1).toUpperCase()
-            + view.details.get(0).getText().substring(1);
+            + view.details.get(0).getText().substring(1).toLowerCase();
             firstName = view.details.get(1).getText().substring(0,1).toUpperCase()
-            + view.details.get(1).getText().substring(1);
+            + view.details.get(1).getText().substring(1).toLowerCase();
         } catch(StringIndexOutOfBoundsException e) {
             StoreView.msgBox("Please enter a last name and a first name for the user.",
             "No Names Entered", JOptionPane.ERROR_MESSAGE);
@@ -260,6 +279,90 @@ class StoreModel {
         model = (DefaultListModel<String>) view.list.getModel();
         model.set(view.list.getSelectedIndex(),view.accountOperation.toString());
         cancel();
+    }
+
+    public void advSearchSingle() {
+
+        String lastName;
+        String firstName;
+        String email;
+
+        try {
+            lastName = view.details.get(0).getText().substring(0,1).toUpperCase()
+            + view.details.get(0).getText().substring(1).toLowerCase();
+            firstName = view.details.get(1).getText().substring(0,1).toUpperCase()
+            + view.details.get(1).getText().substring(1).toLowerCase();
+            email = view.details.get(5).getText() + "@magasin.ca";
+        } catch(StringIndexOutOfBoundsException e) {
+            StoreView.msgBox("Please fill out every field.",
+            "No Input", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        int day = 0;
+        int month = 0;
+        int year = 0;
+
+        String birth;
+
+        int balance;
+
+        try {
+
+            day = Integer.parseInt(view.details.get(2).getText());
+
+            if (day > 31) {
+
+                StoreView.msgBox("Please enter a valid birth day.",
+                "Day Out Of Range", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            month = Integer.parseInt(view.details.get(3).getText());
+
+            if (month > 12) {
+
+                StoreView.msgBox("Please enter a valid birth month.",
+                "Month Out Of Range", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            year = Integer.parseInt(view.details.get(4).getText());
+
+            birth = day + "/" + month + "/" + year;
+
+            balance = Integer.parseInt(view.details.get(6).getText());
+        } catch(NumberFormatException e) {
+            StoreView.msgBox("Please fill out every field.",
+            "No Input", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        String position = getRadioButtonText(view.group);
+
+        Account a;
+
+        if (position == "Client") {
+            a = new Client(lastName, firstName, birth, email, balance);
+        } else if (position == "Employee") {
+            a = new Employee(lastName, firstName, birth, email, balance);
+        } else if (position == "Manager") {
+            a = new Manager(lastName, firstName, birth, email, balance);
+        } else {
+            StoreView.msgBox("Please fill out every field.",
+            "No Input", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        String[] data = {a.toString()};
+
+        if (Base.containsAccount(a)) {
+            generateInterface(data);
+        } else {
+            StoreView.msgBox("The specified user does not exist.",
+            "No Such User", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
     }
 
     public void cancel() {

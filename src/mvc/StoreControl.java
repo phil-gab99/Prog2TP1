@@ -31,6 +31,7 @@ class StoreControl {
         }
 
         public void keyTyped(KeyEvent e) {
+
             model.formatLetters(e);
 
             if (textLength > 0) {
@@ -49,7 +50,27 @@ class StoreControl {
         }
 
         public void keyTyped(KeyEvent e) {
+
             model.formatNumber(e);
+
+            if (textLength > 0) {
+                model.maxColumns(e, textLength);
+            }
+        }
+    }
+
+    public class KeyMixed extends KeyAdapter {
+
+        private int textLength;
+
+        public KeyMixed(int textLength) {
+
+            this.textLength = textLength;
+        }
+
+        public void keyTyped(KeyEvent e) {
+
+            model.formatMixed(e);
 
             if (textLength > 0) {
                 model.maxColumns(e, textLength);
@@ -110,6 +131,20 @@ class StoreControl {
 
         public void actionPerformed(ActionEvent e) {
             model.okDeductBalance();
+        }
+    }
+
+    public class AdvSearchSingle implements ActionListener {
+
+        public void actionPerformed(ActionEvent e) {
+            model.advSearchSingle();
+        }
+    }
+
+    public class AdvSearchMultiple implements ActionListener {
+
+        public void actionPerformed(ActionEvent e) {
+            model.advSearchSingle();
         }
     }
 

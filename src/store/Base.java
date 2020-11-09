@@ -22,6 +22,8 @@ public class Base {
     //The products array list holds the available products decided by managers
     private static ArrayList<Product> products = new ArrayList<Product>();
 
+    private static ArrayList<UserFavProducts> userFav = new ArrayList<UserFavProducts>();
+
     //The emailMapping hashmap keeps track of the number of instances for which
         //users with the same first and last name have been recorded
     private static HashMap<String, Integer> emailMapping = new HashMap <String,
@@ -39,6 +41,17 @@ public class Base {
     }
 
     /*
+    * The method addAccountFav pairs a user with his list of favorite products
+    *
+    * @param u The user paired with his list of products
+    **/
+
+    public static void addAccountFav(UserFavProducts u) {
+
+        userFav.add(u);
+    }
+
+    /*
     * The method deleteAccount deletes a user from the accounts list
     *
     * @param a Account attached to some user
@@ -47,6 +60,20 @@ public class Base {
     public static void deleteAccount(Account a) {
 
         accounts.remove(a);
+    }
+
+    public static boolean containsAccount(Account a) {
+
+        boolean sameAccount = false;
+
+        for (Account e : accounts) {
+            if (e.toString().equals(a.toString())) {
+                sameAccount = true;
+                break;
+            }
+        }
+
+        return sameAccount;
     }
 
     /*

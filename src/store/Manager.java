@@ -21,4 +21,10 @@ public class Manager extends Account {
     public Manager(String lastName, String firstName, String birth) {
         super(lastName, firstName, birth);
     }
+
+    public Manager(String lastName, String firstName, String birth,
+        String email, int balance) {
+
+        super(lastName, firstName, birth, email, balance);
+    }
 }

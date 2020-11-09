@@ -17,8 +17,10 @@ import store.*;
 
 public class StoreView extends JFrame {
 
-    private static final int FRAME_WIDTH = 800; //Default frame width
+    private static final int FRAME_WIDTH = 800;  //Default frame width
     private static final int FRAME_HEIGHT = 450; //Default frame height
+
+    //Acquiring screen details and dimensions
     private static final Toolkit screen = Toolkit.getDefaultToolkit();
     private static final Dimension d = screen.getScreenSize();
 
@@ -32,6 +34,8 @@ public class StoreView extends JFrame {
     protected ButtonGroup group;  //Radio button group
     protected JList<String> list; //List that will hold each account
     protected JDialog dialog;     //Dialog used for various user input contexts
+    protected JFrame guiResults;  //Interface holding user advanced search results
+    protected JList<String> resultsList; //JList for search results
 
 
     public StoreView() {
@@ -91,6 +95,54 @@ public class StoreView extends JFrame {
         makeButton(this, "View Available Products", gridbag, c, 7);
     }
 
+    public void newView() {
+
+        guiResults = new JFrame();
+
+        model = new StoreModel((StoreView)guiResults);
+        control = new StoreControl(model);
+
+        GridBagLayout gridbag = new GridBagLayout();
+        GridBagConstraints c = new GridBagConstraints();
+        setLayout(gridbag);
+        setSize(FRAME_WIDTH, FRAME_HEIGHT);
+        centerComponent(guiResults);
+
+        resultsList = new JList<String>();
+        resultsList.setModel(new DefaultListModel<String>());
+
+        //Creating and configuring the scrollpane and list header
+        JScrollPane scrollpane = new JScrollPane(resultsList);
+        JLabel header = new JLabel("Last Name_First Name_Date of Birth_"
+        + "Email_ Balance_Position", JLabel.LEFT);
+        header.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+        scrollpane.setColumnHeaderView(header);
+
+        c.fill = GridBagConstraints.BOTH;
+        c.weightx = 1.0;
+        c.weighty = 1.0;
+        c.insets = new Insets(5, 20, 5, 20);
+        c.gridwidth = GridBagConstraints.REMAINDER;
+
+        gridbag.setConstraints(scrollpane, c);
+        add(scrollpane);
+
+        //Configuring button placements
+        c.gridwidth = GridBagConstraints.RELATIVE;
+        c.insets = new Insets(5, 20, 5, 5);
+        makeButton(this, "Add Balance", gridbag, c, 4);
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        c.insets = new Insets(5, 5, 5, 20);
+        makeButton(this, "Deduct Balance", gridbag, c, 5);
+
+        c.gridwidth = GridBagConstraints.RELATIVE;
+        c.insets = new Insets(5, 20, 5, 5);
+        makeButton(this, "View Favorite Products", gridbag, c, 6);
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        c.insets = new Insets(5, 5, 5, 20);
+        makeButton(this, "View Available Products", gridbag, c, 7);
+    }
+
     /*
     * The makeButton method creates a button to implement onto the interface
     * and assigns it a specific listener
@@ -116,11 +168,13 @@ public class StoreView extends JFrame {
             case 3: button.addActionListener(control.new AdvSearch()); break;
             case 4: button.addActionListener(control.new AddBalance()); break;
             case 5: button.addActionListener(control.new DeductBalance()); break;
-            // case 6: button.addActionListener(StoreControl.new AddAccount()); break
-            // case 7: button.addActionListener(StoreControl.new AddAccount()); break
+            // case 6: button.addActionListener(StoreControl.new AddAccount()); break;
+            // case 7: button.addActionListener(StoreControl.new AddAccount()); break;
             case 8: button.addActionListener(control.new OkAccount()); break;
             case 9: button.addActionListener(control.new OkAddBalance()); break;
             case 10: button.addActionListener(control.new OkDeductBalance()); break;
+            case 11: button.addActionListener(control.new AdvSearchSingle()); break;
+            case 12: button.addActionListener(control.new AdvSearchMultiple()); break;
             case 20: button.addActionListener(control.new Cancel()); break;
             default: System.out.println("Lolilou");
         }
@@ -168,6 +222,7 @@ public class StoreView extends JFrame {
         switch (listenType) {
             case 1: textfield.addKeyListener(control.new KeyLetters(columns)); break;
             case 2: textfield.addKeyListener(control.new KeyNumbers(columns)); break;
+            case 3: textfield.addKeyListener(control.new KeyMixed(columns)); break;
         }
 
         details.add(textfield);
@@ -329,6 +384,24 @@ public class StoreView extends JFrame {
 
         c.gridwidth = 5;
         c.insets = new Insets(5, 20, 5, 0);
+        makeLabel(dialog, "Email: ", gridbag, c, SwingConstants.LEFT);
+        c.gridwidth = 5;
+        c.insets = new Insets(5, 5, 5, 0);
+        makeTextField(dialog, gridbag, c, 0, 3);
+        c.insets = new Insets(5, 0, 5, 20);
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        makeLabel(dialog, "@magasin.ca", gridbag, c, SwingConstants.CENTER);
+
+        c.gridwidth = 5;
+        c.insets = new Insets(5, 20, 5, 0);
+        makeLabel(dialog, "Balance: ", gridbag, c, SwingConstants.LEFT);
+        c.gridwidth = 5;
+        c.insets = new Insets(5, 5, 5, 0);
+        makeTextField(dialog, gridbag, c, 0, 2);
+
+        c.gridy = 7;
+        c.gridwidth = 5;
+        c.insets = new Insets(5, 20, 5, 0);
         makeLabel(dialog, "Position: ", gridbag, c, SwingConstants.LEFT);
         c.gridwidth = 2;
         c.insets = new Insets(5, 0, 5, 0);
@@ -336,20 +409,20 @@ public class StoreView extends JFrame {
         makeRadioButton(dialog, group, "Employee", gridbag, c);
         makeRadioButton(dialog, group, "Manager", gridbag, c);
 
-        c.gridy = 6;
+        c.gridy = 8;
         c.gridwidth = GridBagConstraints.REMAINDER;
         c.insets = new Insets(5, 20, 5, 20);
-        makeLabel(dialog, "*Note: Fill out at least one field to begin a search.",
+        makeLabel(dialog, "*Note: All fields must be filled to undertake search.",
         gridbag, c, SwingConstants.LEFT);
 
-        c.gridy = 7;
+        c.gridy = 9;
         makeLabel(dialog, "________________________________________________",
         gridbag, c, SwingConstants.CENTER);
 
-        c.gridy = 8;
+        c.gridy = 10;
         makeLabel(dialog, "Multiple User Search", gridbag, c, SwingConstants.CENTER);
 
-        c.gridy = 9;
+        c.gridy = 11;
         c.gridwidth = 5;
         c.insets = new Insets(5, 20, 5, 0);
         makeLabel(dialog, "Last name first letter: ", gridbag, c, SwingConstants.LEFT);
@@ -357,13 +430,13 @@ public class StoreView extends JFrame {
         c.insets = new Insets(5, 5, 5, 0);
         makeTextField(dialog, gridbag, c, 1, 1);
 
-        c.gridy = 10;
+        c.gridy = 12;
         c.ipady = 10;
         c.gridwidth = 6;
         c.insets = new Insets(5, 20, 5, 5);
-        makeButton(dialog, "Single Search", gridbag, c, 8);
+        makeButton(dialog, "Single Search", gridbag, c, 11);
         c.insets = new Insets(5, 5, 5, 5);
-        makeButton(dialog, "Multiple Search", gridbag, c, 8);
+        makeButton(dialog, "Multiple Search", gridbag, c, 12);
         c.gridwidth = GridBagConstraints.REMAINDER;
         c.insets = new Insets(5, 5, 5, 20);
         makeButton(dialog, "Cancel", gridbag, c, 20);

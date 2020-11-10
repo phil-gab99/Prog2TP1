@@ -14,7 +14,7 @@ import inventory.*;
 public class Manager extends Account {
 
     /*
-    * The Manager constructor gives the specific details for creating an
+    * The Manager constructor gives the specific details for creating a
     * manager account
     **/
 

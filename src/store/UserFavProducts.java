@@ -17,12 +17,28 @@ public class UserFavProducts implements FavoriteProducts {
         Base.addUserFav(this);
     }
 
-    public void getUser() {
-        user.toString();
+    public Account getUser() {
+        return user;
     }
 
     public ArrayList<Product> getFavorites() {
         return favorites;
+    }
+
+    public Product productFromString(String product) {
+
+        for (Product p : favorites) {
+
+            if (p.toString().equals(product)) {
+                return p;
+            }
+        }
+        return null;
+    }
+
+    public boolean hasFave(Product p) {
+
+        return favorites.contains(p);
     }
 
     public void addFavorite(Product p) {

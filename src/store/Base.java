@@ -2,8 +2,10 @@ package store;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import javax.swing.*;
 import inventory.*;
 import actions.*;
+import mvc.*;
 
 /*
 * @Karim Boumghar
@@ -92,13 +94,16 @@ public class Base {
 
     public static void addProduct(Product p) {
 
-        if (productAvailable(p)) {
+        products.add(p);
 
-            System.out.println("Product already available!");
-        } else {
-
-            products.add(p);
-        }
+        // if (productAvailable(p)) {
+        //
+        //     StoreView.msgBox("This product has already been enlisted under this manager.",
+        //     "Product already available", JOptionPane.ERROR_MESSAGE);
+        // } else {
+        //
+        //     products.add(p);
+        // }
     }
 
     /*
@@ -109,13 +114,7 @@ public class Base {
 
     public static void removeProduct(Product p) {
 
-        if (productAvailable(p)) {
-
-            products.remove(p);
-        } else {
-
-            System.out.println("No such product enlisted!");
-        }
+        products.remove(p);
     }
 
     /*
@@ -140,13 +139,44 @@ public class Base {
     * The method productAvailable checks if a given product is present within
     * the list or not
     *
-    * @param p Product of interest
-    * @return Boolean indicating if product is available or not
+    * @param p String implementation of product of interest
+    * @return sameProduct Boolean indicating if product is available or not
     **/
 
-    public static boolean productAvailable(Product p) {
+    public static boolean productAvailable(String p) {
 
-        return products.contains(p);
+        boolean sameProduct = false;
+
+        for (Product e : products) {
+            if (e.toString().equals(p.toString())) {
+                sameProduct = true;
+                break;
+            }
+        }
+
+        return sameProduct;
+    }
+
+    public static UserFavProducts getAccountFave(Account a) {
+
+        for (UserFavProducts fave : userFav) {
+
+            if (fave.getUser() == a) {
+                return fave;
+            }
+        }
+
+        return null;
+    }
+
+    public static ArrayList<Product> getFavProducts(Account a) {
+        for (UserFavProducts e : userFav) {
+
+            if (e.getUser() == a) {
+                return e.getFavorites();
+            }
+        }
+        return null;
     }
 
     /*

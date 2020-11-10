@@ -165,9 +165,6 @@ class StoreModel {
 
     public void advSearch() {
 
-        Food f = new Food("Hey", "orange", "blue", 50);
-        Furniture f2 = new Furniture("Heyoo", "chair", 10, 50);
-
         view.advSearchDialog("Advanced Search");
     }
 
@@ -208,6 +205,26 @@ class StoreModel {
 
             String userEmail = users[0].split("_")[3];
             view.deductBalanceDialog("Deduct Balance", Base.userFromEmail(userEmail));
+        }
+    }
+
+    public void favProducts() {
+
+        String[] users = new String[view.list.getSelectedValuesList().size()];
+        view.list.getSelectedValuesList().toArray(users);
+
+        if (users.length == 0) {
+            StoreView.msgBox("Please select a user.",
+            "No User Selected", JOptionPane.ERROR_MESSAGE);
+            return;
+        } else if (users.length > 1) {
+            StoreView.msgBox("Please select a single user.",
+            "No User Selected", JOptionPane.ERROR_MESSAGE);
+            return;
+        } else {
+
+            Account user = Base.userFromEmail(users[0].split("_")[3]);
+            view.makeFavProductsFrame(user);
         }
     }
 
@@ -499,21 +516,26 @@ class StoreModel {
                 String color = view.details.get(1).getText();
                 int weight = Integer.parseInt(view.details.get(2).getText());
 
-                model.addElement(
-                    (new Food(
-                        view.accountOperation.getLastName(), name, color, weight)
-                    ).toString()
-                );
+                if (!(Base.productAvailable(view.accountOperation.getLastName() + "_" + name + "_" + color + "_" + weight + "_" + "Food"))) {
+                    model.addElement((new Food(view.accountOperation.getLastName(), name, color, weight)).toString());
+                } else {
+                    StoreView.msgBox("This product has already been enlisted under this manager.",
+                    "Product Already Available", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
             } else if (getRadioButtonText(view.group).equals("Furniture")) {
 
                 String type = view.details.get(3).getText();
                 int price = Integer.parseInt(view.details.get(4).getText());
                 int height = Integer.parseInt(view.details.get(5).getText());
-                model.addElement(
-                    (new Furniture
-                        (view.accountOperation.getLastName(), type, price, height)
-                    ).toString()
-                );
+
+                if (!(Base.productAvailable(view.accountOperation.getLastName() + "_" + type + "_" + price + "_" + height + "_" + "Furniture"))) {
+                    model.addElement((new Furniture(view.accountOperation.getLastName(), type, price, height)).toString());
+                } else {
+                    StoreView.msgBox("This product has already been enlisted under this manager.",
+                    "Product Already Available", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
             }
 
             cancel();
@@ -521,6 +543,47 @@ class StoreModel {
 
             //do nothing
         }
+    }
+
+    public void addFave() {
+
+        UserFavProducts accountFave = Base.getAccountFave(view.accountOperation);
+        view.makeAvToFavFrame(accountFave);
+    }
+
+    public void removeFave() {
+
+        try {
+
+            String[] faveList = new String[view.listFavorite.getSelectedValuesList().size()];
+            view.listFavorite.getSelectedValuesList().toArray(faveList);
+
+            if (faveList.length == 0) {
+                StoreView.msgBox("Please select a product to delete.",
+                "No Product Selected", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            model = (DefaultListModel<String>) view.listFavorite.getModel();
+            int[] selectedIndices = view.list.getSelectedIndices();
+
+            for (int i = selectedIndices.length - 1; i >= 0; i--) {
+                model.remove(selectedIndices[i]);
+            }
+
+            UserFavProducts accountFave = Base.getAccountFave(view.accountOperation);
+
+            for (String fave : faveList) {
+
+                accountFave.removeFavorite(accountFave.productFromString(fave));
+            }
+        } catch(ConcurrentModificationException e) {
+            //do nothing
+        }
+    }
+
+    public void addAvtoFav() {
+
     }
 
     public void cancel() {

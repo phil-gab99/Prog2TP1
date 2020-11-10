@@ -122,6 +122,13 @@ class StoreControl {
         }
     }
 
+    public class FavProducts implements ActionListener {
+
+        public void actionPerformed(ActionEvent e) {
+            model.favProducts();
+        }
+    }
+
     public class AvProducts implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {
@@ -182,6 +189,27 @@ class StoreControl {
 
         public void actionPerformed(ActionEvent e) {
             model.okProduct();
+        }
+    }
+
+    public class AddFave implements ActionListener {
+
+        public void actionPerformed(ActionEvent e) {
+            model.addFave();
+        }
+    }
+
+    public class RemoveFave implements ActionListener {
+
+        public void actionPerformed(ActionEvent e) {
+            model.removeFave();
+        }
+    }
+
+    public class AddAvtoFav implements ActionListener {
+
+        public void actionPerformed(ActionEvent e) {
+            model.addAvtoFav();
         }
     }
 

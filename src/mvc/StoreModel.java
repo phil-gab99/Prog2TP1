@@ -419,7 +419,9 @@ class StoreModel {
 
     public void addProduct() {
 
-        //DO THIS PHIL BUDDIES!!
+        if (view.accountOperation.isManager()) {
+            view.addProductDialog("Add Product");
+        }
     }
 
     public void removeProduct() {

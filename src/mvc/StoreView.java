@@ -29,16 +29,18 @@ public class StoreView extends JFrame {
     private StoreControl control;
 
     //Array list of textfields holding user input details upon element creation
-    protected ArrayList<JTextField> details;
-    //Account on which some action needs to be done
-    protected Account accountOperation;
-    protected ButtonGroup group;  //Radio button group
-    protected JList<String> list; //List that will hold each account
-    protected JDialog dialog;     //Dialog used for various user input contexts
-    protected JFrame guiResults;  //Frame holding user advanced search results
-    protected JList<String> listResults; //List for search results
-    protected JFrame guiProducts; //Frame holding user advanced search results
-    protected JList<String> listProducts; //List for available products
+    ArrayList<JTextField> details;
+    ArrayList<JTextField> prodDetails;
+    Account accountOperation;   //Account on which some action needs to be done
+    ButtonGroup group;          //Radio button group
+    ButtonGroup prodGroup;      //Radio button group for product management
+    JDialog dialog;             //Dialog used for various user input contexts
+    JDialog prodDialog;         //Dialog used for adding products to the list
+    JFrame guiResults;          //Frame holding user advanced search results
+    JFrame guiProducts;         //Frame holding available products
+    JList<String> list;         //List that will hold each account
+    JList<String> listResults;  //List for search results
+    JList<String> listProducts; //List for available products
 
     public StoreView() {
 
@@ -90,10 +92,10 @@ public class StoreView extends JFrame {
         makeButton(this, "Deduct Balance", gridbag, c, 5);
 
         c.gridwidth = GridBagConstraints.RELATIVE;
-        c.insets = new Insets(5, 20, 5, 5);
+        c.insets = new Insets(5, 20, 20, 5);
         makeButton(this, "View Favorite Products", gridbag, c, 6);
         c.gridwidth = GridBagConstraints.REMAINDER;
-        c.insets = new Insets(5, 5, 5, 20);
+        c.insets = new Insets(5, 5, 20, 20);
         makeButton(this, "View Available Products", gridbag, c, 7);
 
         setTitle("Magasin");
@@ -234,7 +236,7 @@ public class StoreView extends JFrame {
         c.fill = GridBagConstraints.BOTH;
         c.weightx = 1.0;
         c.weighty = 1.0;
-        c.insets = new Insets(5, 20, 5, 20);
+        c.insets = new Insets(20, 20, 20, 20);
         c.gridwidth = GridBagConstraints.REMAINDER;
 
         gridbag.setConstraints(scrollpane, c);
@@ -276,7 +278,7 @@ public class StoreView extends JFrame {
         c.fill = GridBagConstraints.BOTH;
         c.weightx = 1.0;
         c.weighty = 1.0;
-        c.insets = new Insets(5, 20, 5, 20);
+        c.insets = new Insets(20, 20, 5, 20);
         c.gridwidth = GridBagConstraints.REMAINDER;
 
         gridbag.setConstraints(scrollpane, c);
@@ -284,10 +286,10 @@ public class StoreView extends JFrame {
 
         c.weighty = 0.0;
         c.gridwidth = GridBagConstraints.RELATIVE;
-        c.insets = new Insets(5, 20, 5, 5);
+        c.insets = new Insets(5, 20, 20, 5);
         makeButton(guiProducts, "Add Product", gridbag, c, 13);
         c.gridwidth = GridBagConstraints.REMAINDER;
-        c.insets = new Insets(5, 5, 5, 20);
+        c.insets = new Insets(5, 5, 20, 20);
         makeButton(guiProducts, "Remove Product", gridbag, c, 14);
 
         guiProducts.setVisible(true);
@@ -385,7 +387,7 @@ public class StoreView extends JFrame {
         GridBagLayout gridbag = new GridBagLayout();
         GridBagConstraints c = new GridBagConstraints();
 
-        dialog.setSize(FRAME_WIDTH - 200, FRAME_HEIGHT - 50);
+        dialog.setSize(FRAME_WIDTH - 320, FRAME_HEIGHT);
         centerComponent(dialog, 0);
         dialog.setLayout(gridbag);
 
@@ -393,7 +395,7 @@ public class StoreView extends JFrame {
         c.weightx = 1.0;
 
         c.gridwidth = GridBagConstraints.REMAINDER;
-        c.insets = new Insets(5, 20, 5, 20);
+        c.insets = new Insets(20, 20, 5, 20);
         makeLabel(dialog, "Single User Search*", gridbag, c, SwingConstants.CENTER);
 
         c.gridwidth = 5;
@@ -475,12 +477,12 @@ public class StoreView extends JFrame {
         c.gridy = 12;
         c.ipady = 10;
         c.gridwidth = 6;
-        c.insets = new Insets(5, 20, 5, 5);
+        c.insets = new Insets(5, 20, 20, 5);
         makeButton(dialog, "Single Search", gridbag, c, 11);
-        c.insets = new Insets(5, 5, 5, 5);
+        c.insets = new Insets(5, 5, 20, 5);
         makeButton(dialog, "Multiple Search", gridbag, c, 12);
         c.gridwidth = GridBagConstraints.REMAINDER;
-        c.insets = new Insets(5, 5, 5, 20);
+        c.insets = new Insets(5, 5, 20, 20);
         makeButton(dialog, "Cancel", gridbag, c, 20);
 
         dialog.setVisible(true);
@@ -565,6 +567,47 @@ public class StoreView extends JFrame {
         makeButton(dialog, "Cancel", gridbag, c, 20);
 
         dialog.setVisible(true);
+    }
+
+    public void addProductDialog(String title) {
+
+        prodDialog = new JDialog(this, title, true);
+        prodDetails = new ArrayList<JTextField>();
+        GridBagLayout gridbag = new GridBagLayout();
+        GridBagConstraints c = new GridBagConstraints();
+
+        prodDialog.setSize(FRAME_WIDTH/2, FRAME_HEIGHT/2);
+        centerComponent(dialog, 50);
+        prodDialog.setLayout(gridbag);
+
+        c.fill = GridBagConstraints.BOTH;
+        c.weightx = 1.0;
+
+        c.gridwidth = 1;
+        c.insets = new Insets(20, 20, 5, 5);
+        makeRadioButton(prodDialog, prodGroup, "Food", gridbag, c);
+
+        c.insets = new Insets(5, 5, 5, 5);
+        makeLabel(prodDialog, "Name: ", gridbag, c, SwingConstants.LEFT);
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        c.insets = new Insets(5, 5, 5, 20);
+        makeTextField(prodDialog, gridbag, c, 0, 1);
+
+        c.gridx = 2;
+        c.gridwidth = 1;
+        c.insets = new Insets(5, 5, 5, 5);
+        makeLabel(prodDialog, "Color: ", gridbag, c, SwingConstants.LEFT);
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        c.insets = new Insets(5, 5, 5, 20);
+        makeTextField(prodDialog, gridbag, c, 0, 1); //To be changed to a button to open JColorChooser
+
+        c.gridx = 2;
+        c.gridwidth = 1;
+        c.insets = new Insets(5, 5, 20, 5);
+        makeLabel(prodDialog, "Weight: ", gridbag, c, SwingConstants.LEFT);
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        c.insets = new Insets(5, 5, 5, 20);
+        makeTextField(prodDialog, gridbag, c, 0, 1);
     }
 
     /*

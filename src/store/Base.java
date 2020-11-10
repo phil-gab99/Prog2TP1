@@ -3,6 +3,7 @@ package store;
 import java.util.ArrayList;
 import java.util.HashMap;
 import inventory.*;
+import actions.*;
 
 /*
 * @Karim Boumghar
@@ -41,17 +42,6 @@ public class Base {
     }
 
     /*
-    * The method addAccountFav pairs a user with his list of favorite products
-    *
-    * @param u The user paired with his list of products
-    **/
-
-    public static void addAccountFav(UserFavProducts u) {
-
-        userFav.add(u);
-    }
-
-    /*
     * The method deleteAccount deletes a user from the accounts list
     *
     * @param a Account attached to some user
@@ -74,6 +64,18 @@ public class Base {
         }
 
         return sameAccount;
+    }
+
+
+    /*
+    * The method addUserFav pairs a user with his list of favorite products
+    *
+    * @param u The user paired with his list of products
+    **/
+
+    public static void addUserFav(UserFavProducts u) {
+
+        userFav.add(u);
     }
 
     public static ArrayList<Product> getProducts() {

@@ -15,11 +15,7 @@ import mvc.*;
 * account types as well as useful accessor methods
 **/
 
-//todo : Give program specification
-//todo : Begin
-
-public abstract class Account implements ManageBalance, FavoriteProducts,
-    ManageProducts {
+public abstract class Account implements ManageBalance {
 
     private int balance;  //Balance associated with the account
     private String email; //Email to be generated for the different accounts
@@ -27,7 +23,6 @@ public abstract class Account implements ManageBalance, FavoriteProducts,
     private String lastName;
     private String firstName;
     private String birth;
-    private ArrayList<Product> favorites;
 
     /*
     * The Account constructor serves to assign the common existing traits
@@ -157,51 +152,12 @@ public abstract class Account implements ManageBalance, FavoriteProducts,
 
     public void deductBalance(int amount) {
 
-        if (this instanceof Client) {
+        if (isClient()) {
             StoreView.msgBox("Action not allowed for client-type accounts.",
             "Account Rights", JOptionPane.ERROR_MESSAGE);
         } else {
 
             balance -= amount;
-        }
-    }
-
-    /*
-    * The addFavorite method was implemented from the FavoriteProducts
-    * interface and is an available action for all account types
-    **/
-
-    public void addFavorite(Product p) {
-
-        if (Base.productAvailable(p)) {
-            favorites.add(p);
-        }
-    }
-
-    /*
-    * The removeFavorite method was implemented from the FavoriteProducts
-    * interface and is an available action for all account types
-    **/
-
-    public void removeFavorite(Product p) {
-
-        favorites.remove(p);
-    }
-
-    /*
-    * The addProduct method was implemented from the ManageProducts interface
-    * and is an available action for manager-type accounts
-    **/
-
-    public void addProduct(Product p) {
-
-        if (this instanceof Manager) {
-
-            Base.addProduct(p);
-        } else {
-
-            StoreView.msgBox("Action allowed only for manager-type accounts.",
-            "Account Rights", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -212,7 +168,7 @@ public abstract class Account implements ManageBalance, FavoriteProducts,
 
     public void removeProduct(Product p) {
 
-        if (this instanceof Manager) {
+        if (isManager()) {
 
             Base.removeProduct(p);
         } else {
@@ -220,5 +176,15 @@ public abstract class Account implements ManageBalance, FavoriteProducts,
             StoreView.msgBox("Action allowed only for manager-type accounts.",
             "Account Rights", JOptionPane.ERROR_MESSAGE);
         }
+    }
+
+    public boolean isClient() {
+
+        return this instanceof Client;
+    }
+
+    public boolean isManager() {
+
+        return this instanceof Manager;
     }
 }

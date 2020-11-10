@@ -2,8 +2,9 @@ package store;
 
 import java.util.ArrayList;
 import inventory.*;
+import actions.*;
 
-public class UserFavProducts {
+public class UserFavProducts implements FavoriteProducts {
 
     private Account user;
     private ArrayList<Product> favorites;
@@ -13,7 +14,7 @@ public class UserFavProducts {
         this.user = user;
         this.favorites = new ArrayList<Product>();
 
-        Base.addAccountFav(this);
+        Base.addUserFav(this);
     }
 
     public void getUser() {
@@ -22,5 +23,13 @@ public class UserFavProducts {
 
     public ArrayList<Product> getFavorites() {
         return favorites;
+    }
+
+    public void addFavorite(Product p) {
+        favorites.add(p);
+    }
+
+    public void removeFavorite(Product p) {
+        favorites.remove(p);
     }
 }

@@ -516,6 +516,11 @@ class StoreModel {
                 String color = view.details.get(1).getText();
                 int weight = Integer.parseInt(view.details.get(2).getText());
 
+                if (name.equals("") || color.equals("")) {
+                    StoreView.msgBox("Please enter valid inputs.",
+                    "Invalid Inputs", JOptionPane.ERROR_MESSAGE);
+                }
+
                 if (!(Base.productAvailable(view.accountOperation.getLastName() + "_" + name + "_" + color + "_" + weight + "_" + "Food"))) {
                     model.addElement((new Food(view.accountOperation.getLastName(), name, color, weight)).toString());
                 } else {
@@ -529,6 +534,11 @@ class StoreModel {
                 int price = Integer.parseInt(view.details.get(4).getText());
                 int height = Integer.parseInt(view.details.get(5).getText());
 
+                if (type.equals("")) {
+                    StoreView.msgBox("Please enter valid inputs.",
+                    "Invalid Inputs", JOptionPane.ERROR_MESSAGE);
+                }
+
                 if (!(Base.productAvailable(view.accountOperation.getLastName() + "_" + type + "_" + price + "_" + height + "_" + "Furniture"))) {
                     model.addElement((new Furniture(view.accountOperation.getLastName(), type, price, height)).toString());
                 } else {
@@ -539,8 +549,11 @@ class StoreModel {
             }
 
             cancel();
-        } catch(NullPointerException e) {
+        } catch(NumberFormatException e) {
 
+            StoreView.msgBox("Please enter valid inputs.",
+            "Invalid Inputs", JOptionPane.ERROR_MESSAGE);
+        } catch(NullPointerException e) {
             //do nothing
         }
     }
@@ -564,18 +577,19 @@ class StoreModel {
                 return;
             }
 
-            model = (DefaultListModel<String>) view.listFavorite.getModel();
-            int[] selectedIndices = view.list.getSelectedIndices();
-
-            for (int i = selectedIndices.length - 1; i >= 0; i--) {
-                model.remove(selectedIndices[i]);
-            }
 
             UserFavProducts accountFave = Base.getAccountFave(view.accountOperation);
 
             for (String fave : faveList) {
 
-                accountFave.removeFavorite(accountFave.productFromString(fave));
+                accountFave.removeFavorite(Base.productFromString(fave));
+            }
+
+            model = (DefaultListModel<String>) view.listFavorite.getModel();
+            int[] selectedIndices = view.listFavorite.getSelectedIndices();
+
+            for (int i = selectedIndices.length - 1; i >= 0; i--) {
+                model.remove(selectedIndices[i]);
             }
         } catch(ConcurrentModificationException e) {
             //do nothing
@@ -584,6 +598,37 @@ class StoreModel {
 
     public void addAvtoFav() {
 
+        try {
+
+            String[] avList = new String[view.listProducts.getSelectedValuesList().size()];
+            view.listProducts.getSelectedValuesList().toArray(avList);
+
+            if (avList.length == 0) {
+                StoreView.msgBox("Please select a product to add.",
+                "No Product Selected", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            UserFavProducts accountFave = Base.getAccountFave(view.accountOperation);
+
+            for (String fave : avList) {
+
+                System.out.println(fave);
+                accountFave.addFavorite(Base.productFromString(fave));
+            }
+
+            DefaultListModel<String> modelFav = (DefaultListModel<String>) view.listFavorite.getModel();
+
+            model = (DefaultListModel<String>) view.listProducts.getModel();
+            int[] selectedIndices = view.listProducts.getSelectedIndices();
+
+            for (int i = selectedIndices.length - 1; i >= 0; i--) {
+                model.remove(selectedIndices[i]);
+                modelFav.addElement(avList[i]);
+            }
+        } catch(ConcurrentModificationException e) {
+            //do nothing
+        }
     }
 
     public void cancel() {

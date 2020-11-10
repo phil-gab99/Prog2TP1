@@ -25,17 +25,6 @@ public class UserFavProducts implements FavoriteProducts {
         return favorites;
     }
 
-    public Product productFromString(String product) {
-
-        for (Product p : favorites) {
-
-            if (p.toString().equals(product)) {
-                return p;
-            }
-        }
-        return null;
-    }
-
     public boolean hasFave(Product p) {
 
         return favorites.contains(p);

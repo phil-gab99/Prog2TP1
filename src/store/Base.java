@@ -135,6 +135,17 @@ public class Base {
         return null;
     }
 
+    public static Product productFromString(String product) {
+
+        for (Product p : products) {
+
+            if ((p.toString()).equals(product)) {
+                return p;
+            }
+        }
+        return null;
+    }
+
     /*
     * The method productAvailable checks if a given product is present within
     * the list or not
@@ -148,7 +159,7 @@ public class Base {
         boolean sameProduct = false;
 
         for (Product e : products) {
-            if (e.toString().equals(p.toString())) {
+            if (e.toString().equalsIgnoreCase(p)) {
                 sameProduct = true;
                 break;
             }

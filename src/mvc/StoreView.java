@@ -141,7 +141,6 @@ public class StoreView extends JFrame {
             case 17: button.addActionListener(control.new RemoveFave()); break;
             case 18: button.addActionListener(control.new AddAvtoFav()); break;
             case 20: button.addActionListener(control.new Cancel()); break;
-            case 21: button.addActionListener(control.new CloseFrame()); break;
             default: System.out.println("Lolilou");
         }
 
@@ -372,6 +371,7 @@ public class StoreView extends JFrame {
         for (Product p : avProducts) {
 
             if (!(u.hasFave(p))) {
+                
                 listModel.addElement(p.toString());
             }
         }

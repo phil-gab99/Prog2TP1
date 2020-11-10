@@ -178,8 +178,8 @@ class StoreControl {
     public class AddAccount implements ActionListener {
 
         /**
-        * The method actionPerformed is triggered upon pressing the button
-        * the current instance is listening to
+        * The method actionPerformed is triggered upon pressing the button the
+        * current instance is listening to
         *
         * @param e ActionEvent holding information on the press of the button
         ***/
@@ -198,8 +198,8 @@ class StoreControl {
     public class DeleteAccount implements ActionListener {
 
         /**
-        * The method actionPerformed is triggered upon pressing the button
-        * the current instance is listening to
+        * The method actionPerformed is triggered upon pressing the button the
+        * current instance is listening to
         *
         * @param e ActionEvent holding information on the press of the button
         ***/
@@ -218,8 +218,8 @@ class StoreControl {
     public class AdvSearch implements ActionListener {
 
         /**
-        * The method actionPerformed is triggered upon pressing the button
-        * the current instance is listening to
+        * The method actionPerformed is triggered upon pressing the button the
+        * current instance is listening to
         *
         * @param e ActionEvent holding information on the press of the button
         ***/
@@ -237,113 +237,325 @@ class StoreControl {
 
     public class AddBalance implements ActionListener {
 
+        /**
+        * The method actionPerformed is triggered upon pressing the button the
+        * current instance is listening to
+        *
+        * @param e ActionEvent holding information on the press of the button
+        ***/
+
         public void actionPerformed(ActionEvent e) {
-            model.addBalance();
+
+            model.addBalance(); //Method calling dialog for adding balance
         }
     }
+
+    /**
+    * The class DeductBalance handles the event triggered upon pressing the Add
+    * Balance button this class listens to
+    ***/
 
     public class DeductBalance implements ActionListener {
 
+        /**
+        * The method actionPerformed is triggered upon pressing the button the
+        * current instance is listening to
+        *
+        * @param e ActionEvent holding information on the press of the button
+        ***/
+
         public void actionPerformed(ActionEvent e) {
-            model.deductBalance();
+
+            model.deductBalance(); //Method calling dialog for adding balance
         }
     }
+
+    /**
+    * The class FavProducts handles the event triggered upon pressing the View
+    * Favorite Products button this class listens to
+    ***/
 
     public class FavProducts implements ActionListener {
 
+        /**
+        * The method actionPerformed is triggered upon pressing the button the
+        * current instance is listening to
+        *
+        * @param e ActionEvent holding information on the press of the button
+        ***/
+
         public void actionPerformed(ActionEvent e) {
-            model.favProducts();
+
+            model.favProducts(); //Method calling frame for viewing favorites
         }
     }
+
+    /**
+    * The class AvProducts handles the event triggered upon pressing the View
+    * Available Products button this class listens to
+    ***/
 
     public class AvProducts implements ActionListener {
 
+        /**
+        * The method actionPerformed is triggered upon pressing the button the
+        * current instance is listening to
+        *
+        * @param e ActionEvent holding information on the press of the button
+        ***/
+
         public void actionPerformed(ActionEvent e) {
-            model.avProducts();
+
+            model.avProducts(); //Method calling frame for viewing products
         }
     }
+
+    /**
+    * The class OkAccount handles the event triggered upon pressing the Ok
+    * button this class listens to originating from the account dialog
+    ***/
 
     public class OkAccount implements ActionListener {
 
+        /**
+        * The method actionPerformed is triggered upon pressing the button the
+        * current instance is listening to
+        *
+        * @param e ActionEvent holding information on the press of the button
+        ***/
+
         public void actionPerformed(ActionEvent e) {
-            model.okAccount();
+
+            model.okAccount(); //Method undertaking account adding
         }
     }
+
+    /**
+    * The class OkAddBalance handles the event triggered upon pressing the Ok
+    * button this class listens to originating from the adding balance dialog
+    ***/
 
     public class OkAddBalance implements ActionListener {
 
+        /**
+        * The method actionPerformed is triggered upon pressing the button the
+        * current instance is listening to
+        *
+        * @param e ActionEvent holding information on the press of the button
+        ***/
+
         public void actionPerformed(ActionEvent e) {
-            model.okAddBalance();
+
+            model.okAddBalance(); //Method undertaking balance adding
         }
     }
+
+    /**
+    * The class OkDeductBalance handles the event triggered upon pressing the
+    * Ok button this class listens to originating from the deducting balance
+    * dialog
+    ***/
 
     public class OkDeductBalance implements ActionListener {
 
+        /**
+        * The method actionPerformed is triggered upon pressing the button the
+        * current instance is listening to
+        *
+        * @param e ActionEvent holding information on the press of the button
+        ***/
+
         public void actionPerformed(ActionEvent e) {
-            model.okDeductBalance();
+
+            model.okDeductBalance(); //Method undertaking balance deducting
         }
     }
+
+    /**
+    * The class AdvSearchSingle handles the event triggered upon pressing the
+    * Single Search button this class listens to originating from the advanced
+    * search dialog
+    ***/
 
     public class AdvSearchSingle implements ActionListener {
 
+        /**
+        * The method actionPerformed is triggered upon pressing the button the
+        * current instance is listening to
+        *
+        * @param e ActionEvent holding information on the press of the button
+        ***/
+
         public void actionPerformed(ActionEvent e) {
-            model.advSearchSingle();
+
+            model.advSearchSingle(); //Method undertaking single account search
         }
     }
 
+    /**
+    * The class AdvSearchMultiple handles the event triggered upon pressing the
+    * Multiple Search button this class listens to originating from the
+    * advanced search dialog
+    ***/
+
     public class AdvSearchMultiple implements ActionListener {
 
+        /**
+        * The method actionPerformed is triggered upon pressing the button the
+        * current instance is listening to
+        *
+        * @param e ActionEvent holding information on the press of the button
+        ***/
+
         public void actionPerformed(ActionEvent e) {
+
+            //Method undertaking multiple account search
             model.advSearchMultiple();
         }
     }
 
+    /**
+    * The class AddProduct handles the event triggered upon pressing the Add
+    * Product button this class listens to originating from the product viewing
+    * frame
+    ***/
+
     public class AddProduct implements ActionListener {
 
+        /**
+        * The method actionPerformed is triggered upon pressing the button the
+        * current instance is listening to
+        *
+        * @param e ActionEvent holding information on the press of the button
+        ***/
+
         public void actionPerformed(ActionEvent e) {
-            model.addProduct();
+
+            model.addProduct(); //Method calling dialog for adding products
         }
     }
+
+    /**
+    * The class RemoveProducts handles the event triggered upon pressing the
+    * Remove Product button this class listens to originating from the product
+    * viewing frame
+    ***/
 
     public class RemoveProduct implements ActionListener {
 
+        /**
+        * The method actionPerformed is triggered upon pressing the button the
+        * current instance is listening to
+        *
+        * @param e ActionEvent holding information on the press of the button
+        ***/
+
         public void actionPerformed(ActionEvent e) {
-            model.removeProduct();
+
+            model.removeProduct(); //Method undertaking product removal
         }
     }
+
+    /**
+    * The class OkProduct handles the event triggered upon pressing the Ok
+    * button this class listens to originating from the adding product dialog
+    ***/
 
     public class OkProduct implements ActionListener {
 
+        /**
+        * The method actionPerformed is triggered upon pressing the button the
+        * current instance is listening to
+        *
+        * @param e ActionEvent holding information on the press of the button
+        ***/
+
         public void actionPerformed(ActionEvent e) {
-            model.okProduct();
+
+            model.okProduct(); //Method undertaking product adding
         }
     }
+
+    /**
+    * The class AddFave handles the event triggered upon pressing the Add
+    * Product button this class listens to originating from the favorite list
+    * viewing frame
+    ***/
 
     public class AddFave implements ActionListener {
 
+        /**
+        * The method actionPerformed is triggered upon pressing the button the
+        * current instance is listening to
+        *
+        * @param e ActionEvent holding information on the press of the button
+        ***/
+
         public void actionPerformed(ActionEvent e) {
-            model.addFave();
+
+            model.addFave(); //Method calling available products frame
         }
     }
+
+    /**
+    * The class RemoveFave handles the event triggered upon pressing the Remove
+    * Product button this class listens to originating from the favorite list
+    * viewing frame
+    ***/
 
     public class RemoveFave implements ActionListener {
 
+        /**
+        * The method actionPerformed is triggered upon pressing the button the
+        * current instance is listening to
+        *
+        * @param e ActionEvent holding information on the press of the button
+        ***/
+
         public void actionPerformed(ActionEvent e) {
-            model.removeFave();
+
+            model.removeFave(); //Method undertaking favorites removal
         }
     }
+
+    /**
+    * The class AddAvtoFav handles the event triggered upon pressing the Add
+    * button this class listens to originating from the available products
+    * frame
+    ***/
 
     public class AddAvtoFav implements ActionListener {
 
+        /**
+        * The method actionPerformed is triggered upon pressing the button the
+        * current instance is listening to
+        *
+        * @param e ActionEvent holding information on the press of the button
+        ***/
+
         public void actionPerformed(ActionEvent e) {
-            model.addAvtoFav();
+
+            model.addAvtoFav(); //Method undertaking favorites adding
         }
     }
 
+    /**
+    * The class Cancel handles the event triggered upon pressing the Cancel
+    * button this class listens to present in many dialogs
+    ***/
+
     public class Cancel implements ActionListener {
 
+        /**
+        * The method actionPerformed is triggered upon pressing the button the
+        * current instance is listening to
+        *
+        * @param e ActionEvent holding information on the press of the button
+        ***/
+
         public void actionPerformed(ActionEvent e) {
-            model.cancel();
+
+            model.cancel(); //Method closing current dialog
         }
     }
 }

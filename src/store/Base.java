@@ -174,7 +174,7 @@ public class Base {
     * @return sameProduct Boolean indicating if product is available or not
     ***/
 
-    public static boolean containProduct(String product) {
+    public static boolean containsProduct(String product) {
 
         boolean sameProduct = false;
 

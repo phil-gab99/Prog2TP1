@@ -613,7 +613,6 @@ class StoreModel {
 
             for (String fave : avList) {
 
-                System.out.println(fave);
                 accountFave.addFavorite(Base.productFromString(fave));
             }
 

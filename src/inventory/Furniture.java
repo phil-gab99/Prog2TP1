@@ -13,7 +13,7 @@ import store.*;
 public class Furniture extends Product {
 
     private String type;
-    private double price;
+    private int price;
     private int height;
 
     /*
@@ -26,7 +26,7 @@ public class Furniture extends Product {
     * @param height Integer indicating the furniture's height
     **/
 
-    public Furniture(String manager, String type, double price, int height) {
+    public Furniture(String manager, String type, int price, int height) {
 
         super(manager);
 

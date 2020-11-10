@@ -30,12 +30,9 @@ public class StoreView extends JFrame {
 
     //Array list of textfields holding user input details upon element creation
     ArrayList<JTextField> details;
-    ArrayList<JTextField> prodDetails;
     Account accountOperation;   //Account on which some action needs to be done
     ButtonGroup group;          //Radio button group
-    ButtonGroup prodGroup;      //Radio button group for product management
     JDialog dialog;             //Dialog used for various user input contexts
-    JDialog prodDialog;         //Dialog used for adding products to the list
     JFrame guiResults;          //Frame holding user advanced search results
     JFrame guiProducts;         //Frame holding available products
     JList<String> list;         //List that will hold each account
@@ -137,6 +134,7 @@ public class StoreView extends JFrame {
             case 12: button.addActionListener(control.new AdvSearchMultiple()); break;
             case 13: button.addActionListener(control.new AddProduct()); break;
             case 14: button.addActionListener(control.new RemoveProduct()); break;
+            case 15: button.addActionListener(control.new OkProduct()); break;
             case 20: button.addActionListener(control.new Cancel()); break;
             default: System.out.println("Lolilou");
         }
@@ -201,13 +199,19 @@ public class StoreView extends JFrame {
     * @param gridbag GridBagLayout with parent layout details
     * @param c GridBagConstraints indicating the specific constraints and
     * details on where the radio button is to be added
+    * @param listenType Integer representing listener for this component
     **/
 
     public void makeRadioButton(Container parent, ButtonGroup group,
-        String label, GridBagLayout gridbag, GridBagConstraints c) {
+        String label, GridBagLayout gridbag, GridBagConstraints c,
+        int listenType) {
 
         JRadioButton radio = new JRadioButton(label);
         gridbag.setConstraints(radio, c);
+
+        switch (listenType) {
+            case 1: radio.addChangeListener(control.new ProductFields());
+        }
 
         group.add(radio);
         parent.add(radio);
@@ -354,11 +358,11 @@ public class StoreView extends JFrame {
         makeLabel(dialog, "Position: ", gridbag, c, SwingConstants.LEFT);
         c.gridwidth = 7;
         c.insets = new Insets(5, 5, 5, 0);
-        makeRadioButton(dialog, group, "Client", gridbag, c);
+        makeRadioButton(dialog, group, "Client", gridbag, c, 0);
         c.insets = new Insets(5, 0, 5, 0);
-        makeRadioButton(dialog, group, "Employee", gridbag, c);
+        makeRadioButton(dialog, group, "Employee", gridbag, c, 0);
         c.insets = new Insets(5, 0, 5, 20);
-        makeRadioButton(dialog, group, "Manager", gridbag, c);
+        makeRadioButton(dialog, group, "Manager", gridbag, c, 0);
 
         c.gridy = 5;
         c.ipady = 10;
@@ -449,9 +453,9 @@ public class StoreView extends JFrame {
         makeLabel(dialog, "Position: ", gridbag, c, SwingConstants.LEFT);
         c.gridwidth = 2;
         c.insets = new Insets(5, 0, 5, 0);
-        makeRadioButton(dialog, group, "Client", gridbag, c);
-        makeRadioButton(dialog, group, "Employee", gridbag, c);
-        makeRadioButton(dialog, group, "Manager", gridbag, c);
+        makeRadioButton(dialog, group, "Client", gridbag, c, 0);
+        makeRadioButton(dialog, group, "Employee", gridbag, c, 0);
+        makeRadioButton(dialog, group, "Manager", gridbag, c, 0);
 
         c.gridy = 8;
         c.gridwidth = GridBagConstraints.REMAINDER;
@@ -571,43 +575,105 @@ public class StoreView extends JFrame {
 
     public void addProductDialog(String title) {
 
-        prodDialog = new JDialog(this, title, true);
-        prodDetails = new ArrayList<JTextField>();
+        dialog = new JDialog(this, title, true);
+        group = new ButtonGroup();
+        details = new ArrayList<JTextField>();
         GridBagLayout gridbag = new GridBagLayout();
         GridBagConstraints c = new GridBagConstraints();
 
-        prodDialog.setSize(FRAME_WIDTH/2, FRAME_HEIGHT/2);
+        dialog.setSize(FRAME_WIDTH - 320, FRAME_HEIGHT);
         centerComponent(dialog, 50);
-        prodDialog.setLayout(gridbag);
+        dialog.setLayout(gridbag);
 
         c.fill = GridBagConstraints.BOTH;
         c.weightx = 1.0;
 
+        c.gridx = 1;
         c.gridwidth = 1;
         c.insets = new Insets(20, 20, 5, 5);
-        makeRadioButton(prodDialog, prodGroup, "Food", gridbag, c);
-
-        c.insets = new Insets(5, 5, 5, 5);
-        makeLabel(prodDialog, "Name: ", gridbag, c, SwingConstants.LEFT);
-        c.gridwidth = GridBagConstraints.REMAINDER;
-        c.insets = new Insets(5, 5, 5, 20);
-        makeTextField(prodDialog, gridbag, c, 0, 1);
+        makeRadioButton(dialog, group, "Food", gridbag, c, 1);
 
         c.gridx = 2;
+        c.gridy = 2;
+        c.insets = new Insets(5, 5, 5, 5);
+        makeLabel(dialog, "Name: ", gridbag, c, SwingConstants.LEFT);
+        c.gridx = 3;
+        c.gridwidth = 2;
+        c.insets = new Insets(5, 5, 5, 20);
+        makeTextField(dialog, gridbag, c, 0, 1);
+
+        c.gridx = 2;
+        c.gridy = 3;
         c.gridwidth = 1;
         c.insets = new Insets(5, 5, 5, 5);
-        makeLabel(prodDialog, "Color: ", gridbag, c, SwingConstants.LEFT);
+        makeLabel(dialog, "Color: ", gridbag, c, SwingConstants.LEFT);
+        c.gridx = 3;
         c.gridwidth = GridBagConstraints.REMAINDER;
         c.insets = new Insets(5, 5, 5, 20);
-        makeTextField(prodDialog, gridbag, c, 0, 1); //To be changed to a button to open JColorChooser
+        makeTextField(dialog, gridbag, c, 0, 1); //To be changed to a button to open JColorChooser
 
         c.gridx = 2;
+        c.gridy = 4;
         c.gridwidth = 1;
         c.insets = new Insets(5, 5, 20, 5);
-        makeLabel(prodDialog, "Weight: ", gridbag, c, SwingConstants.LEFT);
+        makeLabel(dialog, "Weight: ", gridbag, c, SwingConstants.LEFT);
+        c.gridx = 3;
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        c.insets = new Insets(5, 5, 20, 20);
+        makeTextField(dialog, gridbag, c, 0, 2);
+
+        c.gridx = 1;
+        c.gridy = 5;
+        makeLabel(dialog, "________________________________________________",
+        gridbag, c, SwingConstants.CENTER);
+
+        c.gridx = 1;
+        c.gridwidth = 1;
+        c.gridy = 6;
+        c.insets = new Insets(20, 20, 5, 5);
+        makeRadioButton(dialog, group, "Furniture", gridbag, c, 1);
+
+        c.gridx = 2;
+        c.gridy = 7;
+        c.insets = new Insets(5, 5, 5, 5);
+        makeLabel(dialog, "Type: ", gridbag, c, SwingConstants.LEFT);
+        c.gridx = 3;
         c.gridwidth = GridBagConstraints.REMAINDER;
         c.insets = new Insets(5, 5, 5, 20);
-        makeTextField(prodDialog, gridbag, c, 0, 1);
+        makeTextField(dialog, gridbag, c, 0, 1);
+
+        c.gridx = 2;
+        c.gridy = 8;
+        c.gridwidth = 1;
+        c.insets = new Insets(5, 5, 5, 5);
+        makeLabel(dialog, "Price: ", gridbag, c, SwingConstants.LEFT);
+        c.gridx = 3;
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        c.insets = new Insets(5, 5, 5, 20);
+        makeTextField(dialog, gridbag, c, 0, 2);
+
+        c.gridx = 2;
+        c.gridy = 9;
+        c.gridwidth = 1;
+        c.insets = new Insets(5, 5, 20, 5);
+        makeLabel(dialog, "Height: ", gridbag, c, SwingConstants.LEFT);
+        c.gridx = 3;
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        c.insets = new Insets(5, 5, 20, 20);
+        makeTextField(dialog, gridbag, c, 0, 2);
+
+        c.gridx = 1;
+        c.gridy = 10;
+        c.ipady = 10;
+        c.gridwidth = 2;
+        c.insets = new Insets(5, 20, 20, 5);
+        makeButton(dialog, "OK", gridbag, c, 15);
+        c.gridx = 3;
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        c.insets = new Insets(5, 5, 20, 20);
+        makeButton(dialog, "Cancel", gridbag, c, 20);
+
+        dialog.setVisible(true);
     }
 
     /*

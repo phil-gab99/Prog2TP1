@@ -2,6 +2,7 @@ package mvc;
 
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.event.*;
 
 /*
 * @Karim Boumghar
@@ -75,6 +76,14 @@ class StoreControl {
             if (textLength > 0) {
                 model.maxColumns(e, textLength);
             }
+        }
+    }
+
+    public class ProductFields implements ChangeListener {
+
+        public void stateChanged(ChangeEvent e) {
+
+            model.productFields();
         }
     }
 
@@ -166,6 +175,13 @@ class StoreControl {
 
         public void actionPerformed(ActionEvent e) {
             model.removeProduct();
+        }
+    }
+
+    public class OkProduct implements ActionListener {
+
+        public void actionPerformed(ActionEvent e) {
+            model.okProduct();
         }
     }
 

@@ -14,7 +14,7 @@ public class Food extends Product {
 
     private String name;
     private String color;
-    private double weight;
+    private int weight;
 
     /*
     * The Food constructor serves to assign the traits specific for food-type
@@ -25,7 +25,7 @@ public class Food extends Product {
     * @param weight Double indicating the food's weight
     **/
 
-    public Food(String manager, String name, String color, double weight) {
+    public Food(String manager, String name, String color, int weight) {
 
         super(manager);
 

@@ -94,6 +94,35 @@ class StoreModel {
         return null;
     }
 
+    public void productFields() {
+
+        try {
+
+            if (getRadioButtonText(view.group).equals("Food")) {
+
+                for (int i = 0; i < 3; i++) {
+                    view.details.get(i).setEnabled(true);
+                }
+
+                for (int i = 3; i < view.details.size(); i++) {
+                    view.details.get(i).setEnabled(false);
+                }
+            } else if (getRadioButtonText(view.group).equals("Furniture")) {
+
+                for (int i = 0; i < 3; i++) {
+                    view.details.get(i).setEnabled(false);
+                }
+
+                for (int i = 3; i < view.details.size(); i++) {
+                    view.details.get(i).setEnabled(true);
+                }
+            }
+        } catch(NullPointerException e) {
+
+            //do nothing
+        }
+    }
+
     /*
     * The method addAccount handles the event of adding an account with the
     * included details specified
@@ -136,8 +165,8 @@ class StoreModel {
 
     public void advSearch() {
 
-        Food f = new Food("Hey", "orange", "blue", 50.0);
-        Furniture f2 = new Furniture("Heyoo", "chair", 10.0, 50);
+        Food f = new Food("Hey", "orange", "blue", 50);
+        Furniture f2 = new Furniture("Heyoo", "chair", 10, 50);
 
         view.advSearchDialog("Advanced Search");
     }
@@ -421,6 +450,9 @@ class StoreModel {
 
         if (view.accountOperation.isManager()) {
             view.addProductDialog("Add Product");
+        } else {
+            StoreView.msgBox("Action allowed only for manager-type accounts.",
+            "Account Rights", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -451,6 +483,42 @@ class StoreModel {
                 view.accountOperation.removeProduct(Base.containsProduct(product));
             }
         } catch(ConcurrentModificationException e) {
+            //do nothing
+        }
+    }
+
+    public void okProduct() {
+
+        try {
+
+            model = (DefaultListModel<String>) view.listProducts.getModel();
+
+            if (getRadioButtonText(view.group).equals("Food")) {
+
+                String name = view.details.get(0).getText();
+                String color = view.details.get(1).getText();
+                int weight = Integer.parseInt(view.details.get(2).getText());
+
+                model.addElement(
+                    (new Food(
+                        view.accountOperation.getLastName(), name, color, weight)
+                    ).toString()
+                );
+            } else if (getRadioButtonText(view.group).equals("Furniture")) {
+
+                String type = view.details.get(3).getText();
+                int price = Integer.parseInt(view.details.get(4).getText());
+                int height = Integer.parseInt(view.details.get(5).getText());
+                model.addElement(
+                    (new Furniture
+                        (view.accountOperation.getLastName(), type, price, height)
+                    ).toString()
+                );
+            }
+
+            cancel();
+        } catch(NullPointerException e) {
+
             //do nothing
         }
     }

@@ -106,11 +106,13 @@ class StoreModel {
 
                 for (int i = 3; i < view.details.size(); i++) {
                     view.details.get(i).setEnabled(false);
+                    view.details.get(i).setText("");
                 }
             } else if (getRadioButtonText(view.group).equals("Furniture")) {
 
                 for (int i = 0; i < 3; i++) {
                     view.details.get(i).setEnabled(false);
+                    view.details.get(i).setText("");
                 }
 
                 for (int i = 3; i < view.details.size(); i++) {

@@ -497,7 +497,7 @@ class StoreModel {
 
             for (String product : productsList) {
 
-                view.accountOperation.removeProduct(Base.containsProduct(product));
+                view.accountOperation.removeProduct(Base.productFromString(product));
             }
         } catch(ConcurrentModificationException e) {
             //do nothing
@@ -521,7 +521,7 @@ class StoreModel {
                     "Invalid Inputs", JOptionPane.ERROR_MESSAGE);
                 }
 
-                if (!(Base.productAvailable(view.accountOperation.getLastName() + "_" + name + "_" + color + "_" + weight + "_" + "Food"))) {
+                if (!(Base.containsProduct(view.accountOperation.getLastName() + "_" + name + "_" + color + "_" + weight + "_" + "Food"))) {
                     model.addElement((new Food(view.accountOperation.getLastName(), name, color, weight)).toString());
                 } else {
                     StoreView.msgBox("This product has already been enlisted under this manager.",
@@ -539,7 +539,7 @@ class StoreModel {
                     "Invalid Inputs", JOptionPane.ERROR_MESSAGE);
                 }
 
-                if (!(Base.productAvailable(view.accountOperation.getLastName() + "_" + type + "_" + price + "_" + height + "_" + "Furniture"))) {
+                if (!(Base.containsProduct(view.accountOperation.getLastName() + "_" + type + "_" + price + "_" + height + "_" + "Furniture"))) {
                     model.addElement((new Furniture(view.accountOperation.getLastName(), type, price, height)).toString());
                 } else {
                     StoreView.msgBox("This product has already been enlisted under this manager.",

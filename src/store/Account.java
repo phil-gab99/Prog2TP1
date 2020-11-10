@@ -1,39 +1,35 @@
 package store;
 
-import java.util.ArrayList;
 import javax.swing.*;
-import actions.*;
-import inventory.*;
-import mvc.*;
+import actions.ManageBalance;
+import inventory.Product;
+import mvc.StoreView;
 
-/*
-* @Karim Boumghar
-* @Philippe Gabriel
-* @Version 1.11.11 2020-11-12
+/**
+* @author Philippe Gabriel
+* @version 1.11.11 2020-11-12
 *
 * The class Account contains the basic fields and methods common to the various
 * account types as well as useful accessor methods
-**/
+***/
 
 public abstract class Account implements ManageBalance {
 
-    private int balance;  //Balance associated with the account
-    private String email; //Email to be generated for the different accounts
+    private String lastName;  //String indicating individual's last name
+    private String firstName; //String indicating individual's first name
+    private String birth;     //String indicating individual's date of birth
+    private String email;     //String indicating individual's email
+    private int balance;      //Integer indicating individual's balance
 
-    private String lastName;
-    private String firstName;
-    private String birth;
-
-    /*
-    * The Account constructor serves to assign the common existing traits
-    * with regards to the different account types
+    /**
+    * The constructor method Account serves to assign the common existing
+    * traits with regards to the different account types
     *
-    * @param lastName String indicating individual's last name
-    * @param firstName String indicating individual's first name
-    * @param birth String indicating individual's date of birth following the
-    * format: dd/mm/yyyy
-    * @param favorites ArrayList holding a user's favorite products
-    **/
+    * @param lastName String indicating the individual's last name
+    * @param firstName String indicating the individual's first name
+    * @param birth String indicating the individual's date of birth following
+    * the format: dd/mm/yyyy
+    ***/
 
     public Account(String lastName, String firstName, String birth) {
 
@@ -42,12 +38,27 @@ public abstract class Account implements ManageBalance {
         this.birth = birth;
         this.email = generateEmail();
 
+        //The created account is registered in the temporary database
         Base.addAccount(this);
-        UserFavProducts favorites = new UserFavProducts(this);
+
+        //A list of favorite products is paired with this account
+        new UserFavProducts(this);
     }
 
+    /**
+    * This constructor method Account serves to create a copy of an already
+    * existing account in order to lead some comparisons
+    *
+    * @param lastName String indicating the individual's last name
+    * @param firstName String indicating the individual's first name
+    * @param birth String indicating the individual's date of birth following
+    * the format: dd/mm/yyyy
+    * @param email String indicating the individual's email
+    * @param balance Integer indicating the individual's balance
+    ***/
+
     public Account(String lastName, String firstName, String birth,
-        String email, int balance) {
+    String email, int balance) {
 
         this.lastName = lastName;
         this.firstName = firstName;
@@ -56,16 +67,18 @@ public abstract class Account implements ManageBalance {
         this.balance = balance;
     }
 
-    /*
-    * The generateEmail method creates an email associated with the
+    /**
+    * The method generateEmail creates an email associated with the
     * corresponding account. This method ensures that no duplicate emails are
     * generated and follows a general format of : lastNamefirstName@magasin.ca
     *
     * @return validEmail String representing the email associated with a user
-    **/
+    ***/
 
     public String generateEmail() {
 
+        //This acquired count will serve to distiguish emails if users with
+        //similar last and first names have been registered
         int count = Base.emailExist(lastName, firstName);
 
         String validEmail = lastName + firstName + count + "@magasin.ca";
@@ -73,61 +86,67 @@ public abstract class Account implements ManageBalance {
         return validEmail;
     }
 
-    /*
-    * The getter method getBalance gives access to a user's balance
+    /**
+    * The getter method getLastName grants access to the account's last name
     *
-    * @return balance The user's balance
-    **/
-
-    public int getBalance() {
-        return balance;
-    }
-
-    /*
-    * The getter method getEmail gives access to a user's email
-    *
-    * @return email The user's email
-    **/
-
-    public String getEmail() {
-        return email;
-    }
-
-    /*
-    * The getter method getLastName gives access to a user's last name
-    *
-    * @return lastName The user's last name
-    **/
+    * @return lastName The account's last name
+    ***/
 
     public String getLastName() {
+
         return lastName;
     }
 
-    /*
-    * The getter method getLastName gives access to a user's first name
+    /**
+    * The getter method getLastName grants access to the account's first name
     *
-    * @return firstName The user's first name
-    **/
+    * @return firstName The account's first name
+    ***/
 
     public String getFirstName() {
+
         return firstName;
     }
 
-    /*
-    * The getter method getBirth gives access to a user's date of birth
+    /**
+    * The getter method getBirth grants access to the account's date of birth
     *
-    * @return birth The user's date of birth
-    **/
+    * @return birth The account's date of birth
+    ***/
 
     public String getBirth() {
+
         return birth;
     }
 
-    /*
-    * The method toString converts each account's data into a string
+    /**
+    * The getter method getEmail grants access to the account's email
     *
-    * @return info String holding the user's relevant information
-    **/
+    * @return email The account's email
+    ***/
+
+    public String getEmail() {
+
+        return email;
+    }
+
+    /**
+    * The getter method getBalance grants access to the account's balance
+    *
+    * @return balance The account's balance
+    ***/
+
+    public int getBalance() {
+
+        return balance;
+    }
+
+    /**
+    * The method toString converts the account's information into its String
+    * implementation that will be displayed to the user
+    *
+    * @return String representing the String implementation
+    ***/
 
     public String toString() {
 
@@ -135,24 +154,28 @@ public abstract class Account implements ManageBalance {
         "_" + balance + "_" + getClass().getSimpleName();
     }
 
-    /*
-    * The addBalance method was implemented from the ManageBalance interface
-    * and is an available action for all account types
-    **/
+    /**
+    * The method addBalance adds a given amount to the account's balance
+    *
+    * @param amount Integer to be added to the balance
+    ***/
 
     public void addBalance(int amount) {
 
         balance += amount;
     }
 
-    /*
-    * The deductBalance method was implemented from the ManageBalance interface
-    * and is not an available action for Client-type accounts
-    **/
+    /**
+    * The method deductBalance deducts a given amount fromt the account's
+    * balance
+    *
+    * @param amount Integer to be deducted from the balance
+    ***/
 
     public void deductBalance(int amount) {
 
         if (isClient()) {
+
             StoreView.msgBox("Action not allowed for client-type accounts.",
             "Account Rights", JOptionPane.ERROR_MESSAGE);
         } else {
@@ -161,10 +184,12 @@ public abstract class Account implements ManageBalance {
         }
     }
 
-    /*
-    * The removeProduct method was implemented from the ManageProducts
-    * interface and is an available action for manager-type accounts
-    **/
+    /**
+    * The method removeProduct checks whether the action was undertaken from a
+    * valid account before initiating the change in the temporary database
+    *
+    * @param p Product requested to be removed from the temporary database
+    ***/
 
     public void removeProduct(Product p) {
 
@@ -178,10 +203,24 @@ public abstract class Account implements ManageBalance {
         }
     }
 
+    /**
+    * The method isClient checks for whether the current account is a
+    * client-type account
+    *
+    * @return Boolean indicating whether the account is client-type or not
+    ***/
+
     public boolean isClient() {
 
         return this instanceof Client;
     }
+
+    /**
+    * The method isManager checks for whether the current account is a
+    * manager-type account
+    *
+    * @return Boolean indicating whether the account is manager-type or not
+    ***/
 
     public boolean isManager() {
 

@@ -1,30 +1,29 @@
 package inventory;
 
-import store.*;
+import store.Base;
 
-/*
-* @Karim Boumghar
-* @Philippe Gabriel
-* @Version 1.0.1 2020-11-12
+/**
+* @author Philippe Gabriel
+* @version 1.2.0 2020-11-12
 *
 * The class Furniture gives a definition of furniture-type products
-**/
+***/
 
 public class Furniture extends Product {
 
-    private String type;
-    private int price;
-    private int height;
+    private String type; //String indicating furniture's type
+    private int price;   //Integer indicating furniture's price
+    private int height;  //Integer indicating furniture's height
 
-    /*
-    * The Furniture constructor serves to assign the traits specific for
+    /**
+    * The constructor method Furniture serves to assign the traits specific for
     * furniture-type products
     *
-    * @param type String representing the category of furniture in which this
-    * instance belongs
-    * @param price Double indicating the furniture's price
+    * @param manager String indicating manager who enlisted this furniture
+    * @param type String indicating the furniture's type
+    * @param price Integer indicating the furniture's price
     * @param height Integer indicating the furniture's height
-    **/
+    ***/
 
     public Furniture(String manager, String type, int price, int height) {
 
@@ -34,8 +33,16 @@ public class Furniture extends Product {
         this.price = price;
         this.height = height;
 
+        //The created furniture is registered in the temporary database
         Base.addProduct(this);
     }
+
+    /**
+    * The method toString converts the furniture's information into its String
+    * implementation that will be displayed to the user
+    *
+    * @return String representing the String implementation
+    ***/
 
     public String toString() {
 

@@ -178,10 +178,12 @@ class StoreModel {
                 //The food product traits are available for modification
 
                 for (int i = 0; i < 3; i++) {
+
                     view.details.get(i).setEnabled(true);
                 }
 
                 for (int i = 3; i < view.details.size(); i++) {
+
                     view.details.get(i).setEnabled(false);
                     view.details.get(i).setText("");
                 }
@@ -190,11 +192,13 @@ class StoreModel {
                 //The furniture product traits are available for modification
 
                 for (int i = 0; i < 3; i++) {
+
                     view.details.get(i).setEnabled(false);
                     view.details.get(i).setText("");
                 }
 
                 for (int i = 3; i < view.details.size(); i++) {
+
                     view.details.get(i).setEnabled(true);
                 }
             }
@@ -210,6 +214,22 @@ class StoreModel {
 
     public void addAccount() {
 
+        //Prevent user from opening random frames
+        try {
+
+            if (view.isResultsFrameVisible()
+            || view.isProductsFrameVisible()
+            || view.isFavoriteFrameVisible()) {
+
+                view.msgBox(
+                "Please close this window to undertake this action.",
+                "Action Not Allowed", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        } catch(NullPointerException e) {
+            //Do nothing
+        }
+
         view.accountDialog();
     }
 
@@ -222,6 +242,17 @@ class StoreModel {
 
         try {
 
+            //Prevent user from opening random frames
+            if (view.isResultsFrameVisible()
+            || view.isProductsFrameVisible()
+            || view.isFavoriteFrameVisible()) {
+
+                view.msgBox(
+                "Please close this window to undertake this action.",
+                "Action Not Allowed", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
             //Acquiring list model in string array format of selected users
             String[] users
             = new String[view.listAccounts.getSelectedValuesList().size()];
@@ -229,6 +260,7 @@ class StoreModel {
 
             //At least one user needs to be selected
             if (users.length == 0) {
+
                 StoreView.msgBox("Please select a user to delete.",
                 "No User Selected", JOptionPane.ERROR_MESSAGE);
                 return;
@@ -240,6 +272,7 @@ class StoreModel {
 
             //Removing element(s) from graphical list
             for (int i = selectedIndices.length - 1; i >= 0; i--) {
+
                 model.remove(selectedIndices[i]);
             }
 
@@ -251,6 +284,8 @@ class StoreModel {
             }
         } catch(ConcurrentModificationException e) {
             //Do nothing
+        } catch(NullPointerException e) {
+            //Do nothing
         }
     }
 
@@ -260,6 +295,22 @@ class StoreModel {
 
     public void advSearch() {
 
+        //Prevent user from opening random frames
+        try {
+
+            if (view.isResultsFrameVisible()
+            || view.isProductsFrameVisible()
+            || view.isFavoriteFrameVisible()) {
+
+                view.msgBox(
+                "Please close this window to undertake this action.",
+                "Action Not Allowed", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        } catch(NullPointerException e) {
+            //Do nothing
+        }
+
         view.advSearchDialog();
     }
 
@@ -268,6 +319,22 @@ class StoreModel {
     ***/
 
     public void addBalance() {
+
+        //Prevent user from opening random frames
+        try {
+
+            if (view.isResultsFrameVisible()
+            || view.isProductsFrameVisible()
+            || view.isFavoriteFrameVisible()) {
+
+                view.msgBox(
+                "Please close this window to undertake this action.",
+                "Action Not Allowed", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        } catch(NullPointerException e) {
+            //Do nothing
+        }
 
         //Acquiring list model in string array format
         String[] users =
@@ -297,6 +364,22 @@ class StoreModel {
     ***/
 
     public void deductBalance() {
+
+        //Prevent user from opening random frames
+        try {
+
+            if (view.isResultsFrameVisible()
+            || view.isProductsFrameVisible()
+            || view.isFavoriteFrameVisible()) {
+
+                view.msgBox(
+                "Please close this window to undertake this action.",
+                "Action Not Allowed", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        } catch(NullPointerException e) {
+            //Do nothing
+        }
 
         //Acquiring list model in string array format
         String[] users =
@@ -328,6 +411,22 @@ class StoreModel {
 
     public void favProducts() {
 
+        //Prevent user from opening random frames
+        try {
+
+            if (view.isResultsFrameVisible()
+            || view.isProductsFrameVisible()
+            || view.isFavoriteFrameVisible()) {
+
+                view.msgBox(
+                "Please close this window to undertake this action.",
+                "Action Not Allowed", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        } catch(NullPointerException e) {
+            //Do nothing
+        }
+
         //Acquiring list model in String array format
         String[] users =
         new String[view.listAccounts.getSelectedValuesList().size()];
@@ -357,6 +456,22 @@ class StoreModel {
     ***/
 
     public void avProducts() {
+
+        //Prevent user from opening random frames
+        try {
+
+            if (view.isResultsFrameVisible()
+            || view.isProductsFrameVisible()
+            || view.isFavoriteFrameVisible()) {
+
+                view.msgBox(
+                "Please close this window to undertake this action.",
+                "Action Not Allowed", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        } catch(NullPointerException e) {
+            //Do nothing
+        }
 
         //Acquiring list model in String array format
         String[] users =
@@ -772,8 +887,9 @@ class StoreModel {
                     getLastName(), name, color, weight)).toString());
                 } else {
 
-                    StoreView.msgBox("This product has already been enlisted under this manager.",
-                    "Product Already Available", JOptionPane.ERROR_MESSAGE);
+                    StoreView.msgBox("This product has already been enlisted" +
+                    " under this manager.", "Product Already Available",
+                    JOptionPane.ERROR_MESSAGE);
                     return;
                 }
             } else if (getRadioButtonText(view.group).equals("Furniture")) {
@@ -801,8 +917,9 @@ class StoreModel {
                     getLastName(), type, price, height)).toString());
                 } else {
 
-                    StoreView.msgBox("This product has already been enlisted under this manager.",
-                    "Product Already Available", JOptionPane.ERROR_MESSAGE);
+                    StoreView.msgBox("This product has already been enlisted" +
+                    " under this manager.", "Product Already Available",
+                    JOptionPane.ERROR_MESSAGE);
                     return;
                 }
             }

@@ -1,11 +1,31 @@
 package mvc;
 
-import java.awt.*;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.Toolkit;
 import java.util.ArrayList;
-import javax.swing.*;
-import javax.swing.border.*;
-import inventory.*;
-import store.*;
+import javax.swing.ButtonGroup;
+import javax.swing.BorderFactory;
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
+import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.BevelBorder;
+import inventory.Product;
+import store.Account;
+import store.Base;
+import store.UserFavProducts;
 
 /**
 * @author Philippe Gabriel
@@ -355,8 +375,8 @@ public class StoreView extends JFrame {
 
         //Creating and configuring the scrollpane and list header
         JScrollPane scrollpane = new JScrollPane(listProducts);
-        JLabel header = new JLabel("Manager Name_Property1_Property2_..._Product Type",
-        JLabel.LEFT);
+        JLabel header = new JLabel(
+        "Manager Name_Property1_Property2_..._Product Type", JLabel.LEFT);
         header.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
         scrollpane.setColumnHeaderView(header);
 
@@ -419,8 +439,8 @@ public class StoreView extends JFrame {
 
         //Creating and configuring the scrollpane and list header
         JScrollPane scrollpane = new JScrollPane(listFavorite);
-        JLabel header = new JLabel("Manager Name_Property1_Property2_..._Product Type",
-        JLabel.LEFT);
+        JLabel header = new JLabel(
+        "Manager Name_Property1_Property2_..._Product Type", JLabel.LEFT);
         header.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
         scrollpane.setColumnHeaderView(header);
 
@@ -458,7 +478,7 @@ public class StoreView extends JFrame {
         //Prevent user from re-opening the same window
         try {
 
-            if (guiProducts.isVisible()) {
+            if (isProductsFrameVisible()) {
 
                 msgBox("The products list is already visible.",
                 "Products List Visible", JOptionPane.ERROR_MESSAGE);
@@ -496,8 +516,8 @@ public class StoreView extends JFrame {
 
         //Creating and configuring the scrollpane and list header
         JScrollPane scrollpane = new JScrollPane(listProducts);
-        JLabel header = new JLabel("Manager Name_Property1_Property2_..._Product Type",
-        JLabel.LEFT);
+        JLabel header = new JLabel(
+        "Manager Name_Property1_Property2_..._Product Type", JLabel.LEFT);
         header.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
         scrollpane.setColumnHeaderView(header);
 
@@ -623,7 +643,8 @@ public class StoreView extends JFrame {
 
         c.gridwidth = GridBagConstraints.REMAINDER;
         c.insets = new Insets(20, 20, 5, 20);
-        makeLabel(dialog, "Single User Search*", gridbag, c, SwingConstants.CENTER);
+        makeLabel(dialog, "Single User Search*", gridbag, c,
+        SwingConstants.CENTER);
 
         c.gridwidth = 5;
         c.insets = new Insets(5, 20, 5, 5);
@@ -683,20 +704,22 @@ public class StoreView extends JFrame {
         c.gridy = 8;
         c.gridwidth = GridBagConstraints.REMAINDER;
         c.insets = new Insets(5, 20, 5, 20);
-        makeLabel(dialog, "*Note: All fields must be filled to undertake search.",
-        gridbag, c, SwingConstants.LEFT);
+        makeLabel(dialog, "*Note: All fields must be filled to undertake " +
+        "search.", gridbag, c, SwingConstants.LEFT);
 
         c.gridy = 9;
         makeLabel(dialog, "________________________________________________",
         gridbag, c, SwingConstants.CENTER);
 
         c.gridy = 10;
-        makeLabel(dialog, "Multiple User Search", gridbag, c, SwingConstants.CENTER);
+        makeLabel(dialog, "Multiple User Search", gridbag, c,
+        SwingConstants.CENTER);
 
         c.gridy = 11;
         c.gridwidth = 5;
         c.insets = new Insets(5, 20, 5, 0);
-        makeLabel(dialog, "Last name first letter: ", gridbag, c, SwingConstants.LEFT);
+        makeLabel(dialog, "Last name first letter: ", gridbag, c,
+        SwingConstants.LEFT);
         c.gridwidth = 1;
         c.insets = new Insets(5, 5, 5, 0);
         makeTextField(dialog, gridbag, c, 1, 1);
@@ -929,6 +952,36 @@ public class StoreView extends JFrame {
 
         c.setLocation((d.width - c.getWidth()) / 2 - offset,
         (d.height - c.getHeight()) / 2 - offset);
+    }
+
+    /**
+    * The method isResultsFrameVisible checks for whether the search results
+    * frame is active or not
+    ***/
+
+    public boolean isResultsFrameVisible() {
+
+        return guiResults.isVisible();
+    }
+
+    /**
+    * The method isResultsFrameVisible checks for whether the search results
+    * frame is active or not
+    ***/
+
+    public boolean isProductsFrameVisible() {
+
+        return guiProducts.isVisible();
+    }
+
+    /**
+    * The method isResultsFrameVisible checks for whether the search results
+    * frame is active or not
+    ***/
+
+    public boolean isFavoriteFrameVisible() {
+
+        return guiFavorite.isVisible();
     }
 
     /**

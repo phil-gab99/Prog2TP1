@@ -114,9 +114,11 @@ public class Base {
         for (Account a : accounts) {
 
             if (a.getEmail().equals(email)) {
+
                 return a;
             }
         }
+
         return null;
     }
 
@@ -179,6 +181,7 @@ public class Base {
         boolean sameProduct = false;
 
         for (Product p : products) {
+
             if (p.toString().equalsIgnoreCase(product)) {
 
                 sameProduct = true;
@@ -206,6 +209,7 @@ public class Base {
                 return p;
             }
         }
+
         return null;
     }
 
@@ -263,12 +267,14 @@ public class Base {
     ***/
 
     public static ArrayList<Product> getFavProducts(Account a) {
+
         for (UserFavProducts e : userFav) {
 
             if (e.getUser() == a) {
                 return e.getFavorites();
             }
         }
+        
         return null;
     }
 }

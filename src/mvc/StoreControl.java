@@ -1,7 +1,6 @@
 package mvc;
 
 import java.awt.event.*;
-import javax.swing.*;
 import javax.swing.event.*;
 
 /**
@@ -99,7 +98,7 @@ class StoreControl {
 
         public void keyTyped(KeyEvent e) {
 
-            model.formatNumber(e); //Method restricting text to numbers only
+            model.formatNumbers(e); //Method restricting text to numbers only
 
             //Method restricting text length according to passed length
             if (textLength > 0) { //If length 0 was passed, length is unlimited

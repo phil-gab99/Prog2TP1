@@ -18,6 +18,7 @@ public class Employee extends Account {
     ***/
 
     public Employee(String lastName, String firstName, String birth) {
+        
         super(lastName, firstName, birth);
     }
 

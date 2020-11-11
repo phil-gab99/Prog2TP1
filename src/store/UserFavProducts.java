@@ -1,7 +1,6 @@
 package store;
 
 import java.util.ArrayList;
-import actions.FavoriteProducts;
 import inventory.Product;
 
 /**
@@ -12,7 +11,7 @@ import inventory.Product;
 * favorite products
 ***/
 
-public class UserFavProducts implements FavoriteProducts {
+public class UserFavProducts {
 
     private Account user;                 //Account to pair with a list
     private ArrayList<Product> favorites; //Array List of favorite products

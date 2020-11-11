@@ -93,7 +93,9 @@ public class Base {
 
         //The list implementation of the accounts is compared
         for (Account e : accounts) {
+
             if (e.toString().equals(a.toString())) {
+                
                 sameAccount = true;
                 break;
             }
@@ -274,7 +276,7 @@ public class Base {
                 return e.getFavorites();
             }
         }
-        
+
         return null;
     }
 }

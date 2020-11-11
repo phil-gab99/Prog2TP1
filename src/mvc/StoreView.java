@@ -874,7 +874,7 @@ public class StoreView extends JFrame {
         c.gridx = 3;
         c.gridwidth = GridBagConstraints.REMAINDER;
         c.insets = new Insets(5, 5, 5, 20);
-        makeTextField(dialog, gridbag, c, 0, 1); //To be changed to a button to open JColorChooser
+        makeTextField(dialog, gridbag, c, 0, 1);
 
         c.gridx = 2;
         c.gridy = 4;

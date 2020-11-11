@@ -1,7 +1,6 @@
 package store;
 
 import javax.swing.*;
-import actions.ManageBalance;
 import inventory.Product;
 import mvc.StoreView;
 
@@ -13,7 +12,7 @@ import mvc.StoreView;
 * account types as well as useful accessor methods
 ***/
 
-public abstract class Account implements ManageBalance {
+public abstract class Account {
 
     private String lastName;  //String indicating individual's last name
     private String firstName; //String indicating individual's first name

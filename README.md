@@ -36,5 +36,18 @@ Voici les différentes fonctionnalités de mon programme:
         l'usager devrait remplir. Certains des attributs n'acceptent que des
         lettres (ou que des nombres) et certains possèdent un nombre maximal
         de caractères. La non-complétion des attributs induit un boîte de
-        message signalant à l'usager de remplir chaque donnée.
-        - Le bouton *Delete Account* permet 
+        message signalant à l'usager de remplir chaque donnée;
+        - Le bouton *Delete Account* permet de supprimer une liste de comptes
+        sélectionnés dans la liste affichée;
+        - Le bouton *Advanced Search* permet à l'usager de faire une
+        **recherche simple** ou une **recherche multiple**;
+            - La **recherche simple** requiert de l'usager de remplir toutes
+            les données relatives à un compte pour ensuite lui afficher les
+            informations de cette personne donnée (ou une boîte de message
+            indiquant que le compte n'existe pas);
+            - La **recherche multiple** requiert simplement de l'usager
+            d'entrer une lettre et une liste lui est retournée contenant tous
+            les usagers dont leur nom de famille commence avec cette lettre (ou
+            aucun résultat s'il n'y a aucun compte commençant par cette
+            lettre).
+        - Le bouton

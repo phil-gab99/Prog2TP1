@@ -15,8 +15,8 @@ import inventory.Furniture;
 import store.*;
 
 /**
-* @Philippe Gabriel
-* @Version 1.25.11 2020-11-12
+* @author Philippe Gabriel
+* @version 1.25.11 2020-11-12
 *
 * The class StoreModel gives the details of the actions to be ensued upon
 * triggering action events
@@ -210,7 +210,7 @@ class StoreModel {
 
     public void addAccount() {
 
-        view.accountDialog("Add Account");
+        view.accountDialog();
     }
 
     /**
@@ -224,8 +224,8 @@ class StoreModel {
 
             //Acquiring list model in string array format of selected users
             String[] users
-            = new String[view.list.getSelectedValuesList().size()];
-            view.list.getSelectedValuesList().toArray(users);
+            = new String[view.listAccounts.getSelectedValuesList().size()];
+            view.listAccounts.getSelectedValuesList().toArray(users);
 
             //At least one user needs to be selected
             if (users.length == 0) {
@@ -235,8 +235,8 @@ class StoreModel {
             }
 
             //Acquiring list model selected indices
-            model = (DefaultListModel<String>) view.list.getModel();
-            int[] selectedIndices = view.list.getSelectedIndices();
+            model = (DefaultListModel<String>) view.listAccounts.getModel();
+            int[] selectedIndices = view.listAccounts.getSelectedIndices();
 
             //Removing element(s) from graphical list
             for (int i = selectedIndices.length - 1; i >= 0; i--) {
@@ -260,7 +260,7 @@ class StoreModel {
 
     public void advSearch() {
 
-        view.advSearchDialog("Advanced Search");
+        view.advSearchDialog();
     }
 
     /**
@@ -270,8 +270,9 @@ class StoreModel {
     public void addBalance() {
 
         //Acquiring list model in string array format
-        String[] users = new String[view.list.getSelectedValuesList().size()];
-        view.list.getSelectedValuesList().toArray(users);
+        String[] users =
+        new String[view.listAccounts.getSelectedValuesList().size()];
+        view.listAccounts.getSelectedValuesList().toArray(users);
 
         //A single user must be selected for this operation
         if (users.length == 0) {
@@ -287,7 +288,7 @@ class StoreModel {
         } else {
 
             Account user = Base.userFromEmail(users[0].split("_")[3]);
-            view.addBalanceDialog("Add Balance", user);
+            view.addBalanceDialog(user);
         }
     }
 
@@ -298,8 +299,9 @@ class StoreModel {
     public void deductBalance() {
 
         //Acquiring list model in string array format
-        String[] users = new String[view.list.getSelectedValuesList().size()];
-        view.list.getSelectedValuesList().toArray(users);
+        String[] users =
+        new String[view.listAccounts.getSelectedValuesList().size()];
+        view.listAccounts.getSelectedValuesList().toArray(users);
 
         //A single user must be selected for this operation
         if (users.length == 0) {
@@ -315,7 +317,7 @@ class StoreModel {
         } else {
 
             Account user = Base.userFromEmail(users[0].split("_")[3]);
-            view.deductBalanceDialog("Deduct Balance", user);
+            view.deductBalanceDialog(user);
         }
     }
 
@@ -327,8 +329,9 @@ class StoreModel {
     public void favProducts() {
 
         //Acquiring list model in String array format
-        String[] users = new String[view.list.getSelectedValuesList().size()];
-        view.list.getSelectedValuesList().toArray(users);
+        String[] users =
+        new String[view.listAccounts.getSelectedValuesList().size()];
+        view.listAccounts.getSelectedValuesList().toArray(users);
 
         //A single user must be selected for this operation
         if (users.length == 0) {
@@ -356,8 +359,9 @@ class StoreModel {
     public void avProducts() {
 
         //Acquiring list model in String array format
-        String[] users = new String[view.list.getSelectedValuesList().size()];
-        view.list.getSelectedValuesList().toArray(users);
+        String[] users =
+        new String[view.listAccounts.getSelectedValuesList().size()];
+        view.listAccounts.getSelectedValuesList().toArray(users);
 
         //A single user must be selected for this operation
         if (users.length == 0) {
@@ -465,7 +469,7 @@ class StoreModel {
         }
 
         //Acquiring list model to add the newly created account
-        model = (DefaultListModel<String>) view.list.getModel();
+        model = (DefaultListModel<String>) view.listAccounts.getModel();
         model.addElement(newAccount.toString());
 
         cancel();
@@ -494,8 +498,8 @@ class StoreModel {
         view.accountOperation.addBalance(amount);
 
         //Acquiring list model to update the change on the graphical list
-        model = (DefaultListModel<String>) view.list.getModel();
-        model.set(view.list.getSelectedIndex(),
+        model = (DefaultListModel<String>) view.listAccounts.getModel();
+        model.set(view.listAccounts.getSelectedIndex(),
         view.accountOperation.toString());
 
         cancel();
@@ -525,8 +529,8 @@ class StoreModel {
         view.accountOperation.deductBalance(amount);
 
         //Acquiring list model to update the change on the graphical list
-        model = (DefaultListModel<String>) view.list.getModel();
-        model.set(view.list.getSelectedIndex(),
+        model = (DefaultListModel<String>) view.listAccounts.getModel();
+        model.set(view.listAccounts.getSelectedIndex(),
         view.accountOperation.toString());
 
         cancel();
@@ -680,7 +684,7 @@ class StoreModel {
         //Account issuing the action must have manager rights
         if (view.accountOperation.isManager()) {
 
-            view.addProductDialog("Add Product");
+            view.addProductDialog();
         } else {
 
             StoreView.msgBox("Action allowed only for manager-type accounts.",
@@ -755,21 +759,23 @@ class StoreModel {
 
                 //Fields must be filled
                 if (name.equals("") || color.equals("")) {
+
                     StoreView.msgBox("Please enter valid inputs.",
                     "Invalid Inputs", JOptionPane.ERROR_MESSAGE);
                 }
 
                 //Element added to graphical list and temporary database
-                model.addElement((new Food(view.accountOperation.getLastName(),
-                name, color, weight)).toString());
+                if (!(Base.containsProduct(view.accountOperation.getLastName()
+                + "_" + name + "_" + color + "_" + weight + "_" + "Food"))) {
 
-                // if (!(Base.containsProduct(view.accountOperation.getLastName() + "_" + name + "_" + color + "_" + weight + "_" + "Food"))) {
-                //
-                // } else {
-                //     StoreView.msgBox("This product has already been enlisted under this manager.",
-                //     "Product Already Available", JOptionPane.ERROR_MESSAGE);
-                //     return;
-                // }
+                    model.addElement((new Food(view.accountOperation.
+                    getLastName(), name, color, weight)).toString());
+                } else {
+
+                    StoreView.msgBox("This product has already been enlisted under this manager.",
+                    "Product Already Available", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
             } else if (getRadioButtonText(view.group).equals("Furniture")) {
 
                 //Furniture product properties
@@ -779,22 +785,26 @@ class StoreModel {
 
                 //Fields must be filled
                 if (type.equals("")) {
+
                     StoreView.msgBox("Please enter valid inputs.",
                     "Invalid Inputs", JOptionPane.ERROR_MESSAGE);
                 }
 
                 //Element added to graphical list and temporary database
-                model.addElement(
-                (new Furniture(view.accountOperation.getLastName(), type,
-                price, height)).toString());
 
-                // if (!(Base.containsProduct(view.accountOperation.getLastName() + "_" + type + "_" + price + "_" + height + "_" + "Furniture"))) {
-                //
-                // } else {
-                //     StoreView.msgBox("This product has already been enlisted under this manager.",
-                //     "Product Already Available", JOptionPane.ERROR_MESSAGE);
-                //     return;
-                // }
+
+                if (!(Base.containsProduct(view.accountOperation.getLastName()
+                + "_" + type + "_" + price + "_" + height + "_"
+                + "Furniture"))) {
+
+                    model.addElement((new Furniture(view.accountOperation.
+                    getLastName(), type, price, height)).toString());
+                } else {
+
+                    StoreView.msgBox("This product has already been enlisted under this manager.",
+                    "Product Already Available", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
             }
 
             cancel();
@@ -803,7 +813,9 @@ class StoreModel {
             StoreView.msgBox("Please enter valid inputs.",
             "Invalid Inputs", JOptionPane.ERROR_MESSAGE);
         } catch(NullPointerException e) {
-            //Do nothing
+
+            StoreView.msgBox("Please select a product type.",
+            "No selection", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -892,7 +904,7 @@ class StoreModel {
             //Retrieving the account's paired list of favorite products
             UserFavProducts fave = Base.getAccountFave(view.accountOperation);
 
-            //Products removed from the temporary database
+            //Products added to account's list
             for (String f : avList) {
 
                 fave.addFavorite(Base.productFromString(f));

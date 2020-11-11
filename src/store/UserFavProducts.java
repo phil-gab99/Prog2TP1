@@ -41,6 +41,7 @@ public class UserFavProducts implements FavoriteProducts {
     ***/
 
     public Account getUser() {
+
         return user;
     }
 
@@ -52,6 +53,7 @@ public class UserFavProducts implements FavoriteProducts {
     ***/
 
     public ArrayList<Product> getFavorites() {
+
         return favorites;
     }
 
@@ -76,6 +78,7 @@ public class UserFavProducts implements FavoriteProducts {
     ***/
 
     public void addFavorite(Product p) {
+
         favorites.add(p);
     }
 
@@ -87,6 +90,7 @@ public class UserFavProducts implements FavoriteProducts {
     ***/
 
     public void removeFavorite(Product p) {
+
         favorites.remove(p);
     }
 }

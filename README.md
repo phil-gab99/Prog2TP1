@@ -1,5 +1,7 @@
 # Programmation 2 TP1
 
+*Auteur: Philippe Gabriel, 20120600*
+
 ### Introduction
 
 Mes choix pour ce projet sont les suivants:
@@ -89,4 +91,28 @@ qu'a créer un autre directeur.
 la présence de produits disponibles à un certain degré. Cela veut dire qu'un
 produit disponible peut être ajouté à la liste de produits favoris d'un compte
 sans problème. Par contre, si par après, un directeur décide de supprimer un
-produit présent
+produit présent dans la liste de produits disponibles, ce produit demeurera
+dans la liste de produits favoris du compte qui la possède. Cette
+implémentation spécifique a été permise dans le cas où le produit se
+réaffichera et dans l'état d'esprit de ne pas s'immiscer dans la liste des
+différents comptes (un degré de respect de leurs choix par exemple). De plus,
+cela pourrait permettre aux directeurs d'avoir une idée que sont les produits
+demandé par les comptes pour qu'il puisse en commander et l'ajouter dans la
+liste de produits disponibles.
+
+### Idées supplémentaires
+
+J'aurais aimé implémenter quelques fonctionnalités supplémentaires à mon
+projet, mais le manque de temps et les autres cours ne m'ont pas permis de
+faire cela. Voici une liste d'idées dont j'avais commencé à implémenter mais
+que je devais abandonné car le temps ne me permettait pas de les développer:
+- Pour la création d'un aliment, la couleur pourrait être choisi à travers un
+JColorChooser et la couleur serait sauvegarder dans un libellé pour l'afficher
+dans la liste de produits disponibles. En raison de manque de temps, la couleur
+est simplement spécifié dans un JTextfield par l'usager.
+- Pour le choix de dates de naissance, un calendrier permettant de sélectionner
+d'une manière plus graphique les informations relatives au compte à créer ou
+à rechercher. Cependant, un JCalendar ou JDatePicker n'existe pas dans les
+packages de Java et il aurait été nécessaire de télécharger ces fichiers
+pour en faire usage. Donc cette information est récupéré à la place au moyen de
+3 JTextField.

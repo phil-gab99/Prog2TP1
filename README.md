@@ -1,6 +1,8 @@
-# Programmation 2 TP1
+# Programmation 2 - TP1
 
 *Auteur: Philippe Gabriel, 20120600*
+
+*Visioner la version électronique du fichier à travers le fichier html attaché*
 
 ### Introduction
 
@@ -114,5 +116,5 @@ est simplement spécifié dans un JTextfield par l'usager.
 d'une manière plus graphique les informations relatives au compte à créer ou
 à rechercher. Cependant, un JCalendar ou JDatePicker n'existe pas dans les
 packages de Java et il aurait été nécessaire de télécharger ces fichiers
-pour en faire usage. Donc cette information est récupéré à la place au moyen de
-3 JTextField.
+pour en faire usage. Donc cette information est récupérée à la place au moyen
+de 3 JTextField.

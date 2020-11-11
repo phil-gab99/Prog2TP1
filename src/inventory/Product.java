@@ -1,5 +1,7 @@
 package inventory;
 
+import store.Manager;
+
 /**
 * @author Philippe Gabriel
 * @version 1.0.1 2020-11-12
@@ -10,20 +12,23 @@ package inventory;
 
 public class Product {
 
-    private String manager; //String representing manager's last name
+    private Manager manager; //Manager who added this product
 
     /**
     * The constructor method Product serves to assign the common existing
     * traits with regards to the different product types
     *
-    * @param manager String representing the manager's last name indicating the
-    * manager responsible for including a given product in the store's
-    * inventory
+    * @param manager Manager responsible for adding the product
     ***/
 
-    public Product(String manager) {
+    public Product(Manager manager) {
 
         this.manager = manager;
+    }
+
+    public Manager getManager() {
+
+        return manager;
     }
 
     /**
@@ -33,8 +38,8 @@ public class Product {
     * @return manager String indicating manager
     ***/
 
-    public String getManager() {
+    public String getManagerLast() {
 
-        return manager;
+        return manager.getLastName();
     }
 }

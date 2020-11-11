@@ -1,6 +1,7 @@
 package inventory;
 
 import store.Base;
+import store.Manager;
 
 /**
 * @author Philippe Gabriel
@@ -19,13 +20,13 @@ public class Furniture extends Product {
     * The constructor method Furniture serves to assign the traits specific for
     * furniture-type products
     *
-    * @param manager String indicating manager who enlisted this furniture
+    * @param manager Manager responsible for enlisting this furniture
     * @param type String indicating the furniture's type
     * @param price Integer indicating the furniture's price
     * @param height Integer indicating the furniture's height
     ***/
 
-    public Furniture(String manager, String type, int price, int height) {
+    public Furniture(Manager manager, String type, int price, int height) {
 
         super(manager);
 
@@ -46,7 +47,7 @@ public class Furniture extends Product {
 
     public String toString() {
 
-        return getManager() + "_" + type + "_" + price + "_" + height + "_" +
-        getClass().getSimpleName();
+        return getManagerLast() + "_" + type + "_" + price + "_" + height +
+        "_" + getClass().getSimpleName();
     }
 }

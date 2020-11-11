@@ -95,7 +95,7 @@ public class Base {
         for (Account e : accounts) {
 
             if (e.toString().equals(a.toString())) {
-                
+
                 sameAccount = true;
                 break;
             }
@@ -178,13 +178,13 @@ public class Base {
     * @return sameProduct Boolean indicating if product is available or not
     ***/
 
-    public static boolean containsProduct(String product) {
+    public static boolean containsProduct(Account manager, String product) {
 
         boolean sameProduct = false;
 
         for (Product p : products) {
 
-            if (p.toString().equalsIgnoreCase(product)) {
+            if (p.toString().equalsIgnoreCase(product) && manager.toString().equals(p.getManager().toString())) {
 
                 sameProduct = true;
                 break;

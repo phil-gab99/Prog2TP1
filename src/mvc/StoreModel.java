@@ -242,16 +242,22 @@ class StoreModel {
 
         try {
 
-            //Prevent user from opening random frames
-            if (view.isResultsFrameVisible()
-            || view.isProductsFrameVisible()
-            || view.isFavoriteFrameVisible()) {
+            try {
 
-                view.msgBox(
-                "Please close this window to undertake this action.",
-                "Action Not Allowed", JOptionPane.ERROR_MESSAGE);
-                return;
+                //Prevent user from opening random frames
+                if (view.isResultsFrameVisible()
+                || view.isProductsFrameVisible()
+                || view.isFavoriteFrameVisible()) {
+
+                    view.msgBox(
+                    "Please close this window to undertake this action.",
+                    "Action Not Allowed", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            } catch(NullPointerException e) {
+                //Do nothing
             }
+
 
             //Acquiring list model in string array format of selected users
             String[] users
@@ -283,8 +289,6 @@ class StoreModel {
                 Base.deleteAccount(Base.userFromEmail(userEmail));
             }
         } catch(ConcurrentModificationException e) {
-            //Do nothing
-        } catch(NullPointerException e) {
             //Do nothing
         }
     }
@@ -880,11 +884,12 @@ class StoreModel {
                 }
 
                 //Element added to graphical list and temporary database
-                if (!(Base.containsProduct(view.accountOperation.getLastName()
-                + "_" + name + "_" + color + "_" + weight + "_" + "Food"))) {
+                if (!(Base.containsProduct(view.accountOperation,
+                view.accountOperation.getLastName() + "_" + name + "_" + color
+                + "_" + weight + "_" + "Food"))) {
 
-                    model.addElement((new Food(view.accountOperation.
-                    getLastName(), name, color, weight)).toString());
+                    model.addElement((new Food((Manager) view.accountOperation,
+                    name, color, weight)).toString());
                 } else {
 
                     StoreView.msgBox("This product has already been enlisted" +
@@ -909,12 +914,13 @@ class StoreModel {
                 //Element added to graphical list and temporary database
 
 
-                if (!(Base.containsProduct(view.accountOperation.getLastName()
-                + "_" + type + "_" + price + "_" + height + "_"
-                + "Furniture"))) {
+                if (!(Base.containsProduct(view.accountOperation,
+                view.accountOperation.getLastName() + "_" + type + "_" + price
+                + "_" + height + "_" + "Furniture"))) {
 
-                    model.addElement((new Furniture(view.accountOperation.
-                    getLastName(), type, price, height)).toString());
+                    model.addElement((new Furniture(
+                    (Manager) view.accountOperation, type, price, height)).
+                    toString());
                 } else {
 
                     StoreView.msgBox("This product has already been enlisted" +

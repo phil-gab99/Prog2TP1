@@ -1,6 +1,7 @@
 package inventory;
 
 import store.Base;
+import store.Manager;
 
 /**
 * @author Philippe Gabriel
@@ -19,13 +20,13 @@ public class Food extends Product {
     * The constructor method Food serves to assign the traits specific for
     * food-type products
     *
-    * @param manager String indicating manager who enlisted this food
+    * @param manager Manager responsible for enlisting this food
     * @param name String indicating the food's name
     * @param color String indicating the food's color
     * @param weight Double indicating the food's weight
     ***/
 
-    public Food(String manager, String name, String color, int weight) {
+    public Food(Manager manager, String name, String color, int weight) {
 
         super(manager);
 
@@ -46,7 +47,7 @@ public class Food extends Product {
 
     public String toString() {
 
-        return getManager() + "_" + name + "_" + color + "_" + weight + "_" +
-        getClass().getSimpleName();
+        return getManagerLast() + "_" + name + "_" + color + "_" + weight +
+        "_" + getClass().getSimpleName();
     }
 }

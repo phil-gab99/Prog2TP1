@@ -1,13 +1,17 @@
 package mvc;
 
+import java.awt.event.KeyEvent;
+import javax.swing.AbstractButton;
+import javax.swing.ButtonGroup;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ConcurrentModificationException;
-import java.util.*;
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
-import inventory.*;
+import java.util.Enumeration;
+import inventory.Food;
+import inventory.Furniture;
 import store.*;
 
 /**
@@ -265,7 +269,7 @@ class StoreModel {
 
     public void addBalance() {
 
-        //Acquiring list model in String array format
+        //Acquiring list model in string array format
         String[] users = new String[view.list.getSelectedValuesList().size()];
         view.list.getSelectedValuesList().toArray(users);
 
@@ -282,7 +286,7 @@ class StoreModel {
             return;
         } else {
 
-            String user = Base.userFromEmail(users[0].split("_")[3]);
+            Account user = Base.userFromEmail(users[0].split("_")[3]);
             view.addBalanceDialog("Add Balance", user);
         }
     }
@@ -293,7 +297,7 @@ class StoreModel {
 
     public void deductBalance() {
 
-        //Acquiring list model in String array format
+        //Acquiring list model in string array format
         String[] users = new String[view.list.getSelectedValuesList().size()];
         view.list.getSelectedValuesList().toArray(users);
 
@@ -310,7 +314,7 @@ class StoreModel {
             return;
         } else {
 
-            String user = Base.userFromEmail(users[0].split("_")[3]);
+            Account user = Base.userFromEmail(users[0].split("_")[3]);
             view.deductBalanceDialog("Deduct Balance", user);
         }
     }
@@ -462,7 +466,7 @@ class StoreModel {
 
         //Acquiring list model to add the newly created account
         model = (DefaultListModel<String>) view.list.getModel();
-        model.addElement(a.toString());
+        model.addElement(newAccount.toString());
 
         cancel();
     }
@@ -621,7 +625,7 @@ class StoreModel {
         }
 
         //String array holding string implemented account
-        String[] data = {data.toString()};
+        String[] data = {dummy.toString()};
 
         if (Base.containsAccount(dummy)) {
 
@@ -919,7 +923,7 @@ class StoreModel {
     ***/
 
     public void cancel() {
-        
+
         view.dialog.dispose();
     }
 }

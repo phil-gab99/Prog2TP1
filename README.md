@@ -18,7 +18,7 @@ Mes choix pour ce projet sont les suivants:
     rien apporté de supplémentaire par après. Donc j'ai décidé d'entreprendre
     le projet par moi-même.
 
-### L'Interface
+### L'interface
 
 Il se peut que mon interface ne suive pas tout à fait les directives exactes
 énoncées dans le fichier pdf. Cela est dû au fait que je voyais que les
@@ -43,11 +43,50 @@ Voici les différentes fonctionnalités de mon programme:
         **recherche simple** ou une **recherche multiple**;
             - La **recherche simple** requiert de l'usager de remplir toutes
             les données relatives à un compte pour ensuite lui afficher les
-            informations de cette personne donnée (ou une boîte de message
-            indiquant que le compte n'existe pas);
+            informations de cette personne donnée dans une nouvelle fenêtre(ou
+            une boîte de message indiquant que le compte n'existe pas);
             - La **recherche multiple** requiert simplement de l'usager
             d'entrer une lettre et une liste lui est retournée contenant tous
-            les usagers dont leur nom de famille commence avec cette lettre (ou
-            aucun résultat s'il n'y a aucun compte commençant par cette
-            lettre).
-        - Le bouton
+            les usagers dont leur nom de famille commence avec cette lettre
+            dans une nouvelle fenêtre (ou aucun résultat s'il n'y a aucun
+            compte commençant par cette lettre).
+        - Le bouton *Add Balance* permet d'ajouter de l'argent au compte
+        sélectionné à travers un petit dialogue;
+        - Le bouton *Deduct Balance* permet d'enlever de l'argent au compte
+        sélectionné à travers un petit dialogue - Cette action n'est pas
+        permise pour les comptes clients;
+        - Le bouton *View Favorite Products* génère une nouvelle fenêtre
+        contenant la liste des produits favoris du compte sélectionné. Cette
+        fenêtre contient aussi deux boutons permettant l'ajout ou la
+        supprimation de produits;
+            - Le bouton *Add Product* permet d'ajouter des produits parmi ceux
+            disponibles. Une nouvelle fenêtre s'affiche contenant la liste des
+            produits disponibles et un bouton pour transférer de cette liste à
+            la liste des produits favoris du compte en question;
+            - Le bouton *Remove Product* permet de supprimer la liste de
+            produits sélectionnés.
+        - Le bouton *View Available Products* génère une nouvelle fenêtre
+        contenant la liste de produits disponibles et contient également deux
+        boutons permettant l'ajout ou la supprimation de produits.
+            - Le bouton *Add Product* permet d'ajouter un aliment ou un meuble
+            au moyen d'un dialogue et de certains attributs à remplir. Cette
+            action est permise uniquement à travers un compte directeur;
+            - Le bouton *Delete Product* permet de supprimer la liste de
+            produits sélectionnés. Cette action est permise uniquement à
+            travers un compte directeur.
+
+Ceci résume les fonctionnalités du programme.
+
+### Détails
+
+Je voudrais adresser maintenant quelques détails sur la fonctionnalités du
+programme:
+1. La duplication de produits dans la liste de produits disponibles n'a pas été
+permise. Cela veut dire que le même directeur ne peut pas créer deux mêmes
+produits. Cependant, un directeur différent pourrait créer le même produit
+qu'a créer un autre directeur.
+1. L'ajout de produits dans la liste de produits favoris d'un compte dépend de
+la présence de produits disponibles à un certain degré. Cela veut dire qu'un
+produit disponible peut être ajouté à la liste de produits favoris d'un compte
+sans problème. Par contre, si par après, un directeur décide de supprimer un
+produit présent

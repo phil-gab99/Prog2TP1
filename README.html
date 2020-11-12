@@ -1,0 +1,152 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome file</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+</head>
+
+<body class="stackedit">
+  <div class="stackedit__html"><h1 id="programmation-2---tp1">Programmation 2 - TP1</h1>
+<p><em>Auteur: Philippe Gabriel, 20120600</em></p>
+<p><em>Visioner la version électronique du fichier à travers le fichier html attaché</em></p>
+<h3 id="introduction">Introduction</h3>
+<p>Mes choix pour ce projet sont les suivants:</p>
+<ul>
+<li>Mon projet est entièrement en anglais;
+<ul>
+<li>La raison pour cette décision est que je pensais rendre ce projet public<br>
+sur GitHub, et l’anglais est assez universelle dans le monde de la<br>
+programmation.</li>
+</ul>
+</li>
+<li>J’ai complété ce projet individuellement;
+<ul>
+<li>Mon coéquipier n’avait pas apporté quoi que ce soit d’utile pour le<br>
+le projet. J’avais complètement rédigé les fichiers dans les packages<br>
+<em>store</em> et <em>inventory</em>, et signalé mon coéquipier dans mon dernier message<br>
+commit de continuer avec la seconde partie du projet pour avoir une idée<br>
+de ce qu’il y aurait à modifier dans les autres fichiers si besoin est.<br>
+Mais celui-ci a décidé de plutôt “corriger” ce que j’avais écrit sans<br>
+vraiment être certain lui-même des corrections qu’il apportait. Et il n’a<br>
+rien apporté de supplémentaire par après. Donc j’ai décidé d’entreprendre<br>
+le projet par moi-même.</li>
+</ul>
+</li>
+</ul>
+<h3 id="linterface">L’interface</h3>
+<p>Il se peut que mon interface ne suive pas tout à fait les directives exactes<br>
+énoncées dans le fichier pdf. Cela est dû au fait que je voyais que les<br>
+directives dans le fichier pouvait sembler parfois contre-intuitive et même<br>
+contradictoire.</p>
+<p>Voici les différentes fonctionnalités de mon programme:</p>
+<ul>
+<li>Lorsqu’exécuté, une première fenêtre apparaît;
+<ul>
+<li>Cette fenêtre est la fenêtre principale;</li>
+<li>Elle contient la liste des comptes créés et leurs détails;</li>
+<li>Elle contient 7 différents boutons décrivant l’action que chacun<br>
+entreprend sur son libellé:
+<ul>
+<li>Le bouton <em>Add Account</em> permet l’ajout d’un compte - Un dialogue<br>
+est généré et contient les différents attributs d’un compte que<br>
+l’usager devrait remplir. Certains des attributs n’acceptent que des<br>
+lettres (ou que des nombres) et certains possèdent un nombre maximal<br>
+de caractères. La non-complétion des attributs induit un boîte de<br>
+message signalant à l’usager de remplir chaque donnée;</li>
+<li>Le bouton <em>Delete Account</em> permet de supprimer une liste de comptes<br>
+sélectionnés dans la liste affichée;</li>
+<li>Le bouton <em>Advanced Search</em> permet à l’usager de faire une<br>
+<strong>recherche simple</strong> ou une <strong>recherche multiple</strong>;
+<ul>
+<li>La <strong>recherche simple</strong> requiert de l’usager de remplir toutes<br>
+les données relatives à un compte pour ensuite lui afficher les<br>
+informations de cette personne donnée dans une nouvelle fenêtre(ou<br>
+une boîte de message indiquant que le compte n’existe pas);</li>
+<li>La <strong>recherche multiple</strong> requiert simplement de l’usager<br>
+d’entrer une lettre et une liste lui est retournée contenant tous<br>
+les usagers dont leur nom de famille commence avec cette lettre<br>
+dans une nouvelle fenêtre (ou aucun résultat s’il n’y a aucun<br>
+compte commençant par cette lettre).</li>
+</ul>
+</li>
+<li>Le bouton <em>Add Balance</em> permet d’ajouter de l’argent au compte<br>
+sélectionné à travers un petit dialogue;</li>
+<li>Le bouton <em>Deduct Balance</em> permet d’enlever de l’argent au compte<br>
+sélectionné à travers un petit dialogue - Cette action n’est pas<br>
+permise pour les comptes clients;</li>
+<li>Le bouton <em>View Favorite Products</em> génère une nouvelle fenêtre<br>
+contenant la liste des produits favoris du compte sélectionné. Cette<br>
+fenêtre contient aussi deux boutons permettant l’ajout ou la<br>
+supprimation de produits;
+<ul>
+<li>Le bouton <em>Add Product</em> permet d’ajouter des produits parmi ceux<br>
+disponibles. Une nouvelle fenêtre s’affiche contenant la liste des<br>
+produits disponibles et un bouton pour transférer de cette liste à<br>
+la liste des produits favoris du compte en question;</li>
+<li>Le bouton <em>Remove Product</em> permet de supprimer la liste de<br>
+produits sélectionnés.</li>
+</ul>
+</li>
+<li>Le bouton <em>View Available Products</em> génère une nouvelle fenêtre<br>
+contenant la liste de produits disponibles et contient également deux<br>
+boutons permettant l’ajout ou la supprimation de produits.
+<ul>
+<li>Le bouton <em>Add Product</em> permet d’ajouter un aliment ou un meuble<br>
+au moyen d’un dialogue et de certains attributs à remplir. Cette<br>
+action est permise uniquement à travers un compte directeur;</li>
+<li>Le bouton <em>Delete Product</em> permet de supprimer la liste de<br>
+produits sélectionnés. Cette action est permise uniquement à<br>
+travers un compte directeur.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>Ceci résume les fonctionnalités du programme.</p>
+<h3 id="détails">Détails</h3>
+<p>Je voudrais adresser maintenant quelques détails sur la fonctionnalités du<br>
+programme:</p>
+<ol>
+<li>La duplication de produits dans la liste de produits disponibles n’a pas été<br>
+permise. Cela veut dire que le même directeur ne peut pas créer deux mêmes<br>
+produits. Cependant, un directeur différent pourrait créer le même produit<br>
+qu’a créer un autre directeur.</li>
+<li>L’ajout de produits dans la liste de produits favoris d’un compte dépend de<br>
+la présence de produits disponibles à un certain degré. Cela veut dire qu’un<br>
+produit disponible peut être ajouté à la liste de produits favoris d’un compte<br>
+sans problème. Par contre, si par après, un directeur décide de supprimer un<br>
+produit présent dans la liste de produits disponibles, ce produit demeurera<br>
+dans la liste de produits favoris du compte qui la possède. Cette<br>
+implémentation spécifique a été permise dans le cas où le produit se<br>
+réaffichera et dans l’état d’esprit de ne pas s’immiscer dans la liste des<br>
+différents comptes (un degré de respect de leurs choix par exemple). De plus,<br>
+cela pourrait permettre aux directeurs d’avoir une idée que sont les produits<br>
+demandé par les comptes pour qu’il puisse en commander et l’ajouter dans la<br>
+liste de produits disponibles.</li>
+</ol>
+<h3 id="idées-supplémentaires">Idées supplémentaires</h3>
+<p>J’aurais aimé implémenter quelques fonctionnalités supplémentaires à mon<br>
+projet, mais le manque de temps et les autres cours ne m’ont pas permis de<br>
+faire cela. Voici une liste d’idées dont j’avais commencé à implémenter mais<br>
+que je devais abandonné car le temps ne me permettait pas de les développer:</p>
+<ul>
+<li>Pour la création d’un aliment, la couleur pourrait être choisi à travers un<br>
+JColorChooser et la couleur serait sauvegarder dans un libellé pour l’afficher<br>
+dans la liste de produits disponibles. En raison de manque de temps, la couleur<br>
+est simplement spécifié dans un JTextfield par l’usager.</li>
+<li>Pour le choix de dates de naissance, un calendrier permettant de sélectionner<br>
+d’une manière plus graphique les informations relatives au compte à créer ou<br>
+à rechercher. Cependant, un JCalendar ou JDatePicker n’existe pas dans les<br>
+packages de Java et il aurait été nécessaire de télécharger ces fichiers<br>
+pour en faire usage. Donc cette information est récupérée à la place au moyen<br>
+de 3 JTextField.</li>
+</ul>
+</div>
+</body>
+
+</html>

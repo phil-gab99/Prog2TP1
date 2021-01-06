@@ -13,7 +13,7 @@ Mes choix pour ce projet sont les suivants:
     programmation.
 - J'ai complété ce projet individuellement;
     - Mon coéquipier n'avait pas apporté quoi que ce soit d'utile pour le
-    le projet. J'avais complètement rédigé les fichiers dans les packages
+    projet. J'avais complètement rédigé les fichiers dans les packages
     *store* et *inventory*, et signalé mon coéquipier dans mon dernier message
     commit de continuer avec la seconde partie du projet pour avoir une idée
     de ce qu'il y aurait à modifier dans les autres fichiers si besoin est.
